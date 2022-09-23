@@ -4,7 +4,7 @@
 #include <glad.h>
 #include <glfw3.h>
 
-
+#include <glm/glm.hpp>
 
 int window_width = 800;
 int window_height = 600;
@@ -63,15 +63,15 @@ namespace deranos
             glfwSetWindowShouldClose(window, true);
     }
 
-    void ClearBackBuffer()//TO DO GLM 
+    void ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0) ) 
     {
-        glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+        glClearColor(clear_color.x, clear_color.y, clear_color.z, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
     }
 
     void renderloop()
     {
-        deranos::ClearBackBuffer();
+        deranos::ClearBackBuffer(glm::vec3(1.0, 0.0, 0.0));
     }
 
     void update()
