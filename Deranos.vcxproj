@@ -45,15 +45,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(SolutionDir)vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\spdlog\include;$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Projekty\engine\Deranos\Deranos\vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Deranos\vendor\spdlog\include;$(SolutionDir)Deranos\vendor\glm;$(SolutionDir)Deranos\vendor\KHR;$(SolutionDir)Deranos\vendor\glad;$(SolutionDir)Deranos\vendor\GLFW\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(SolutionDir)vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\spdlog\include;$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Projekty\engine\Deranos\Deranos\vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Deranos\vendor\spdlog\include;$(SolutionDir)Deranos\vendor\glm;$(SolutionDir)Deranos\vendor\KHR;$(SolutionDir)Deranos\vendor\glad;$(SolutionDir)Deranos\vendor\GLFW\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -88,19 +88,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Deranos.cpp" />
-    <ClCompile Include="src\glad.c" />
-    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="Deranos\src\Deranos.cpp" />
+    <ClCompile Include="Deranos\src\Log.cpp" />
+    <ClCompile Include="Deranos\vendor\glad\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Deranos.h" />
-    <ClInclude Include="src\Log.h" />
-    <ClInclude Include="vendor\glad\glad.h" />
-    <ClInclude Include="vendor\GLFW\include\glfw3.h" />
-    <ClInclude Include="vendor\KHR\khrplatform.h" />
+    <ClInclude Include="Deranos\src\Deranos.h" />
+    <ClInclude Include="Deranos\src\Log.h" />
+    <ClInclude Include="Deranos\vendor\glad\glad.h" />
+    <ClInclude Include="Deranos\vendor\GLFW\include\glfw3.h" />
+    <ClInclude Include="Deranos\vendor\KHR\khrplatform.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="vendor\GLFW\lib\glfw3.lib" />
+    <Library Include="Deranos\vendor\GLFW\lib\glfw3.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

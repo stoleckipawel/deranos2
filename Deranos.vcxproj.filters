@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Deranos.cpp">
+    <ClCompile Include="Deranos\src\Deranos.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\glad.c">
+    <ClCompile Include="Deranos\src\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Log.cpp">
+    <ClCompile Include="Deranos\vendor\glad\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,10 +35,10 @@
     <ClInclude Include="vendor\GLFW\include\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Log.h">
+    <ClInclude Include="Deranos\src\Deranos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Deranos.h">
+    <ClInclude Include="Deranos\src\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
