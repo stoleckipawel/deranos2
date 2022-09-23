@@ -45,15 +45,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>E:\Projekty\engine\Deranos\Deranos\vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>E:\Projekty\engine\Deranos\Deranos\vendor\glm;E:\Projekty\engine\Deranos\Deranos\vendor\KHR;E:\Projekty\engine\Deranos\Deranos\vendor\glad;E:\Projekty\engine\Deranos\Deranos\vendor\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>E:\Projekty\engine\Deranos\Deranos\vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>E:\Projekty\engine\Deranos\Deranos\vendor\glm;E:\Projekty\engine\Deranos\Deranos\vendor\KHR;E:\Projekty\engine\Deranos\Deranos\vendor\glad;E:\Projekty\engine\Deranos\Deranos\vendor\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
