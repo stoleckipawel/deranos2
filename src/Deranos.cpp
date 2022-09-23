@@ -1,17 +1,6 @@
-#include <iostream>
-#include <string>
+#include "Deranos.h"
 
-#include <glad.h>
-#include <glfw3.h>
-
-#include <glm/glm.hpp>
-
-int window_width = 800;
-int window_height = 600;
-
-GLFWwindow* window;
-
-namespace deranos
+namespace Deranos
 {
     void initialize_glfw()
     {
@@ -25,36 +14,37 @@ namespace deranos
     {
         glViewport(0, 0, width, height);
 
-        std::cout << "Viewport has been resized to: " << width << "," << height << std::endl;
+        DERANOS_CORE_INFO("Viewport has been resized to: {0}, {1}", width, height);
     }
 
     void initialize_window()
     {
         //GLFW Window
-        window = glfwCreateWindow(window_width, window_height, "Deranos", NULL, NULL);
-        if (window == NULL)//Check whether window has been created
+        Deranos::window = glfwCreateWindow(Deranos::window_width, Deranos::window_height, "Deranos", NULL, NULL);
+        if (Deranos::window == NULL)//Check whether window has been created
         {
-            std::cout << "Failed to create GLFW window" << std::endl;
+            DERANOS_CORE_ERROR("Failed to Initialize GLFW Window!");
         }
-        glfwMakeContextCurrent(window);
+        glfwMakeContextCurrent(Deranos::window);
 
         //Register Resize function callback for the window
-        glfwSetFramebufferSizeCallback(window, deranos::framebuffer_size_callback);
+        glfwSetFramebufferSizeCallback(Deranos::window, Deranos::framebuffer_size_callback);
     }
 
     void initialize_glad()
     {
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
-            std::cout << "Failed to initialize GLAD" << std::endl;
+            DERANOS_CORE_ERROR("Failed to Initialize GLAD!");
         }
     }
 
     void initialize()
     {
-        deranos::initialize_glfw();
-        deranos::initialize_window();
-        deranos::initialize_glad();
+        Deranos::Log::Init();
+        Deranos::initialize_glfw();
+        Deranos::initialize_window();
+        Deranos::initialize_glad();
     }
 
     void processInput(GLFWwindow* window)
@@ -71,7 +61,7 @@ namespace deranos
 
     void renderloop()
     {
-        deranos::ClearBackBuffer(glm::vec3(1.0, 0.0, 0.0));
+        Deranos::ClearBackBuffer(glm::vec3(1.0, 0.0, 0.0));
     }
 
     void update()
@@ -81,7 +71,7 @@ namespace deranos
             //Input
             processInput(window);
 
-            deranos::renderloop();
+            Deranos::renderloop();
 
             //Check events and swap buffers
             glfwSwapBuffers(window);
@@ -95,10 +85,9 @@ namespace deranos
     }
 }
 
-
 int main()
 {
-    deranos::initialize();
-    deranos::update();
-    deranos::terminate();
+    Deranos::initialize();
+    Deranos::update();
+    Deranos::terminate();
 }

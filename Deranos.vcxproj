@@ -46,14 +46,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(SolutionDir)vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)vendor\spdlog\include;$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(SolutionDir)vendor\GLFW\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)vendor\spdlog\include;$(SolutionDir)vendor\glm;$(SolutionDir)\vendor\KHR;$(SolutionDir)\vendor\glad;$(SolutionDir)\vendor\GLFW\include;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -88,10 +88,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Deranos.cpp" />
-    <ClCompile Include="glad.c" />
+    <ClCompile Include="src\Deranos.cpp" />
+    <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Deranos.h" />
+    <ClInclude Include="src\Log.h" />
     <ClInclude Include="vendor\glad\glad.h" />
     <ClInclude Include="vendor\GLFW\include\glfw3.h" />
     <ClInclude Include="vendor\KHR\khrplatform.h" />
