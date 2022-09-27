@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "Window.h"
 
-Window::Window(int width, int height)
+Window::Window(int height = 1200, int width = 720, const std::string& name = "Deranos")
+    : m_width(width), m_height(height), m_name(name)
 {
-    Window::SetHeight(height);
-    Window::SetWidth(width);
     Window::m_window = Window::MakeWindow();
     Window::ValidateWindow();
     Window::BindWindow();
@@ -13,7 +12,7 @@ Window::Window(int width, int height)
 
 GLFWwindow* Window::MakeWindow()
 {
-    return glfwCreateWindow(Window::GetWidth(), Window::GetHeight(), "Deranos", NULL, NULL);
+    return glfwCreateWindow(Window::GetWidth(), Window::GetHeight(), Window::GetName().c_str(), NULL, NULL);
 }
 
 void Window::BindWindow()

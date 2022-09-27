@@ -5,9 +5,11 @@
 class Window
 {
 public:
-	Window::Window(int height, int width);
+	Window::Window(int height, int width, const std::string& name);
 	inline int GetWidth() { return Window::m_width; };
 	inline void SetHeight(int height) { Window::m_height = height; };
+
+	inline const std::string& GetName() { return Window::m_name; };
 
 	inline int GetHeight() { return Window::m_height; };
 	inline void SetWidth(int width) { Window::m_width = width; };
@@ -20,8 +22,9 @@ private:
 	void ResizeCallback(GLFWwindow* window, int width, int height);
 	void RegisterResizeCallback();
 
-	int m_width = 800;
-	int m_height = 600;
+	int m_width;
+	int m_height;
+	const std::string& m_name;
 	GLFWwindow* m_window;
 };
 
