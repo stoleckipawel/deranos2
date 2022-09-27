@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Renderer.h"
 
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))

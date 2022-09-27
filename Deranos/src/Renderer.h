@@ -1,8 +1,6 @@
 #pragma once
 
-#include <glad.h>
-#include <glfw3.h>
-#include <glm/glm.hpp>
+
 
 class Renderer
 {

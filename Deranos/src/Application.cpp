@@ -1,4 +1,6 @@
+#include "pch.h"
 #include "Application.h"
+#include "Renderer.h"
 
 void InitializeGlfw()
 {

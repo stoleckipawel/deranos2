@@ -17,6 +17,9 @@ project "Deranos"
     targetdir("bin/" ..  outputdir .. "/%{prj.name}")
     objdir("bin-int/" ..  outputdir .. "/%{prj.name}")
 
+    pchheader "pch.h"
+    pchsource "Deranos/src/pch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",
@@ -30,6 +33,7 @@ project "Deranos"
 
     includedirs
     {
+        "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/glm",
         "%{prj.name}/vendor/KHR",
@@ -74,3 +78,16 @@ project "Deranos"
         {
             "DERANOS_RELEASE"
         }
+
+    filter "files:not **.cpp"
+        flags
+        {
+            "NoPCH"
+        }
+
+        
+    
+    
+
+        
+

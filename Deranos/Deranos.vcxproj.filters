@@ -15,7 +15,19 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="vendor\GLFW\glfw3.h">
@@ -24,22 +36,28 @@
     <ClInclude Include="vendor\GLFW\glfw3native.h">
       <Filter>vendor\GLFW</Filter>
     </ClInclude>
-    <ClInclude Include="src\Window.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\Application.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\EntryPoint.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\Window.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\EntryPoint.cpp" />
   </ItemGroup>
 </Project>
