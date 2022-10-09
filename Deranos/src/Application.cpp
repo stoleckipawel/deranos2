@@ -29,7 +29,7 @@ Application::Application()
     Log::Init();
     InitializeGlfw();
 
-    Application::window = new Window(800, 600, "PRAWIE SUPER ENGINE");
+    Application::window = new Window(900, 900, "PRAWIE SUPER ENGINE");
     InitializeGlad();
 }
 

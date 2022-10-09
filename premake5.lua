@@ -9,6 +9,8 @@ workspace "Deranos"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+include "Deranos/vendor/imgui"
+
 project "Deranos"
     location "Deranos"
     kind "consoleapp"
@@ -38,7 +40,8 @@ project "Deranos"
         "%{prj.name}/vendor/glm",
         "%{prj.name}/vendor/KHR",
         "%{prj.name}/vendor/glad",
-        "%{prj.name}/vendor/GLFW/include"
+        "%{prj.name}/vendor/GLFW/include",
+        "%{prj.name}/vendor/imgui"
     }
 
     libdirs
@@ -49,7 +52,8 @@ project "Deranos"
     links
     {
         "glfw3.lib",
-        "opengl32.lib"
+        "opengl32.lib",
+        "ImGui"
     }
 
 
