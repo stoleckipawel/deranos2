@@ -41,12 +41,14 @@ Application::~Application()
 
 void Application::Run()
 {
+    Renderer::PreRender();
+
     while (!glfwWindowShouldClose(Application::window->GetWindow()) && Application::window->GetWindow() != NULL)
     {
         //Input
         ProcessInput(Application::window->GetWindow());
 
-        Renderer::Renderloop();
+        Renderer::Render();
         Renderer::Present();
 
         //Check events and swap buffers
