@@ -36,6 +36,7 @@
     <ClInclude Include="vendor\GLFW\glfw3native.h">
       <Filter>vendor\GLFW</Filter>
     </ClInclude>
+    <ClInclude Include="src\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -59,5 +60,10 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\shaders\simple_ps.txt" />
+    <Text Include="src\shaders\simple_vs.txt" />
   </ItemGroup>
 </Project>
