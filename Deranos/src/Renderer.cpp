@@ -58,8 +58,8 @@ void Renderer::Render()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	Shader simpleShader("src/shaders/simple_vs.txt",
-						"src/shaders/simple_ps.txt");
+	Shader simpleShader("src/shaders/simple.vs",
+						"src/shaders/simple.ps");
 	simpleShader.use();
 
 	glBindVertexArray(VAO);

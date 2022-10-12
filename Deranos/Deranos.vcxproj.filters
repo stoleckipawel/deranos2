@@ -62,8 +62,4 @@
     </ClCompile>
     <ClCompile Include="src\Shader.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\shaders\simple_ps.txt" />
-    <Text Include="src\shaders\simple_vs.txt" />
-  </ItemGroup>
 </Project>
