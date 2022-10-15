@@ -18,7 +18,7 @@ public:
 	void setFloat2(const std::string& name, float x, float y) const;
 	void setFloat3(const std::string& name, float x, float y, float z) const;
 	void setFloat4(const std::string& name, float x, float y, float z, float w) const;
-
+	//void setMatrix4Float(const std::string& name, float x, float y, float z, float w) const;
 private:
 	void checkCompileErrors(unsigned int shader, std::string type);
 };
