@@ -19,8 +19,6 @@
 #include <glm/glm.hpp>
 #include <Log.h>
 
-
-
 #if defined DERANOS_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

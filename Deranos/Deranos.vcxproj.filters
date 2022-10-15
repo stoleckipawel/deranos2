@@ -4,6 +4,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\ImGui">
+      <UniqueIdentifier>{170E22B3-8378-D629-CCB6-87CF3860B47E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
     </Filter>
@@ -18,10 +21,16 @@
     <ClInclude Include="src\Application.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\ImGui\ImGuiLayer.h">
+      <Filter>src\ImGui</Filter>
+    </ClInclude>
     <ClInclude Include="src\Log.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Renderer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Shader.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Window.h">
@@ -36,7 +45,6 @@
     <ClInclude Include="vendor\GLFW\glfw3native.h">
       <Filter>vendor\GLFW</Filter>
     </ClInclude>
-    <ClInclude Include="src\Shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -45,10 +53,16 @@
     <ClCompile Include="src\EntryPoint.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ImGui\ImGuiLayer.cpp">
+      <Filter>src\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Window.cpp">
@@ -60,6 +74,5 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
-    <ClCompile Include="src\Shader.cpp" />
   </ItemGroup>
 </Project>

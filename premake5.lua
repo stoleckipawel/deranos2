@@ -41,7 +41,8 @@ project "Deranos"
         "%{prj.name}/vendor/KHR",
         "%{prj.name}/vendor/glad",
         "%{prj.name}/vendor/GLFW/include",
-        "%{prj.name}/vendor/imgui"
+        "%{prj.name}/vendor/imgui",
+        "%{prj.name}/vendor/stb_image"
     }
 
     libdirs
