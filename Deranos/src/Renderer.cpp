@@ -11,8 +11,6 @@ void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
 
 void Renderer::PreRender()
 {
-
-
 	//check how many vertex attrib there is
 	int nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
@@ -88,16 +86,23 @@ void Renderer::Render()
 
 	Shader simpleShader("src/shaders/simple.vs",
 						"src/shaders/simple.ps");
-	
 
-	glm::mat4 trans = glm::mat4(1.0f);
-	trans = glm::translate(trans, glm::vec3(0.0f, 0.0f, 0.0f));
-	trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 0.0f, 0.0f));
 
+	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
-	
+	float fov = 45.0;
+	float near_clipping_plane = 0.1;
+	float far_clipping_plane = 100.0;
+	glm::mat4 proj = glm::mat4(1.0f);
+	proj = glm::perspective(glm::radians(fov), (float)900 / (float)900.0, near_clipping_plane, far_clipping_plane);
+
 	//Renderloop
 	Renderer::ClearBackBuffer(glm::vec3(1.0, 0.0, 1.0));
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
+
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//wireframe mode
 
@@ -107,15 +112,15 @@ void Renderer::Render()
 
 	//render objects
 	simpleShader.use();
+	glEnable(GL_DEPTH_TEST);
 	simpleShader.setInt("ourTexture", 0);
 
-	unsigned int transformLoc = glGetUniformLocation(simpleShader.ID, "transform");
-	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+	simpleShader.setMat4("model", model);
+	simpleShader.setMat4("view", view);
+	simpleShader.setMat4("projection", proj);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-
 
 
 	// optional: de-allocate all resources once they've outlived their purpose:

@@ -18,7 +18,9 @@ public:
 	void setFloat2(const std::string& name, float x, float y) const;
 	void setFloat3(const std::string& name, float x, float y, float z) const;
 	void setFloat4(const std::string& name, float x, float y, float z, float w) const;
-	//void setMatrix4Float(const std::string& name, float x, float y, float z, float w) const;
+	void Shader::setMat2(const std::string& name, const glm::mat2& mat) const;
+	void Shader::setMat3(const std::string& name, const glm::mat3& mat) const;
+	void Shader::setMat4(const std::string& name, const glm::mat4& mat) const;
 private:
 	void checkCompileErrors(unsigned int shader, std::string type);
 };
