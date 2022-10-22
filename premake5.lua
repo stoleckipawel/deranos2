@@ -42,19 +42,22 @@ project "Deranos"
         "%{prj.name}/vendor/glad",
         "%{prj.name}/vendor/GLFW/include",
         "%{prj.name}/vendor/imgui",
-        "%{prj.name}/vendor/stb_image"
+        "%{prj.name}/vendor/stb_image",
+        "%{prj.name}/vendor/assimp/include",
+        "%{prj.name}/vendor"
     }
 
     libdirs
     {
-        "%{prj.name}/vendor/GLFW/lib"
+        "%{prj.name}/vendor/GLFW/lib",
+        "%{prj.name}/vendor/assimp/lib"
     }
 
     links
     {
         "glfw3.lib",
         "opengl32.lib",
-        "ImGui"
+        "assimp-vc142-mt.lib"
     }
 
 
