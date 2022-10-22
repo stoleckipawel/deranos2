@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Renderer.h"
 #include "Shader.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))

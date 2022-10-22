@@ -9,8 +9,6 @@ workspace "Deranos"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
-include "Deranos/vendor/imgui"
-
 project "Deranos"
     location "Deranos"
     kind "consoleapp"
@@ -41,7 +39,6 @@ project "Deranos"
         "%{prj.name}/vendor/KHR",
         "%{prj.name}/vendor/glad",
         "%{prj.name}/vendor/GLFW/include",
-        "%{prj.name}/vendor/imgui",
         "%{prj.name}/vendor/stb_image",
         "%{prj.name}/vendor/assimp/include",
         "%{prj.name}/vendor"
