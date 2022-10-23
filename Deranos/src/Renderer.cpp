@@ -72,35 +72,7 @@ void Renderer::Render()
 	indices.push_back(2);
 	indices.push_back(3);
 
-
-	unsigned int VAO;
-	unsigned int VBO;
-
-	glGenVertexArrays(1, &VAO);
-
-	glGenBuffers(1, &VBO);
-	glBindVertexArray(VAO);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(plane[0]) * plane.size(), &plane[0], GL_DYNAMIC_DRAW);
-	
-	//index buffer
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_DYNAMIC_DRAW);
-
-	//set our vertex attributes pointers
-	//position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	//vertex color
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	//uvs
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(plane, indices);
 
 	//textures
 	unsigned int texture;
@@ -153,15 +125,7 @@ void Renderer::Render()
 	simpleShader->setMat4("view", m_camera->GetViewMatrix());
 	simpleShader->setMat4("projection", m_camera->GetProjectionMatrix());
 
-	glBindVertexArray(VAO);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
-
-	// optional: de-allocate all resources once they've outlived their purpose:
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteBuffers(1, &EBO);
-
+	mesh->Draw();
 }
 
 void Renderer::Present()
