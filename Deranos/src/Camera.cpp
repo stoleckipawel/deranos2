@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "Camera.h"
 
+Camera::Camera()
+{
+}
+
 glm::mat4 Camera::GetViewMatrix()
 {
 	return glm::lookAt(m_position, m_target, m_up);

@@ -2,6 +2,7 @@
 class Camera
 {
 public:
+	Camera();
 	void OnKeyboard(unsigned char key);
 
 	glm::mat4 GetViewMatrix();

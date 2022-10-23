@@ -6,7 +6,7 @@
 #include <stb_image.h>
 
 #include <Transform.h>
-#include <Camera.h>
+	
 
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
 {
@@ -20,6 +20,16 @@ void Renderer::PreRender()
 	int nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+}
+
+Renderer::Renderer()
+{
+	
+}
+
+Renderer::~Renderer()
+{
+
 }
 
 void Renderer::Render()
@@ -89,20 +99,18 @@ void Renderer::Render()
 	}
 	stbi_image_free(data);
 
-	Shader simpleShader("src/shaders/simple.vs",
-						"src/shaders/simple.ps");
+	std::shared_ptr<Shader> simpleShader = std::make_shared<Shader>("src/shaders/simple.vs", "src/shaders/simple.ps");
 
-	Transform world_transform;
-	world_transform.SetPosition(0.5f, 0.0f, 0.0f);
-	world_transform.SetScale(1.25);
-	world_transform.Rotate((float)glfwGetTime() * 0.5, 0.0f, 0.0f);
-
-	Camera camera;
-	camera.SetFov(45.0f);
-	camera.SetNearClippingPlane(0.01);
-	camera.SetFarClippingPlane(1000.0);
-
-	camera.Translate(0.0f, 0.0f, -3.0f);
+	std::shared_ptr<Transform> world_transform = std::make_shared<Transform>();
+	world_transform->SetPosition(0.5f, 0.0f, 0.0f);
+	world_transform->SetScale(1.25);
+	world_transform->Rotate((float)glfwGetTime() * 0.5, 0.0f, 0.0f);
+	
+	std::shared_ptr<Camera> m_camera = std::make_shared<Camera>();
+	m_camera->SetFov(45.0f);
+	m_camera->SetNearClippingPlane(0.01);
+	m_camera->SetFarClippingPlane(1000.0);
+	m_camera->Translate(0.0f, 0.0f, -3.0f);
 
 
 	//Renderloop
@@ -117,13 +125,13 @@ void Renderer::Render()
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	//render objects
-	simpleShader.use();
+	simpleShader->use();
 	glEnable(GL_DEPTH_TEST);
-	simpleShader.setInt("ourTexture", 0);
+	simpleShader->setInt("ourTexture", 0);
 
-	simpleShader.setMat4("model", world_transform.GetMatrix());
-	simpleShader.setMat4("view", camera.GetViewMatrix());
-	simpleShader.setMat4("projection", camera.GetProjectionMatrix());
+	simpleShader->setMat4("model", world_transform->GetMatrix());
+	simpleShader->setMat4("view", m_camera->GetViewMatrix());
+	simpleShader->setMat4("projection", m_camera->GetProjectionMatrix());
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -133,6 +141,7 @@ void Renderer::Render()
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
+
 }
 
 void Renderer::Present()

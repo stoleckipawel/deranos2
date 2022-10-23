@@ -1,5 +1,7 @@
 #pragma once
 
+#include <EngineDefines.h>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
