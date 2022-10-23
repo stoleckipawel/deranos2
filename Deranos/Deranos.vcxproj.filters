@@ -45,6 +45,10 @@
     <ClInclude Include="vendor\GLFW\glfw3native.h">
       <Filter>vendor\GLFW</Filter>
     </ClInclude>
+    <ClInclude Include="src\WorldTransform.h" />
+    <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\Input.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -77,5 +81,9 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\WorldTransform.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Input.cpp" />
   </ItemGroup>
 </Project>

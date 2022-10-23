@@ -5,6 +5,9 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+#include <Transform.h>
+#include <Camera.h>
+
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
 {
 	glClearColor(clear_color.x, clear_color.y, clear_color.z, 1.0f);
@@ -89,17 +92,18 @@ void Renderer::Render()
 	Shader simpleShader("src/shaders/simple.vs",
 						"src/shaders/simple.ps");
 
-	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.0f, 0.0f, 0.0f));
+	Transform world_transform;
+	world_transform.SetPosition(0.5f, 0.0f, 0.0f);
+	world_transform.SetScale(1.25);
+	world_transform.Rotate((float)glfwGetTime() * 0.5, 0.0f, 0.0f);
 
-	glm::mat4 view = glm::mat4(1.0f);
-	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+	Camera camera;
+	camera.SetFov(45.0f);
+	camera.SetNearClippingPlane(0.01);
+	camera.SetFarClippingPlane(1000.0);
 
-	float fov = 45.0;
-	float near_clipping_plane = 0.1;
-	float far_clipping_plane = 100.0;
-	glm::mat4 proj = glm::mat4(1.0f);
-	proj = glm::perspective(glm::radians(fov), (float)900 / (float)900.0, near_clipping_plane, far_clipping_plane);
+	camera.Translate(0.0f, 0.0f, -3.0f);
+
 
 	//Renderloop
 	Renderer::ClearBackBuffer(glm::vec3(1.0, 0.0, 1.0));
@@ -117,9 +121,9 @@ void Renderer::Render()
 	glEnable(GL_DEPTH_TEST);
 	simpleShader.setInt("ourTexture", 0);
 
-	simpleShader.setMat4("model", model);
-	simpleShader.setMat4("view", view);
-	simpleShader.setMat4("projection", proj);
+	simpleShader.setMat4("model", world_transform.GetMatrix());
+	simpleShader.setMat4("view", camera.GetViewMatrix());
+	simpleShader.setMat4("projection", camera.GetProjectionMatrix());
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
