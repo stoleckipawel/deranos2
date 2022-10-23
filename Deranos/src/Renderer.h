@@ -6,13 +6,13 @@ class Renderer
 public:
 	Renderer();
 	~Renderer();
-	static void PreRender();
-	static void Render();
-	static void Present();
+	void PreRender();
+	void Render();
+	void Present();
 private:
-	static void ClearBackBuffer(glm::vec3 clear_color);
+	void ClearBackBuffer(glm::vec3 clear_color);
 
-	//static Camera* m_camera;
+	std::shared_ptr<Camera> m_camera;
 };
 
 

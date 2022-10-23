@@ -6,6 +6,7 @@
 #include <stb_image.h>
 
 #include <Transform.h>
+#include <Mesh.h>
 	
 
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
@@ -24,7 +25,12 @@ void Renderer::PreRender()
 
 Renderer::Renderer()
 {
-	
+	//Camera Setup
+	m_camera = std::make_shared<Camera>();
+	m_camera->SetFov(45.0f);
+	m_camera->SetNearClippingPlane(0.01);
+	m_camera->SetFarClippingPlane(1000.0);
+	m_camera->Translate(0.0f, 0.0f, -3.0f);
 }
 
 Renderer::~Renderer()
@@ -34,17 +40,38 @@ Renderer::~Renderer()
 
 void Renderer::Render()
 {
-	float vertices[] = {
-		// positions          // colors           // texture coords
-		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // bottom left
-		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // top left 
-	};
-	unsigned int indices[] = {
-		0, 1, 3, // first triangle
-		1, 2, 3  // second triangle
-	};
+	std::vector<VertexLayout> plane;
+	VertexLayout vertex;
+	//vert1 // top right
+	vertex.position = glm::vec3(0.5f, 0.5f, 0.0f);
+	vertex.color = glm::vec3(1.0f, 0.0f, 0.0f);
+	vertex.uv0 = glm::vec2(1.0f, 1.0f);
+	plane.push_back(vertex);
+	//vert2 // bottom right
+	vertex.position = glm::vec3(0.5f, -0.5f, 0.0f);
+	vertex.color = glm::vec3(0.0f, 1.0f, 0.0f);
+	vertex.uv0 = glm::vec2(1.0f, 0.0f);
+	plane.push_back(vertex);
+	//vert3 // bottom left
+	vertex.position = glm::vec3(-0.5f, -0.5f, 0.0f);
+	vertex.color = glm::vec3(0.0f, 0.0f, 1.0f);
+	vertex.uv0 = glm::vec2(0.0f, 0.0f);
+	plane.push_back(vertex);
+	//vert4 // top left
+	vertex.position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	vertex.color = glm::vec3(1.0f, 1.0f, 0.0f);
+	vertex.uv0 = glm::vec2(0.0f, 1.0f);
+	plane.push_back(vertex);
+
+	//incex buffer
+	std::vector<unsigned int> indices;
+	indices.push_back(0);
+	indices.push_back(1);
+	indices.push_back(3);
+	indices.push_back(1);
+	indices.push_back(2);
+	indices.push_back(3);
+
 
 	unsigned int VAO;
 	unsigned int VBO;
@@ -55,13 +82,13 @@ void Renderer::Render()
 	glBindVertexArray(VAO);
 	
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(plane[0]) * plane.size(), &plane[0], GL_DYNAMIC_DRAW);
 	
 	//index buffer
 	unsigned int EBO;
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_DYNAMIC_DRAW);
 
 	//set our vertex attributes pointers
 	//position
@@ -106,13 +133,6 @@ void Renderer::Render()
 	world_transform->SetScale(1.25);
 	world_transform->Rotate((float)glfwGetTime() * 0.5, 0.0f, 0.0f);
 	
-	std::shared_ptr<Camera> m_camera = std::make_shared<Camera>();
-	m_camera->SetFov(45.0f);
-	m_camera->SetNearClippingPlane(0.01);
-	m_camera->SetFarClippingPlane(1000.0);
-	m_camera->Translate(0.0f, 0.0f, -3.0f);
-
-
 	//Renderloop
 	Renderer::ClearBackBuffer(glm::vec3(1.0, 0.0, 1.0));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!

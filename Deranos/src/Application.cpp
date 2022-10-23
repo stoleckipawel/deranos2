@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "Application.h"
-#include "Renderer.h"
 
 void InitializeGlfw()
 {
@@ -29,30 +28,30 @@ Application::Application()
     Log::Init();
     InitializeGlfw();
 
-    Application::window = new Window(900, 900, "PRAWIE SUPER ENGINE");
+    window = std::make_shared<Window>(900, 900, "PRAWIE SUPER ENGINE");
+    renderer = std::make_shared<Renderer>();
     InitializeGlad();
 }
 
 Application::~Application()
 {
     glfwTerminate();
-    delete Application::window;
 }
 
 void Application::Run()
 {
-    Renderer::PreRender();
+    renderer->PreRender();
 
-    while (!glfwWindowShouldClose(Application::window->GetWindow()) && Application::window->GetWindow() != NULL)
+    while (!glfwWindowShouldClose(window->GetWindow()) && window->GetWindow() != NULL)
     {
         //Input
-        ProcessInput(Application::window->GetWindow());
+        ProcessInput(window->GetWindow());
 
-        Renderer::Render();
-        Renderer::Present();
+        renderer->Render();
+        renderer->Present();
 
         //Check events and swap buffers
-        glfwSwapBuffers(Application::window->GetWindow());
+        glfwSwapBuffers(window->GetWindow());
         glfwPollEvents();
     }
 }
