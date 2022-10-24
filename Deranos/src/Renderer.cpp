@@ -68,7 +68,7 @@ void Renderer::PreRender()
 	m_model_transform = std::make_shared<Transform>();
 }
 
-void Renderer::Render()
+void Renderer::Renderloop()
 {
 	//Renderloop ->
 	Renderer::ClearBackBuffer(glm::vec3(1.0, 0.0, 1.0));
@@ -94,6 +94,15 @@ void Renderer::Render()
 
 void Renderer::Present()
 {	
-	//Check events and swap buffers
-	//glfwSwapBuffers(window);
+	glfwSwapBuffers(m_window->GetWindow());
+}
+
+void Renderer::BindWindow(std::shared_ptr<Window> window)
+{
+	m_window = window;
+}
+
+void Renderer::OnInput()
+{
+	m_camera->OnInput(m_window);
 }

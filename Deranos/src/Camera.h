@@ -1,9 +1,12 @@
 #pragma once
+#include <Input.h>
+#include <Window.h>
+
 class Camera
 {
 public:
 	Camera();
-	void OnKeyboard(unsigned char key);
+	void OnInput(std::shared_ptr<Window> window);
 
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix();
@@ -25,16 +28,13 @@ private:
 	float m_fov = 45.0f;
 	float m_near_clipping_plane;
 	float m_far_clipping_plane;
-	glm::float32 m_speed = 1.0f;
+	glm::float32 m_speed = 0.01f;
 
 	glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::vec3 m_rotation = glm::vec3(1.0f, 1.0f, 1.0f);
 
 	glm::vec3 m_up = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::vec3 m_target = glm::vec3(0.0f, 0.0f, 1.0f);
-	glm::vec3 m_left = glm::normalize(glm::cross(m_target, m_up));
-	glm::vec3 m_right = glm::normalize(glm::cross(m_up, m_target));
-
-
+	glm::vec3 m_left = glm::vec3(-1.0f, 0.0f, 0.0f);
+	glm::vec3 m_right = glm::vec3(1.0f, 0.0f, 0.0f);
 };
-

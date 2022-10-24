@@ -77,17 +77,19 @@ glm::vec3 Camera::GetRotation()
 	return m_rotation;
 }
 
-void Camera::OnKeyboard(unsigned char key)
+void Camera::OnInput(std::shared_ptr<Window> window)
 {
-	switch(key)
-	{
-	case GLFW_KEY_UP:
+	Input input;//Input should take window in constructor
+	
+	if(input.IsKeyPressed(GLFW_KEY_UP, window))
 		Translate(m_target * m_speed);
-	case GLFW_KEY_DOWN:
+
+	if (input.IsKeyPressed(GLFW_KEY_DOWN, window))
 		Translate(m_target * -m_speed);
-	case GLFW_KEY_LEFT:
+
+	if (input.IsKeyPressed(GLFW_KEY_LEFT, window))
 		Translate(m_left * m_speed);
-	case GLFW_KEY_RIGHT:
+
+	if (input.IsKeyPressed(GLFW_KEY_RIGHT, window))
 		Translate(m_right * m_speed);
-	}
 }

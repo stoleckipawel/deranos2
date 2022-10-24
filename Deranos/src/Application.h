@@ -8,9 +8,8 @@ public:
 	void Run();
 	Application();
 	~Application();
-
-	std::shared_ptr<Window> window;
-	std::shared_ptr<Renderer> renderer;
+	void OnInput();
 private:
-		
+	std::shared_ptr<Window> m_window;
+	std::shared_ptr<Renderer> m_renderer;
 };

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Application.h"
 
+
+
 void InitializeGlfw()
 {
     glfwInit();
@@ -17,10 +19,12 @@ void InitializeGlad()
     }
 }
 
-void ProcessInput(GLFWwindow* window)
+void Application::OnInput()
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    if (glfwGetKey(m_window->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(m_window->GetWindow(), true);
+
+    m_renderer->OnInput();
 }
 
 Application::Application()
@@ -28,8 +32,11 @@ Application::Application()
     Log::Init();
     InitializeGlfw();
 
-    window = std::make_shared<Window>(900, 900, "PRAWIE SUPER ENGINE");
-    renderer = std::make_shared<Renderer>();
+    m_window = std::make_shared<Window>(900, 900, "PRAWIE SUPER ENGINE");
+
+    m_renderer = std::make_shared<Renderer>();
+    m_renderer->BindWindow(m_window);
+
     InitializeGlad();
 }
 
@@ -40,18 +47,16 @@ Application::~Application()
 
 void Application::Run()
 {
-    renderer->PreRender();
+    m_renderer->PreRender();
 
-    while (!glfwWindowShouldClose(window->GetWindow()) && window->GetWindow() != NULL)
+    while (!glfwWindowShouldClose(m_window->GetWindow()) && m_window->GetWindow() != NULL)
     {
-        //Input
-        ProcessInput(window->GetWindow());
+        OnInput();
 
-        renderer->Render();
-        renderer->Present();
+        m_renderer->Renderloop();
 
-        //Check events and swap buffers
-        glfwSwapBuffers(window->GetWindow());
+        m_renderer->Present();
+
         glfwPollEvents();
     }
 }

@@ -1,44 +1,35 @@
 #include "pch.h"
 #include "Input.h"
-#include "Application.h"
-/*
-bool Input::IsKeyPressed(int keyCode)
+
+bool Input::IsKeyPressed(int keyCode, std::shared_ptr<Window> window)
 {
-	auto window = Application::window->GetWindow();
-
-	auto state = glfwGetKey(window, keyCode);
-
+	auto state = glfwGetKey(window->GetWindow(), keyCode);
 	return state & (GLFW_PRESS || GLFW_REPEAT);
 }
 
-bool Input::IsMouseButtonPressed(int button)
+bool Input::IsMouseButtonPressed(int button, std::shared_ptr<Window> window)
 {
-	auto window = Application::window->GetWindow();
-
-	auto state = glfwGetMouseButton(window, button);
-
+	auto state = glfwGetMouseButton(window->GetWindow(), button);
 	return state & GLFW_PRESS;
 }
 
-std::pair<float, float> Input::GetMousePosition()
+std::pair<float, float> Input::GetMousePosition(std::shared_ptr<Window> window)
 {
-	auto window = Application::window->GetWindow();
-
 	double posX, posY;
-	glfwGetCursorPos(window, &posX, &posY);
+	glfwGetCursorPos(window->GetWindow(), &posX, &posY);
 	return { (float)posX, (float)posY };
 }
 
-float Input::GetMouseX()
+float Input::GetMouseX(std::shared_ptr<Window> window)
 {
-	auto [x, y] = GetMousePosition();
+	auto [x, y] = GetMousePosition(window);
 	return x;
 }
 
-float Input::GetMouseY()
+float Input::GetMouseY(std::shared_ptr<Window> window)
 {
-	auto [x, y] = GetMousePosition();
+	auto [x, y] = GetMousePosition(window);
 	return y;
 }
-*/
+
 
