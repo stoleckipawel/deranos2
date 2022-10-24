@@ -55,6 +55,7 @@
       <Filter>vendor\GLFW</Filter>
     </ClInclude>
     <ClInclude Include="src\EngineDefines.h" />
+    <ClInclude Include="src\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -96,5 +97,6 @@
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
     </ClCompile>
+    <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
 </Project>
