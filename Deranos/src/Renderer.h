@@ -1,6 +1,7 @@
 #pragma once
 #include <Camera.h>
 
+#include <Model.h>
 #include <Mesh.h>
 #include <Texture.h>
 #include "Shader.h"
@@ -21,7 +22,8 @@ private:
 
 	std::shared_ptr<Window> m_window;
 
-	std::shared_ptr<Mesh> m_mesh;
+	std::shared_ptr<Model> m_model;
+
 	std::shared_ptr<Transform> m_model_transform;
 
 	std::shared_ptr<Camera> m_camera;

@@ -10,3 +10,4 @@ using Scope = std::unique_ptr<T>;
 //std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>();
 template<typename T>
 using Ref = std::shared_ptr<T>;
+
