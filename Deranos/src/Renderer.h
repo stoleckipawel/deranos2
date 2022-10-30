@@ -11,16 +11,17 @@
 class Renderer
 {
 public:
+	Renderer(std::shared_ptr<Window>& window);
 	void PreRender();
 	void Renderloop();
 	void Present();
-	void BindWindow(std::shared_ptr<Window> window);
+	void BindWindow(std::shared_ptr<Window>& window);
 	void OnInput();
 private:
 	void ClearBackBuffer(glm::vec3 clear_color);
 	void WireframeMode();
 
-	std::shared_ptr<Window> m_window;
+	std::shared_ptr<Window>& m_window;
 
 	std::shared_ptr<Model> m_model;
 

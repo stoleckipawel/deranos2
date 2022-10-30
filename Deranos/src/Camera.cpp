@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "Camera.h"
 
-Camera::Camera()
-	: m_fov(40.5f), 
+Camera::Camera(std::shared_ptr<Window>& window)
+	: 
+	m_window(window),
+	m_fov(40.5f), 
 	m_near_clipping_plane(0.01f), 
 	m_far_clipping_plane(1000.0), 
 	m_speed(0.01f),
@@ -23,7 +25,7 @@ glm::mat4 Camera::GetViewMatrix()
 
 glm::mat4 Camera::GetProjectionMatrix()
 {
-	return glm::perspective(glm::radians(m_fov), (float)900 / (float)900.0, m_near_clipping_plane, m_far_clipping_plane);
+	return glm::perspective(glm::radians(m_fov), static_cast<float>(m_window->GetWidth()) / m_window->GetHeight(), m_near_clipping_plane, m_far_clipping_plane);
 }
 
 float Camera::GetFov()
@@ -88,19 +90,19 @@ glm::vec3 Camera::GetRotation()
 	return m_rotation;
 }
 
-void Camera::OnInput(std::shared_ptr<Window> window)
+void Camera::OnInput()
 {
 	Input input;//Input should take window in constructor
 	
-	if(input.IsKeyPressed(GLFW_KEY_UP, window))
+	if(input.IsKeyPressed(GLFW_KEY_W, m_window))
 		Translate(m_target * m_speed);
 
-	if (input.IsKeyPressed(GLFW_KEY_DOWN, window))
+	if (input.IsKeyPressed(GLFW_KEY_S, m_window))
 		Translate(m_target * -m_speed);
 
-	if (input.IsKeyPressed(GLFW_KEY_LEFT, window))
+	if (input.IsKeyPressed(GLFW_KEY_A, m_window))
 		Translate(m_left * m_speed);
 
-	if (input.IsKeyPressed(GLFW_KEY_RIGHT, window))
+	if (input.IsKeyPressed(GLFW_KEY_D, m_window))
 		Translate(m_right * m_speed);
 }

@@ -19,7 +19,6 @@ private:
 	GLFWwindow* MakeWindow();
 	void BindWindow();
 	void ValidateWindow();
-	void ResizeCallback(GLFWwindow* window, int width, int height);
 	void RegisterResizeCallback();
 
 	int m_width;

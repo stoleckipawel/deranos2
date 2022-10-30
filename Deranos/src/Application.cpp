@@ -34,8 +34,7 @@ Application::Application()
 
     m_window = std::make_shared<Window>(900, 900, "PRAWIE SUPER ENGINE");
 
-    m_renderer = std::make_shared<Renderer>();
-    m_renderer->BindWindow(m_window);
+    m_renderer = std::make_shared<Renderer>(m_window);
 
     InitializeGlad();
 }

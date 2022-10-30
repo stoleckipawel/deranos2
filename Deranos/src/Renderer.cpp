@@ -1,6 +1,11 @@
 #include "pch.h"
 #include "Renderer.h"
 
+Renderer::Renderer(std::shared_ptr<Window>& window)
+	: m_window(window)
+{
+}
+
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
 {
 	glClearColor(clear_color.x, clear_color.y, clear_color.z, 1.0f);
@@ -20,7 +25,7 @@ void Renderer::PreRender()
 	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 
 	//Camera Setup
-	m_camera = std::make_shared<Camera>();
+	m_camera = std::make_shared<Camera>(m_window);
 	m_camera->Translate(glm::vec3(0.0f, 0.0f, -3.0f));
 
 	m_model = std::make_shared<Model>();
@@ -61,12 +66,12 @@ void Renderer::Present()
 	glfwSwapBuffers(m_window->GetWindow());
 }
 
-void Renderer::BindWindow(std::shared_ptr<Window> window)
+void Renderer::BindWindow(std::shared_ptr<Window>& window)
 {
 	m_window = window;
 }
 
 void Renderer::OnInput()
 {
-	m_camera->OnInput(m_window);
+	m_camera->OnInput();
 }

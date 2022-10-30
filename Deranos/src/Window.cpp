@@ -28,15 +28,15 @@ void Window::ValidateWindow()
     }
 }
 
-void Window::ResizeCallback(GLFWwindow* window, int width, int height)
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
-    
+
     DERANOS_CORE_INFO("Viewport has been resized to: {0}, {1}", width, height);
 }
 
 void Window::RegisterResizeCallback()
 {
-    //glfwSetFramebufferSizeCallback(Window::GetWindow(), Window::ResizeCallback);
+    glfwSetFramebufferSizeCallback(Window::GetWindow(), framebuffer_size_callback);
 }
 
