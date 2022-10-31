@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Renderer.h"
+#include "Gui.h"
 
 Renderer::Renderer(std::shared_ptr<Window>& window)
 	: m_window(window)
@@ -19,19 +20,8 @@ void Renderer::WireframeMode()
 
 void Renderer::PreRender()
 {
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	ImGui::StyleColorsDark();
-	ImGui_ImplGlfw_InitForOpenGL(m_window->GetWindow(), true);
-	ImGui_ImplOpenGL3_Init("#version 330");
+	m_gui = std::make_shared<Gui>(m_window);
 
-	//check how many vertex attrib there is
-	int nrAttributes;
-	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
-	std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
-
-	//Camera Setup
 	m_camera = std::make_shared<Camera>(m_window);
 	m_camera->Translate(glm::vec3(0.0f, 0.0f, -3.0f));
 
@@ -44,9 +34,18 @@ void Renderer::PreRender()
 	m_model_transform = std::make_shared<Transform>();
 }
 
-bool test_bool = false;
-float test_float = 0.0f;
-float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+void Renderer::DrawGui()
+{
+	bool test = false;
+	float test2 = 0.0f;
+	float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+	m_gui->Init();
+	m_gui->Checkbox("Checkbox", test);
+	m_gui->Slider("Slider", test2, 0.0, 1.0);
+	m_gui->Color("Color", color);
+	m_gui->Render();
+}
 
 void Renderer::Renderloop()
 {
@@ -71,17 +70,7 @@ void Renderer::Renderloop()
 
 	m_model->Draw();
 
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplGlfw_NewFrame();
-	ImGui::NewFrame();
-	ImGui::Begin("Wannabe Editor");
-	
-	ImGui::Checkbox("Test", &test_bool);
-	ImGui::SliderFloat("Size", &test_float, 0.0, 1.0);
-	ImGui::ColorEdit4("Color", color);
-	ImGui::End();
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+	this->DrawGui();
 }
 
 void Renderer::Present()
