@@ -19,6 +19,13 @@ void Renderer::WireframeMode()
 
 void Renderer::PreRender()
 {
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+	ImGui_ImplGlfw_InitForOpenGL(m_window->GetWindow(), true);
+	ImGui_ImplOpenGL3_Init("#version 330");
+
 	//check how many vertex attrib there is
 	int nrAttributes;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
@@ -37,12 +44,16 @@ void Renderer::PreRender()
 	m_model_transform = std::make_shared<Transform>();
 }
 
+bool test_bool = false;
+float test_float = 0.0f;
+float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+
 void Renderer::Renderloop()
 {
 	//Renderloop ->
 	Renderer::ClearBackBuffer(glm::vec3(1.0, 0.0, 1.0));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // also clear the depth buffer now!
-	
+
 	glEnable(GL_DEPTH_TEST);
 
 	m_model_transform->SetPosition(0.5f, 0.0f, 0.0f);
@@ -59,6 +70,18 @@ void Renderer::Renderloop()
 	m_shader->setMat4("projection", m_camera->GetProjectionMatrix());
 
 	m_model->Draw();
+
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+	ImGui::Begin("Wannabe Editor");
+	
+	ImGui::Checkbox("Test", &test_bool);
+	ImGui::SliderFloat("Size", &test_float, 0.0, 1.0);
+	ImGui::ColorEdit4("Color", color);
+	ImGui::End();
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 void Renderer::Present()

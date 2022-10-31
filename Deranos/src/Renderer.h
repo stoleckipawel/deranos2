@@ -22,11 +22,8 @@ private:
 	void WireframeMode();
 
 	std::shared_ptr<Window>& m_window;
-
 	std::shared_ptr<Model> m_model;
-
 	std::shared_ptr<Transform> m_model_transform;
-
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Texture> m_texture;
 	std::shared_ptr<Shader> m_shader;

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <array>
 #include <memory>
 #include <utility>
 #include <algorithm>
@@ -16,7 +17,12 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "imgui.h"
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+
 #include <glad.h>
+
 #include <glfw3.h>
 
 #include <glm/glm.hpp>

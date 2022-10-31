@@ -2,20 +2,18 @@
 #include "Camera.h"
 
 Camera::Camera(std::shared_ptr<Window>& window)
-	: 
-	m_window(window),
+	: m_window(window),
 	m_fov(40.5f), 
 	m_near_clipping_plane(0.01f), 
 	m_far_clipping_plane(1000.0), 
 	m_speed(0.01f),
 	m_position(glm::vec3(0.0f, 0.0f, 0.0f)),
-	m_rotation(glm::vec3(1.0f, 1.0f, 1.0f)),
+	m_rotation(glm::vec3(0.0f, 0.0f, 0.0f)),
 	m_up(glm::vec3(0.0f, 1.0f, 0.0f)),
 	m_target(glm::vec3(0.0f, 0.0f, 1.0f)),
 	m_left(glm::vec3(-1.0f, 0.0f, 0.0f)),
 	m_right(glm::vec3(1.0f, 0.0f, 0.0f))
 {
-
 }
 
 glm::mat4 Camera::GetViewMatrix()

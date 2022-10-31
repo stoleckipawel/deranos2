@@ -4,7 +4,7 @@
 Transform::Transform()
 	: m_scale(glm::vec3(1.0f, 1.0f, 1.0f)), 
 	m_position(glm::vec3(0.0f, 0.0f, 0.0f)), 
-	m_rotation(glm::vec3(1.0f, 1.0f, 1.0f))
+	m_rotation(glm::vec3(0.0f, 0.0f, 0.0f))
 {
 
 }

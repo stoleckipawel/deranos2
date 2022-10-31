@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Window.h"
 
-Window::Window(int height = 1200, int width = 720, const std::string& name = "Deranos")
+Window::Window(int height = 1200, int width = 720, std::string name = "Deranos")
     : m_width(width), m_height(height), m_name(name)
 {
     Window::m_window = Window::MakeWindow();

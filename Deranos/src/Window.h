@@ -5,7 +5,7 @@
 class Window
 {
 public:
-	Window::Window(int height, int width, const std::string& name);
+	Window::Window(int height, int width, std::string name);
 	inline int GetWidth() { return Window::m_width; };
 	inline void SetHeight(int height) { Window::m_height = height; };
 
@@ -23,7 +23,7 @@ private:
 
 	int m_width;
 	int m_height;
-	const std::string& m_name;
+	std::string m_name;
 	GLFWwindow* m_window;
 };
 

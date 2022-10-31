@@ -28,7 +28,9 @@ project "Deranos"
         "%{prj.name}/src/**.hpp",
         "%{prj.name}/vendor/glad/glad.c",
         "%{prj.name}/vendor/GLFW/glfw3.h",
-        "%{prj.name}/vendor/GLFW/glfw3native.h"
+        "%{prj.name}/vendor/GLFW/glfw3native.h",
+        "%{prj.name}/vendor/imgui/**.h",
+        "%{prj.name}/vendor/imgui/**.cpp"
     }
 
     includedirs
@@ -41,6 +43,7 @@ project "Deranos"
         "%{prj.name}/vendor/GLFW/include",
         "%{prj.name}/vendor/stb_image",
         "%{prj.name}/vendor/assimp/include",
+        "%{prj.name}/vendor/imgui",
         "%{prj.name}/vendor"
     }
 
@@ -84,11 +87,14 @@ project "Deranos"
             "DERANOS_RELEASE"
         }
 
-    filter "files:not **.cpp"
-        flags
-        {
-            "NoPCH"
+    filter "files:Deranos/vendor/imgui/**.cpp or files:Deranos/vendor/assimp/**.cpp or files:not **.cpp"
+        flags 
+        { 
+            "NoPCH" 
         }
+    
+    
+
 
         
     
