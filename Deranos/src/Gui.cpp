@@ -29,6 +29,16 @@ void Gui::Slider(const char* name, float& value, float min, float max)
 	ImGui::SliderFloat(name, &value, min, max);
 }
 
+void Gui::Slider(const char* name, float value[3], float min, float max)
+{
+	ImGui::SliderFloat3(name, value, min, max);
+}
+
+void Gui::Drag(const char* name, float value[3], float speed)
+{
+	ImGui::DragFloat3(name, value, speed);
+}
+
 void Gui::Color(const char* name, float value[4])
 {
 	ImGui::ColorEdit4(name, value);

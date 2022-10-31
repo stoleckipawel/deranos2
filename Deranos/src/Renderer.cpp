@@ -33,16 +33,21 @@ void Renderer::PreRender()
 
 	m_model_transform = std::make_shared<Transform>();
 }
+bool test = false;
+float test2 = 0.0f;
+float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+float pos[3] = {0.0f, 0.0f, 0.0f};
 
 void Renderer::DrawGui()
 {
-	bool test = false;
-	float test2 = 0.0f;
-	float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
-
 	m_gui->Init();
 	m_gui->Checkbox("Checkbox", test);
 	m_gui->Slider("Slider", test2, 0.0, 1.0);
+	
+	m_gui->Drag("Camera Position", pos);
+	//m_camera->SetPosition(pos[0], pos[1], pos[2]);
+
+	
 	m_gui->Color("Color", color);
 	m_gui->Render();
 }
