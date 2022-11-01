@@ -51,7 +51,7 @@ void Application::Run()
 
     while (!glfwWindowShouldClose(m_window->GetWindow()) && m_window->GetWindow() != NULL)
     {
-        OnInput();
+        OnInput();//Should be callback based
 
         m_renderer->Renderloop();
 
