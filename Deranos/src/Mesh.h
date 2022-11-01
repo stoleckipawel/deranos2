@@ -10,11 +10,12 @@ struct VertexLayout
 class Mesh
 {
 public:
-    Mesh(std::vector<VertexLayout> vertecies, std::vector<unsigned int> indecies);
+    Mesh();
     ~Mesh();
     void Draw();
 private:
     void BindVertexArray();
+    void LoadMesh();
 
     std::vector<VertexLayout> m_vertecies;
     std::vector<unsigned int> m_indecies;

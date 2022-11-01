@@ -57,9 +57,29 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glDeleteShader(fragment);
 }
 
-void Shader::Bind()
+void Shader::ResolveConstants(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
+{
+    setInt("ourTexture", 0);
+    setMat4("model", model_xform->GetMatrix());
+    setMat4("view", camera->GetViewMatrix());
+    setMat4("projection", camera->GetProjectionMatrix());
+}
+
+void Shader::Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
 {
     glUseProgram(ID);
+    DepthFunc();
+    ResolveConstants(camera, model_xform);
+}
+
+void Shader::DepthFunc()
+{
+    glEnable(GL_DEPTH_TEST);
+}
+
+void Shader::CullFunc()
+{
+    glEnable(GL_CULL_FACE);
 }
 
 void Shader::checkCompileErrors(unsigned int shader, std::string type)

@@ -1,10 +1,9 @@
 #include "pch.h"
 #include "Mesh.h"
 
-Mesh::Mesh(std::vector<VertexLayout> vertecies, std::vector<unsigned int> indecies)
+Mesh::Mesh()
 {
-	m_vertecies = vertecies;
-	m_indecies = indecies;
+	Mesh::LoadMesh();
 
 	glGenVertexArrays(1, &m_vao);
 
@@ -27,6 +26,40 @@ Mesh::Mesh(std::vector<VertexLayout> vertecies, std::vector<unsigned int> indeci
 	//uvs
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexLayout), (void*)offsetof(VertexLayout, uv0));
 	glEnableVertexAttribArray(2);
+}
+
+void Mesh::LoadMesh()
+{
+	VertexLayout vertex;
+	//vert1 // top right
+	vertex.position = glm::vec3(0.5f, 0.5f, 0.0f);
+	vertex.color = glm::vec3(1.0f, 0.0f, 0.0f);
+	vertex.uv0 = glm::vec2(1.0f, 1.0f);
+	m_vertecies.push_back(vertex);
+	//vert2 // bottom right
+	vertex.position = glm::vec3(0.5f, -0.5f, 0.0f);
+	vertex.color = glm::vec3(0.0f, 1.0f, 0.0f);
+	vertex.uv0 = glm::vec2(1.0f, 0.0f);
+	m_vertecies.push_back(vertex);
+	//vert3 // bottom left
+	vertex.position = glm::vec3(-0.5f, -0.5f, 0.0f);
+	vertex.color = glm::vec3(0.0f, 0.0f, 1.0f);
+	vertex.uv0 = glm::vec2(0.0f, 0.0f);
+	m_vertecies.push_back(vertex);
+	//vert4 // top left
+	vertex.position = glm::vec3(-0.5f, 0.5f, 0.0f);
+	vertex.color = glm::vec3(1.0f, 1.0f, 0.0f);
+	vertex.uv0 = glm::vec2(0.0f, 1.0f);
+	m_vertecies.push_back(vertex);
+
+	//incex buffer
+	std::vector<unsigned int> indices;
+	m_indecies.push_back(0);
+	m_indecies.push_back(1);
+	m_indecies.push_back(3);
+	m_indecies.push_back(1);
+	m_indecies.push_back(2);
+	m_indecies.push_back(3);
 }
 
 Mesh::~Mesh()

@@ -1,54 +1,26 @@
 #include "pch.h"
 #include "Model.h"
 
-Model::Model()
+Model::Model(const char* vertex_shader_path, const char* pixel_shader_path, const char* texture_path)
 {
-	LoadMesh();
+	mesh = std::make_shared<Mesh>();
+	model_xform = std::make_shared<Transform>();
+	material = std::make_shared<Material>(vertex_shader_path, pixel_shader_path, texture_path);
 }
 
-void Model::Draw()
+void Model::ResolveTransforms()
 {
-	m_mesh->Draw();
+	model_xform->SetPosition(0.5f, 0.0f, 0.0f);
+	model_xform->SetRotation(1.0f, 1.0f, 1.0f);
+	model_xform->SetScale(1.25);
+	model_xform->Rotate((float)glfwGetTime() * 0.5, 0.0f, 0.0f);
 }
 
-std::shared_ptr<Mesh> Model::GetMesh()
+void Model::Draw(std::shared_ptr<Camera>& camera)
 {
-	return m_mesh;
+	ResolveTransforms();
+	material->Bind(camera, model_xform);
+	mesh->Draw();
 }
 
-void Model::LoadMesh()
-{
-	std::vector<VertexLayout> plane;
-	VertexLayout vertex;
-	//vert1 // top right
-	vertex.position = glm::vec3(0.5f, 0.5f, 0.0f);
-	vertex.color = glm::vec3(1.0f, 0.0f, 0.0f);
-	vertex.uv0 = glm::vec2(1.0f, 1.0f);
-	plane.push_back(vertex);
-	//vert2 // bottom right
-	vertex.position = glm::vec3(0.5f, -0.5f, 0.0f);
-	vertex.color = glm::vec3(0.0f, 1.0f, 0.0f);
-	vertex.uv0 = glm::vec2(1.0f, 0.0f);
-	plane.push_back(vertex);
-	//vert3 // bottom left
-	vertex.position = glm::vec3(-0.5f, -0.5f, 0.0f);
-	vertex.color = glm::vec3(0.0f, 0.0f, 1.0f);
-	vertex.uv0 = glm::vec2(0.0f, 0.0f);
-	plane.push_back(vertex);
-	//vert4 // top left
-	vertex.position = glm::vec3(-0.5f, 0.5f, 0.0f);
-	vertex.color = glm::vec3(1.0f, 1.0f, 0.0f);
-	vertex.uv0 = glm::vec2(0.0f, 1.0f);
-	plane.push_back(vertex);
 
-	//incex buffer
-	std::vector<unsigned int> indices;
-	indices.push_back(0);
-	indices.push_back(1);
-	indices.push_back(3);
-	indices.push_back(1);
-	indices.push_back(2);
-	indices.push_back(3);
-
-	m_mesh = std::make_shared<Mesh>(plane, indices);
-}

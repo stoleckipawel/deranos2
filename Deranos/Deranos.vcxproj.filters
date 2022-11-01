@@ -91,6 +91,8 @@
       <Filter>vendor\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\Gui.h" />
+    <ClInclude Include="src\Button.h" />
+    <ClInclude Include="src\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -157,5 +159,7 @@
       <Filter>vendor\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\Gui.cpp" />
+    <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\Material.cpp" />
   </ItemGroup>
 </Project>
