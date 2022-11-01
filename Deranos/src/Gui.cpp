@@ -9,7 +9,7 @@ void Gui::SetStyle()
 Gui::Gui(std::shared_ptr<Window>& window)
 	: m_window(window)
 {
-	IMGUI_CHECKVERSION();
+	//IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();

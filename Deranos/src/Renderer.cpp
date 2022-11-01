@@ -31,8 +31,8 @@ void Renderer::DrawGui()
 	m_gui->Init();
 
 	ImGui::Begin("Camera");
-		Button::Drag("Position", m_camera->position);
-		Button::Drag("Rotation", m_camera->rotation);
+		Button::Drag("Position", m_camera->position_ws);
+		Button::Drag("Rotation", m_camera->orientation);
 		Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
 	ImGui::End();
 

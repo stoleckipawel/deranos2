@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "Application.h"
 
-
+//#ToDo:
+//convert to a singleton
 
 void InitializeGlfw()
 {

@@ -21,16 +21,25 @@
     <ClInclude Include="src\Application.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\EngineDefines.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Gui.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Input.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Log.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Material.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Mesh.h">
@@ -90,12 +99,12 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
       <Filter>vendor\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Gui.h" />
-    <ClInclude Include="src\Button.h" />
-    <ClInclude Include="src\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Camera.cpp">
@@ -104,10 +113,16 @@
     <ClCompile Include="src\EntryPoint.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Gui.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Input.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Mesh.cpp">
@@ -158,8 +173,5 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <Filter>vendor\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Gui.cpp" />
-    <ClCompile Include="src\Button.cpp" />
-    <ClCompile Include="src\Material.cpp" />
   </ItemGroup>
 </Project>

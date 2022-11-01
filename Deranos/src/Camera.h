@@ -14,12 +14,15 @@ public:
 	float near_clipping_plane;
 	float far_clipping_plane;
 	glm::float32 speed;
-	glm::vec3 position;
-	glm::vec3 rotation;
+	glm::float32 sensitivity;
+	glm::vec3 position_ws;
+	glm::vec3 orientation;
 private:
-	glm::vec3 m_up;
-	glm::vec3 m_target;
-	glm::vec3 m_left;
-	glm::vec3 m_right;
+	void Rotation();
+	void Translation();
 	std::shared_ptr<Window>& m_window;
+	std::shared_ptr<Input> m_input;
+
+	glm::vec3 m_up;
+	bool m_in_rotation = true;
 };
