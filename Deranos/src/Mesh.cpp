@@ -11,11 +11,11 @@ Mesh::Mesh()
 	glBindVertexArray(m_vao);
 
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertecies[0]) * m_vertecies.size(), &m_vertecies[0], GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertecies[0]) * m_vertecies.size(), &m_vertecies[0], GL_STATIC_DRAW);
 
 	glGenBuffers(1, &m_ebo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_indecies[0]) * m_indecies.size(), &m_indecies[0], GL_DYNAMIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(m_indecies[0]) * m_indecies.size(), &m_indecies[0], GL_STATIC_DRAW);
 
 	//position
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexLayout), (void*)offsetof(VertexLayout, position));
@@ -26,6 +26,9 @@ Mesh::Mesh()
 	//uvs
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(VertexLayout), (void*)offsetof(VertexLayout, uv0));
 	glEnableVertexAttribArray(2);
+	//normals
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(VertexLayout), (void*)offsetof(VertexLayout, normal));
+	glEnableVertexAttribArray(3);
 }
 
 void Mesh::LoadMesh()
@@ -76,6 +79,11 @@ void Mesh::BindVertexArray()
 
 void Mesh::Draw()
 {
+	//#ToDo, check whether a material has been set, if not set a dummy
+
 	BindVertexArray();
 	glDrawElements(GL_TRIANGLES, m_indecies.size(), GL_UNSIGNED_INT, 0);
 }
+
+
+

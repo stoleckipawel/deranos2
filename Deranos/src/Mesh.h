@@ -5,6 +5,7 @@ struct VertexLayout
     glm::vec3 position;
     glm::vec3 color;
     glm::vec2 uv0;
+    glm::vec3 normal;
 };
 
 class Mesh

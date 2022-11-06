@@ -8,13 +8,16 @@
 class Model
 {
 public:
-	Model(const char* vertex_shader_path, const char* pixel_shader_path, const char* texture_path);
+	Model();
+	Model(const char* path);
 	void Draw(std::shared_ptr<Camera>& camera);
 
+	void AttachMaterial(std::shared_ptr<Material>& material);
+	
 	std::shared_ptr<Material> material;
-	std::shared_ptr<Mesh> mesh;
 	std::shared_ptr<Transform> model_xform;
+	std::vector<std::shared_ptr<Mesh>> mesh;
 private:
-	void ResolveTransforms();
+	void LoadModel(const char* path);
 };
 

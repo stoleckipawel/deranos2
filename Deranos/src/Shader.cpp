@@ -59,7 +59,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 
 void Shader::ResolveConstants(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
 {
-    setInt("ourTexture", 0);
+    setInt("T_DIFFUSE", 0);
     setMat4("model", model_xform->GetMatrix());
     setMat4("view", camera->GetViewMatrix());
     setMat4("projection", camera->GetProjectionMatrix());

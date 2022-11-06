@@ -1,26 +1,39 @@
 #include "pch.h"
 #include "Model.h"
 
-Model::Model(const char* vertex_shader_path, const char* pixel_shader_path, const char* texture_path)
+Model::Model()
 {
-	mesh = std::make_shared<Mesh>();
+	//Dummy Model Implementation
+	mesh.push_back(std::make_shared<Mesh>());
 	model_xform = std::make_shared<Transform>();
-	material = std::make_shared<Material>(vertex_shader_path, pixel_shader_path, texture_path);
+	material = std::make_shared<Material>();
 }
 
-void Model::ResolveTransforms()
+Model::Model(const char* path)
 {
-	model_xform->SetPosition(0.5f, 0.0f, 0.0f);
-	model_xform->SetRotation(1.0f, 1.0f, 1.0f);
-	model_xform->SetScale(1.25);
-	model_xform->Rotate((float)glfwGetTime() * 0.5, 0.0f, 0.0f);
+	Model::LoadModel(path);
+}
+
+void Model::LoadModel(const char* path)
+{
+
+}
+
+void Model::AttachMaterial(std::shared_ptr<Material>& material)
+{
+	this->material = material;
 }
 
 void Model::Draw(std::shared_ptr<Camera>& camera)
 {
-	ResolveTransforms();
+	//Set proper camera consts in  the material, model, view, projection xform in the material
 	material->Bind(camera, model_xform);
-	mesh->Draw();
+
+	//Draw each sub mesh of the mesh
+	for each (auto submesh in mesh)
+	{
+		submesh->Draw();
+	}
 }
 
 

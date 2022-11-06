@@ -5,6 +5,7 @@
 #include <stb_image.h>
 
 Texture::Texture(const char* path, bool flip)
+	: m_texture_type(texture_type::none)
 {
 	glGenTextures(1, &m_id);
 	glBindTexture(GL_TEXTURE_2D, m_id);
@@ -39,6 +40,11 @@ Texture::Texture(const char* path, bool flip)
 unsigned int Texture::GetId()
 {
 	return m_id;
+}
+
+texture_type Texture::GetTextureType()
+{
+	return m_texture_type;
 }
 
 void Texture::Bind()

@@ -5,12 +5,14 @@
 class Material
 {
 public:
-	Material(const char* vertex_shader_path, const char* pixel_shader_path, const char* texture_path);
+	Material();
 	void Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform);
-	std::shared_ptr<Texture> texture;
-	std::shared_ptr<Shader> shader;
+	
+	void AttachShader(std::shared_ptr<Shader>& shader);
+	void AttachTexture(std::shared_ptr<Texture>& texture);
 private:
-
+	std::shared_ptr<Shader> m_shader;
+	std::shared_ptr<Texture> m_texture_0;
 };
 
 

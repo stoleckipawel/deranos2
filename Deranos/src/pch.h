@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 
+#include <map>
 #include <array>
 #include <memory>
 #include <utility>
@@ -30,6 +31,11 @@
 #include<glm/gtc/type_ptr.hpp>
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
+
+
+#include <assimp/Importer.hpp>// c++ importer interface
+#include <assimp/scene.h>//data structure
+#include <assimp/postprocess.h>//postprocessing flags
 
 #include <Log.h>
 

@@ -75,7 +75,7 @@ glm::mat4 Transform::GetMatrix()
 {
 	glm::mat4 model_mtx = glm::mat4(1.0f);
 	model_mtx = glm::translate(model_mtx, m_position);
-	model_mtx = glm::rotate(model_mtx, glm::radians(glm::length(m_rotation) * 360.0f), glm::normalize(m_rotation));//to be done properly
+	//model_mtx = glm::rotate(model_mtx, glm::radians(360.0f), m_rotation);
 	model_mtx = glm::scale(model_mtx, m_scale);
 	return model_mtx;
 }

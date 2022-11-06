@@ -17,7 +17,6 @@ public:
 	void PreRender();
 	void Renderloop();
 	void Present();
-	void BindWindow(std::shared_ptr<Window>& window);
 	void OnInput();
 private:
 	void ClearBackBuffer(glm::vec3 clear_color);
