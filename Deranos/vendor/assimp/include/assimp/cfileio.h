@@ -3,8 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
-
+Copyright (c) 2006-2017, assimp team
 
 
 All rights reserved.
@@ -48,16 +47,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef AI_FILEIO_H_INC
 #define AI_FILEIO_H_INC
 
-#ifdef __GNUC__
-#   pragma GCC system_header
-#endif
-
 #include <assimp/types.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 struct aiFileIO;
 struct aiFile;
 

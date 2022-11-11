@@ -3,7 +3,7 @@
 
 Mesh::Mesh()
 {
-	Mesh::LoadMesh();
+	Mesh::LoadQuad();
 
 	glGenVertexArrays(1, &m_vao);
 
@@ -31,8 +31,10 @@ Mesh::Mesh()
 	glEnableVertexAttribArray(3);
 }
 
-void Mesh::LoadMesh()
+void Mesh::LoadQuad()
 {
+	Mesh::Clear();
+
 	VertexLayout vertex;
 	//vert1 // top right
 	vertex.position = glm::vec3(0.5f, 0.5f, 0.0f);
@@ -85,5 +87,65 @@ void Mesh::Draw()
 	glDrawElements(GL_TRIANGLES, m_indecies.size(), GL_UNSIGNED_INT, 0);
 }
 
+void Mesh::Clear()
+{
+	m_indecies.clear();
+	m_vertecies.clear();
+}
+
+void Mesh::SetIndecies(std::vector<unsigned int>& indecies)
+{
+	m_indecies = indecies;
+}
+
+void Mesh::SetVertecies(std::vector<VertexLayout>& vertecies)
+{
+	m_vertecies = vertecies;
+}
+
+void Mesh::RetrieveVertecies(aiMesh* mesh)
+{
+	std::vector<VertexLayout> vertices;//Potentialy needs to be smart pointer, if it doesnt work
+
+	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+	{
+		VertexLayout vertex;
+		vertex.position.x = mesh->mVertices[i].x;
+		vertex.position.y = mesh->mVertices[i].y;
+		vertex.position.z = mesh->mVertices[i].z;
+
+		if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
+		{
+			vertex.uv0.x = mesh->mTextureCoords[0][i].x;
+			vertex.uv0.y = mesh->mTextureCoords[0][i].y;
+		}
+		else
+		{
+			vertex.uv0 = glm::vec2(0.0f, 0.0f);
+		}
+
+		vertex.normal.x = mesh->mNormals[i].x;
+		vertex.normal.y = mesh->mNormals[i].y;
+		vertex.normal.z = mesh->mNormals[i].z;
+
+		vertices.push_back(vertex);
+	}
+
+	this->SetVertecies(vertices);
+}
+
+void Mesh::RetrieveIndeces(aiMesh* mesh)
+{
+	std::vector<unsigned int> indices;//Potentialy needs to be smart pointer, if it doesnt work
+
+	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+	{
+		aiFace face = mesh->mFaces[i];
+		for (unsigned int j = 0; j < face.mNumIndices; j++)
+			indices.push_back(face.mIndices[j]);
+	}
+
+	this->SetIndecies(indices);
+}
 
 

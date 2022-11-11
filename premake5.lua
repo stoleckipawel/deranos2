@@ -43,6 +43,8 @@ project "Deranos"
         "%{prj.name}/vendor/GLFW/include",
         "%{prj.name}/vendor/stb_image",
         "%{prj.name}/vendor/assimp/include",
+        "%{prj.name}/vendor/assimp/lib",
+        "%{prj.name}/vendor/assimp/dll",
         "%{prj.name}/vendor/imgui",
         "%{prj.name}/vendor"
     }
@@ -57,7 +59,13 @@ project "Deranos"
     {
         "glfw3.lib",
         "opengl32.lib",
-        "assimp-vc142-mt.lib"
+        "assimp-vc142-mt.lib",
+        "assimp-vc142-mt.dll"
+    }
+
+    postbuildcommands 
+    {
+        '{COPY} "../Deranos/vendor/assimp/dll/assimp-vc142-mt.dll" "%{cfg.targetdir}"'
     }
 
 
@@ -92,6 +100,8 @@ project "Deranos"
         { 
             "NoPCH" 
         }
+
+
     
     
 

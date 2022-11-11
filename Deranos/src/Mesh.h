@@ -14,9 +14,14 @@ public:
     Mesh();
     ~Mesh();
     void Draw();
+    void SetVertecies(std::vector<VertexLayout>& vertecies);
+    void SetIndecies(std::vector<unsigned int>& indecies);
+    void RetrieveVertecies(aiMesh* mesh);
+    void RetrieveIndeces(aiMesh* mesh);
 private:
     void BindVertexArray();
-    void LoadMesh();
+    void Clear();
+    void LoadQuad();
 
     std::vector<VertexLayout> m_vertecies;
     std::vector<unsigned int> m_indecies;

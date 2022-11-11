@@ -3,8 +3,7 @@
 Open Asset Import Library (assimp)
 ---------------------------------------------------------------------------
 
-Copyright (c) 2006-2021, assimp team
-
+Copyright (c) 2006-2017, assimp team
 
 
 All rights reserved.
@@ -50,10 +49,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef AI_IOSYSTEM_H_INC
 #define AI_IOSYSTEM_H_INC
 
-#ifdef __GNUC__
-#   pragma GCC system_header
-#endif
-
 #ifndef __cplusplus
 #   error This header requires C++ to be used. aiFileIO.h is the \
     corresponding C interface.
@@ -62,9 +57,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "types.h"
 
 #ifdef _WIN32
-#   include <direct.h>
-#   include <stdlib.h>
-#   include <stdio.h>
+#   include <direct.h>  
+#   include <stdlib.h>  
+#   include <stdio.h>  
 #else
 #   include <sys/stat.h>
 #   include <sys/types.h>
@@ -84,7 +79,7 @@ namespace Assimp    {
  *  to the importer library. If you implement this interface, you also want to
  *  supply a custom implementation for IOStream.
  *
- *  @see Importer::SetIOHandler()
+ *  @see Importer::SetIOHandler() 
  */
 class ASSIMP_API IOSystem
 #ifndef SWIG
@@ -99,7 +94,7 @@ public:
      *  Create an instance of your derived class and assign it to an
      *  #Assimp::Importer instance by calling Importer::SetIOHandler().
      */
-    IOSystem() AI_NO_EXCEPT;
+    IOSystem();
 
     // -------------------------------------------------------------------
     /** @brief Virtual destructor.
@@ -108,6 +103,9 @@ public:
      *  on Assimp's heap.
      */
     virtual ~IOSystem();
+
+
+public:
 
     // -------------------------------------------------------------------
     /** @brief For backward compatibility
@@ -234,7 +232,7 @@ private:
 
 // ----------------------------------------------------------------------------
 AI_FORCE_INLINE
-IOSystem::IOSystem() AI_NO_EXCEPT
+IOSystem::IOSystem()
 : m_pathStack() {
     // empty
 }
@@ -294,7 +292,7 @@ bool IOSystem::PushDirectory( const std::string &path ) {
 AI_FORCE_INLINE
 const std::string &IOSystem::CurrentDirectory() const {
     if ( m_pathStack.empty() ) {
-        static const std::string Dummy;
+        static const std::string Dummy("");
         return Dummy;
     }
     return m_pathStack[ m_pathStack.size()-1 ];

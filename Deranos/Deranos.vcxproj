@@ -60,7 +60,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DERANOS_PLATFORM_WINDOWS;DERANOS_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\assimp\lib;vendor\assimp\dll;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -71,6 +71,9 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\GLFW\lib;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll"\ (xcopy /Q /E /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Debug-windows-x86_64\Deranos" &gt; nul) ELSE (xcopy /Q /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Debug-windows-x86_64\Deranos" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -78,7 +81,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DERANOS_PLATFORM_WINDOWS;DERANOS_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\assimp\lib;vendor\assimp\dll;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -95,6 +98,9 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\GLFW\lib;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll"\ (xcopy /Q /E /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Release-windows-x86_64\Deranos" &gt; nul) ELSE (xcopy /Q /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Release-windows-x86_64\Deranos" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />

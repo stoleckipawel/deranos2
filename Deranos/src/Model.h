@@ -18,6 +18,8 @@ public:
 	std::shared_ptr<Transform> model_xform;
 	std::vector<std::shared_ptr<Mesh>> mesh;
 private:
-	void LoadModel(const char* path);
+	void LoadModel(std::string path);
+	void ProcessNode(aiNode* node, const aiScene* scene);
+	void ProcessMesh(aiMesh* mesh, const aiScene* scene);
 };
 

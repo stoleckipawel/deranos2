@@ -46,7 +46,7 @@ void Renderer::PreRender()
 	m_camera = std::make_shared<Camera>(m_window);
 	m_camera->position_ws = glm::vec3(0.0f, 0.0f, 3.0f);
 
-	m_model = std::make_shared<Model>();
+	m_model = std::make_shared<Model>("resources/backpack/backpack.obj");
 }
 
 void Renderer::Renderloop()
