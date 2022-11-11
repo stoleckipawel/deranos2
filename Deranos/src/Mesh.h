@@ -12,6 +12,7 @@ class Mesh
 {
 public:
     Mesh();
+    Mesh(aiMesh* mesh);
     ~Mesh();
     void Draw();
     void SetVertecies(std::vector<VertexLayout>& vertecies);
@@ -22,6 +23,7 @@ private:
     void BindVertexArray();
     void Clear();
     void LoadQuad();
+    void Build();
 
     std::vector<VertexLayout> m_vertecies;
     std::vector<unsigned int> m_indecies;

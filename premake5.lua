@@ -59,13 +59,13 @@ project "Deranos"
     {
         "glfw3.lib",
         "opengl32.lib",
-        "assimp-vc142-mt.lib",
-        "assimp-vc142-mt.dll"
+        "assimp-vc140-mt.lib",
+        "assimp-vc140-mt.dll"
     }
 
     postbuildcommands 
     {
-        '{COPY} "../Deranos/vendor/assimp/dll/assimp-vc142-mt.dll" "%{cfg.targetdir}"'
+        '{COPY} "../Deranos/vendor/assimp/dll/assimp-vc140-mt.dll" "%{cfg.targetdir}"'
     }
 
 

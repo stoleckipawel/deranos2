@@ -68,11 +68,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\GLFW\lib;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll"\ (xcopy /Q /E /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Debug-windows-x86_64\Deranos" &gt; nul) ELSE (xcopy /Q /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Debug-windows-x86_64\Deranos" &gt; nul)</Command>
+      <Command>IF EXIST "..\Deranos\vendor\assimp\dll\assimp-vc140-mt.dll"\ (xcopy /Q /E /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc140-mt.dll" "..\bin\Debug-windows-x86_64\Deranos" &gt; nul) ELSE (xcopy /Q /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc140-mt.dll" "..\bin\Debug-windows-x86_64\Deranos" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -95,11 +95,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>vendor\GLFW\lib;vendor\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll"\ (xcopy /Q /E /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Release-windows-x86_64\Deranos" &gt; nul) ELSE (xcopy /Q /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc142-mt.dll" "..\bin\Release-windows-x86_64\Deranos" &gt; nul)</Command>
+      <Command>IF EXIST "..\Deranos\vendor\assimp\dll\assimp-vc140-mt.dll"\ (xcopy /Q /E /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc140-mt.dll" "..\bin\Release-windows-x86_64\Deranos" &gt; nul) ELSE (xcopy /Q /Y /I "..\Deranos\vendor\assimp\dll\assimp-vc140-mt.dll" "..\bin\Release-windows-x86_64\Deranos" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

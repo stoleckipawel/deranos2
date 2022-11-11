@@ -12,22 +12,25 @@ Model::Model()
 Model::Model(const char* path)
 {
 	Model::LoadModel(path);
+	model_xform = std::make_shared<Transform>();
+	material = std::make_shared<Material>();
 }
 
 void Model::LoadModel(std::string path)
 {
-	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+	Assimp::Importer* importer = new Assimp::Importer();
+
+	const aiScene* scene = importer->ReadFile(path, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace | aiProcess_ValidateDataStructure | aiProcess_FindInvalidData);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
-		std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
+		std::cout << "ERROR::ASSIMP::" << importer->GetErrorString() << std::endl;
 		return;
 	}
 
-	std::string directory = path.substr(0, path.find_last_of('/'));
-
 	ProcessNode(scene->mRootNode, scene);
+
+	delete importer;
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
@@ -47,14 +50,7 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene)
 
 void Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 {
-	std::shared_ptr<Mesh> submesh = std::make_shared<Mesh>();
-
-	submesh->RetrieveVertecies(mesh);
-
-	submesh->RetrieveIndeces(mesh);
-
-	//RetrieveMaterial
-
+	std::shared_ptr<Mesh> submesh = std::make_shared<Mesh>(mesh);
 	this->mesh.push_back(submesh);
 }
 

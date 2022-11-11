@@ -1,9 +1,35 @@
 #include "pch.h"
 #include "Mesh.h"
 
+Mesh::Mesh(aiMesh* mesh)
+{
+	RetrieveVertecies(mesh);
+	RetrieveIndeces(mesh);
+
+	//RetrieveMaterial
+	Build();
+}
+
 Mesh::Mesh()
 {
-	Mesh::LoadQuad();
+	LoadQuad();
+	Build();
+}
+
+void Mesh::Build()
+{
+	if (m_vertecies.size() == 0)
+	{
+		std::cout << "WARNING::MESH " << "EMPTY VERTEX BUFFER" << std::endl;//TO DO NAME OF THE MESH 
+		return;
+	}
+
+
+	if (m_indecies.size() == 0)
+	{
+		std::cout << "WARNING::MESH " << "EMPTY INDEX BUFFER" << std::endl;//TO DO NAME OF THE MESH 
+		return;
+	}
 
 	glGenVertexArrays(1, &m_vao);
 
@@ -33,7 +59,7 @@ Mesh::Mesh()
 
 void Mesh::LoadQuad()
 {
-	Mesh::Clear();
+	Clear();
 
 	VertexLayout vertex;
 	//vert1 // top right
@@ -140,9 +166,8 @@ void Mesh::RetrieveIndeces(aiMesh* mesh)
 
 	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
 	{
-		aiFace face = mesh->mFaces[i];
-		for (unsigned int j = 0; j < face.mNumIndices; j++)
-			indices.push_back(face.mIndices[j]);
+		for (unsigned int j = 0; j < mesh->mFaces[i].mNumIndices; j++)
+			indices.push_back(mesh->mFaces[i].mIndices[j]);
 	}
 
 	this->SetIndecies(indices);
