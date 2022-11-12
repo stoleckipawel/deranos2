@@ -38,6 +38,7 @@
 #include <assimp/postprocess.h>//postprocessing flags
 
 #include <Log.h>
+#include "TextureTypes.h"
 
 #if defined DERANOS_PLATFORM_WINDOWS
 	#include <Windows.h>

@@ -2,18 +2,12 @@
 #include "Material.h"
 #include "Camera.h"
 
+
 Material::Material()
 {
 	//Attach dummy texture & dummy shader at initialization
-	m_shader = std::make_shared<Shader>("shaders/simple.vs", "shaders/simple.ps");
-	m_dummy_texture = std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", true);
-
-}
-
-void Material::Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
-{
-	m_dummy_texture->Bind(USERMAP_DIFFUSE);
-	m_shader->Bind(camera, model_xform);
+	AttachShader(std::make_shared<Shader>("shaders/simple.vs", "shaders/simple.ps"));
+	AttachTexture(std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", TextureTypes::Diffuse()));
 }
 
 void Material::AttachShader(std::shared_ptr<Shader>& shader)
@@ -23,12 +17,18 @@ void Material::AttachShader(std::shared_ptr<Shader>& shader)
 
 void Material::AttachTexture(std::shared_ptr<Texture>& texture)
 {
+
 	m_dummy_texture = texture;
+}
+
+void Material::Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
+{
+	m_dummy_texture->Bind(USERMAP_DIFFUSE);
+	m_shader->Bind(camera, model_xform);
 }
 
 std::vector<Texture> Material::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 {
-	
 	std::vector<Texture> textures;
 	/*
 	for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)

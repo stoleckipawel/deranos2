@@ -1,32 +1,23 @@
 #pragma once
+#include "TextureTypes.h"
 
-enum texture_type
-{
-	color,
-	diffuse,
-	normal,
-	specular,
-	roughness,
-	tangent,
-	metalic,
-	height
-};
+
 
 class Texture
 {
 public:
-	Texture(const char* path, bool flip);
+	Texture(const char* path, TextureType texture_type = TextureTypes::Default(), bool flip = true);
 	unsigned int GetId();
-	void SetTextureType(texture_type type);
-	texture_type GetTextureType();
+	TextureType GetTextureType();
 	void Bind(int usermap);
 	void Bind();
 private:
+	void CalcMipCount();
+
 	unsigned int  m_id;
-	texture_type m_texture_type;
+	TextureType m_texture_type;
 	int m_width;
 	int m_height;
-	int m_channel_num;
-
+	int m_mip_count;
 };
 
