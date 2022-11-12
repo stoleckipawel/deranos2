@@ -1,8 +1,6 @@
 #pragma once
 #include "TextureTypes.h"
 
-
-
 class Texture
 {
 public:
@@ -15,9 +13,9 @@ private:
 	void CalcMipCount();
 
 	unsigned int  m_id;
-	TextureType m_texture_type;
 	int m_width;
 	int m_height;
 	int m_mip_count;
+	const TextureType m_texture_type;
 };
 

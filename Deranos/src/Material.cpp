@@ -17,7 +17,6 @@ void Material::AttachShader(std::shared_ptr<Shader>& shader)
 
 void Material::AttachTexture(std::shared_ptr<Texture>& texture)
 {
-
 	m_dummy_texture = texture;
 }
 

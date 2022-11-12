@@ -20,7 +20,7 @@ public:
 private:
 	void Rotation();
 	void Translation();
-	std::shared_ptr<Window>& m_window;
+	std::shared_ptr<Window>& m_window;//weird usage of reference to be checked
 	std::shared_ptr<Input> m_input;
 
 	glm::vec3 m_up;

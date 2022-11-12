@@ -2,18 +2,13 @@
 #include "Texture.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include "Sampler.h"
 
 Texture::Texture(const char* path, TextureType texture_type, bool flip)
 	: m_texture_type(texture_type)
 {
 	glGenTextures(1, &m_id);
 	glBindTexture(GL_TEXTURE_2D, m_id);
-
-	// set the texture wrapping/filtering options (on the currently bound texture object)
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	stbi_set_flip_vertically_on_load(flip);
 
@@ -28,7 +23,7 @@ Texture::Texture(const char* path, TextureType texture_type, bool flip)
 		if (texture_data)
 		{
 			CalcMipCount();
-			glTexImage2D(GL_TEXTURE_2D, m_mip_count, m_texture_type.format, m_width, m_height, 0, m_texture_type.format, GL_UNSIGNED_BYTE, texture_data);
+			glTexImage2D(GL_TEXTURE_2D, m_mip_count, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture_data);
 
 			if(m_texture_type.generate_mips)
 				glGenerateMipmap(GL_TEXTURE_2D);
@@ -64,17 +59,18 @@ unsigned int Texture::GetId()
 	return m_id;
 }
 
-//TextureType Texture::GetTextureType()
-//{
-	//return m_texture_type;
-//}
-
-void Texture::Bind(int usermap)
+TextureType Texture::GetTextureType()
 {
-	glBindTexture(GL_TEXTURE_2D, m_id);
+	return m_texture_type;
 }
 
 void Texture::Bind()
 {
-	glBindTexture(GL_TEXTURE_2D, m_id);
+	Sampler(*this).Bind();
 }
+
+void Texture::Bind(int usermap)
+{
+	Bind();
+}
+

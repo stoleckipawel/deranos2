@@ -103,6 +103,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Sampler.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Button.h" />
     <ClInclude Include="src\Camera.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Sampler.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Camera.cpp" />

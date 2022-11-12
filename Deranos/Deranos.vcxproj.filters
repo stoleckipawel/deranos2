@@ -101,6 +101,7 @@
     </ClInclude>
     <ClInclude Include="src\TextureTypes.h" />
     <ClInclude Include="src\TextureType.h" />
+    <ClInclude Include="src\Sampler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -177,5 +178,6 @@
     </ClCompile>
     <ClCompile Include="src\TextureType.cpp" />
     <ClCompile Include="src\TextureTypes.cpp" />
+    <ClCompile Include="src\Sampler.cpp" />
   </ItemGroup>
 </Project>
