@@ -3886,7 +3886,7 @@ GLFWAPI GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window
  *
  *  This function sets the window content scale callback of the specified window,
  *  which is called when the content scale of the specified window changes.
- *
+ Get
  *  @param[in] window The window whose callback to set.
  *  @param[in] callback The new callback, or `NULL` to remove the currently set
  *  callback.

@@ -25,7 +25,6 @@ public:
 	void Shader::setMat3(const std::string& name, const glm::mat3& mat) const;
 	void Shader::setMat4(const std::string& name, const glm::mat4& mat) const;
 private:
-	void ResolveConstants(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform);
 	void checkCompileErrors(unsigned int shader, std::string type);
 };
 

@@ -20,14 +20,14 @@ void Mesh::Build()
 {
 	if (m_vertecies.size() == 0)
 	{
-		std::cout << "WARNING::MESH " << "EMPTY VERTEX BUFFER" << std::endl;//TO DO NAME OF THE MESH 
+		DERANOS_CORE_WARN("MESH::EMPTY VERTEX BUFFER");//TO DO NAME OF THE MESH
 		return;
 	}
 
 
 	if (m_indecies.size() == 0)
 	{
-		std::cout << "WARNING::MESH " << "EMPTY INDEX BUFFER" << std::endl;//TO DO NAME OF THE MESH 
+		DERANOS_CORE_WARN("MESH::EMPTY INDEX BUFFER");//TO DO NAME OF THE MESH 
 		return;
 	}
 

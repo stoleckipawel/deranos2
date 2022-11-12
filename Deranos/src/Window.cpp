@@ -4,39 +4,40 @@
 Window::Window(int height = 1200, int width = 720, std::string name = "Deranos")
     : m_width(width), m_height(height), m_name(name)
 {
-    Window::m_window = Window::MakeWindow();
-    Window::ValidateWindow();
-    Window::BindWindow();
-    Window::RegisterResizeCallback();
+    m_window = MakeWindow();
+    ValidateWindow();
+    BindWindow();
+    RegisterResizeCallback();
 }
 
 GLFWwindow* Window::MakeWindow()
 {
-    return glfwCreateWindow(Window::GetWidth(), Window::GetHeight(), Window::GetName().c_str(), NULL, NULL);
+    return glfwCreateWindow(GetWidth(), GetHeight(), GetName().c_str(), NULL, NULL);
 }
 
 void Window::BindWindow()
 {
-    glfwMakeContextCurrent(Window::GetWindow());
+    glfwMakeContextCurrent(GetWindow());
 }
 
 void Window::ValidateWindow()
 {
-    if (Window::GetWindow() == NULL)
+    if (GetWindow() == NULL)
     {
         DERANOS_CORE_ERROR("GLFW Window Validation Failed!");
     }
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void Window::ResizeCallback(GLFWwindow* window, int width, int height)
 {
-    glViewport(0, 0, width, height);
+    //glViewport(0, 0, width, height);
 
     DERANOS_CORE_INFO("Viewport has been resized to: {0}, {1}", width, height);
 }
 
 void Window::RegisterResizeCallback()
 {
-    glfwSetFramebufferSizeCallback(Window::GetWindow(), framebuffer_size_callback);
+    //Universal wrapper for callback is needed
+    glfwSetFramebufferSizeCallback(GetWindow(), ResizeCallback);
 }
 

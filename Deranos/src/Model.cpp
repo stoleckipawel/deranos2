@@ -24,7 +24,7 @@ void Model::LoadModel(std::string path)
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
-		std::cout << "ERROR::ASSIMP::" << importer->GetErrorString() << std::endl;
+		DERANOS_CORE_ERROR(std::strcat("ASSIMP::IMPORT ", importer->GetErrorString()));
 		return;
 	}
 

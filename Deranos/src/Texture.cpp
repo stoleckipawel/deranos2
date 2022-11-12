@@ -5,7 +5,7 @@
 #include <stb_image.h>
 
 Texture::Texture(const char* path, bool flip)
-	: m_texture_type(texture_type::none)
+	: m_texture_type(texture_type::color)
 {
 	glGenTextures(1, &m_id);
 	glBindTexture(GL_TEXTURE_2D, m_id);
@@ -21,7 +21,7 @@ Texture::Texture(const char* path, bool flip)
 		stbi_set_flip_vertically_on_load(true);
 	}
 
-	unsigned char* texture_data = stbi_load("resources/textures/container.jpg", &m_width, &m_height, &m_channel_num, 0);
+	unsigned char* texture_data = stbi_load(path, &m_width, &m_height, &m_channel_num, 0);
 
 	if(texture_data)
 	{
@@ -47,9 +47,19 @@ texture_type Texture::GetTextureType()
 	return m_texture_type;
 }
 
-void Texture::Bind()
+void Texture::SetTextureType(texture_type type)
+{
+	m_texture_type = type;
+}
+
+void Texture::Bind(int usermap)
 {
 	//To do texture slot other than 0
 	glActiveTexture(GL_TEXTURE0); // activate the texture unit first before binding texture
+	glBindTexture(GL_TEXTURE_2D, m_id);
+}
+
+void Texture::Bind()
+{
 	glBindTexture(GL_TEXTURE_2D, m_id);
 }

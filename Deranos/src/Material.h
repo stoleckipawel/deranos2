@@ -14,7 +14,10 @@ public:
 private:
 	std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
 	std::shared_ptr<Shader> m_shader;
-	std::shared_ptr<Texture> m_texture_0;
+	
+	//std::shared_ptr<std::vector<Texture>> m_textures;
+
+	std::shared_ptr<Texture> m_dummy_texture;
 };
 
 

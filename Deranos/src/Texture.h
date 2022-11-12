@@ -2,11 +2,11 @@
 
 enum texture_type
 {
-	none,
+	color,
 	diffuse,
+	normal,
 	specular,
 	roughness,
-	normal,
 	tangent,
 	metalic,
 	height
@@ -17,7 +17,9 @@ class Texture
 public:
 	Texture(const char* path, bool flip);
 	unsigned int GetId();
+	void SetTextureType(texture_type type);
 	texture_type GetTextureType();
+	void Bind(int usermap);
 	void Bind();
 private:
 	unsigned int  m_id;
@@ -25,5 +27,6 @@ private:
 	int m_width;
 	int m_height;
 	int m_channel_num;
+
 };
 

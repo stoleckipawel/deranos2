@@ -30,7 +30,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     }
     catch (std::ifstream::failure& e)
     {
-        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: " << e.what() << std::endl;
+        DERANOS_CORE_ERROR(std::strcat("ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: " , e.what()));
     }
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
@@ -57,19 +57,17 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glDeleteShader(fragment);
 }
 
-void Shader::ResolveConstants(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
-{
-    setInt("T_DIFFUSE", 0);
-    setMat4("model", model_xform->GetMatrix());
-    setMat4("view", camera->GetViewMatrix());
-    setMat4("projection", camera->GetProjectionMatrix());
-}
-
 void Shader::Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
 {
     glUseProgram(ID);
     DepthFunc();
-    ResolveConstants(camera, model_xform);
+
+    setInt("T_DIFFUSE", 0);
+    //for each texture bind
+
+    setMat4("model", model_xform->GetMatrix());
+    setMat4("view", camera->GetViewMatrix());
+    setMat4("projection", camera->GetProjectionMatrix());
 }
 
 void Shader::DepthFunc()

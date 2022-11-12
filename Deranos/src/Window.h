@@ -20,6 +20,7 @@ private:
 	void BindWindow();
 	void ValidateWindow();
 	void RegisterResizeCallback();
+	static void ResizeCallback(GLFWwindow* window, int width, int height);
 
 	int m_width;
 	int m_height;
