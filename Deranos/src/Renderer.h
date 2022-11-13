@@ -9,6 +9,7 @@
 #include <Window.h>
 #include <Gui.h>
 #include "Material.h"
+#include "../Scene.h"
 
 class Renderer
 {

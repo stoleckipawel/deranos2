@@ -50,9 +50,12 @@ void Renderer::PreRender()
 	m_gui = std::make_shared<Gui>(m_window);
 
 	m_camera = std::make_shared<Camera>(m_window);
-	m_camera->position_ws = glm::vec3(0.0f, 0.0f, 3.0f);
 
 	m_model = std::make_shared<Model>("resources/models/backpack/backpack.obj");
+	m_model->model_xform->position += glm::vec3(0.0, 0.0, -5.0f);
+
+	//m_scene = std::make_shared<Scene>(m_window, m_camera);
+	//m_scene->models.push_back(m_model);
 }
 
 void Renderer::Renderloop()
@@ -61,6 +64,8 @@ void Renderer::Renderloop()
 	ClearZbuffer();
 
 	m_model->Draw(*m_camera);
+
+	//m_scene->Draw();
 
 	DrawGui();
 }

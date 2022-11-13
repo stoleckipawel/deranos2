@@ -16,4 +16,6 @@ void Sampler::Bind()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, m_filtering);
 	int mag_filter = ((m_filtering == GL_LINEAR_MIPMAP_NEAREST) || (m_filtering == GL_LINEAR_MIPMAP_LINEAR)) ? GL_LINEAR : GL_NEAREST;
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
+
+	//#To do anisotropy(needs extensions) glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16);
 }

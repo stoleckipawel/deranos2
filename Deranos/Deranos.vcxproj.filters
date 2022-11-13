@@ -108,6 +108,9 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
       <Filter>vendor\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -190,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
