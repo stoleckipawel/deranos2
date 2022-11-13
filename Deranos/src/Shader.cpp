@@ -57,7 +57,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glDeleteShader(fragment);
 }
 
-void Shader::Bind(Texture& texture, std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
+void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 {
     glUseProgram(m_id);
     DepthFunc();
@@ -66,9 +66,9 @@ void Shader::Bind(Texture& texture, std::shared_ptr<Camera>& camera, std::shared
 
     //for each texture bind
 
-    setMat4("model", model_xform->GetMatrix());
-    setMat4("view", camera->GetViewMatrix());
-    setMat4("projection", camera->GetProjectionMatrix());
+    setMat4("model", model_xform.GetMatrix());
+    setMat4("view", camera.GetViewMatrix());
+    setMat4("projection", camera.GetProjectionMatrix());
 }
 
 void Shader::BindSampler(Texture& texture, const char* texture_name, int texture_slot)

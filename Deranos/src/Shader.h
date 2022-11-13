@@ -9,7 +9,7 @@ class Shader
 public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 
-	void Bind(Texture& texture, std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform);
+	void Bind(Texture& texture, Camera& camera, Transform& model_xform);
 	void BindSampler(Texture& texture, const char* texture_name, int texture_slot);
 	void DepthFunc();
 	void CullFunc();
