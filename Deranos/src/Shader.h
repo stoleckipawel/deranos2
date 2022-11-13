@@ -1,6 +1,9 @@
 #pragma once
 #include <Camera.h>
 #include <Transform.h>
+#include "Sampler.h"
+#include <Texture.h>
+
 class Shader
 {
 public:
@@ -9,9 +12,11 @@ public:
 	// constructor reads and builds the shader
 	Shader(const char* vertexPath, const char* fragmentPath);
 
-	void Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform);
+	void Bind(Texture& texture, std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform);
+	void BindSampler(Texture& texture, const char* texture_name, int texture_slot);
 	void DepthFunc();
 	void CullFunc();
+	
 
 
 	// utility uniform functions

@@ -22,8 +22,7 @@ Texture::Texture(const char* path, TextureType texture_type, bool flip)
 
 		if (texture_data)
 		{
-			CalcMipCount();
-			glTexImage2D(GL_TEXTURE_2D, m_mip_count, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture_data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture_data);
 
 			if(m_texture_type.generate_mips)
 				glGenerateMipmap(GL_TEXTURE_2D);
@@ -41,19 +40,6 @@ Texture::Texture(const char* path, TextureType texture_type, bool flip)
 	stbi_image_free(texture_data);
 }
 
-void Texture::CalcMipCount()
-{
-	if (m_texture_type.generate_mips)
-	{
-		//# To do calculate mip levels based on resolution
-		m_mip_count = 0;
-	}
-	else
-	{
-		m_mip_count = 0;
-	}
-}
-
 unsigned int Texture::GetId()
 {
 	return m_id;
@@ -64,13 +50,5 @@ TextureType Texture::GetTextureType()
 	return m_texture_type;
 }
 
-void Texture::Bind()
-{
-	Sampler(*this, WRAP_X, WRAP_Y, LINEAR_MIP_LINEAR).Bind();
-}
 
-void Texture::Bind(int usermap)
-{
-	Bind();
-}
 

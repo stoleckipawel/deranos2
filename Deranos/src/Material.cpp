@@ -7,6 +7,7 @@ Material::Material()
 {
 	//Attach dummy texture & dummy shader at initialization
 	AttachShader(std::make_shared<Shader>("shaders/simple.vs", "shaders/simple.ps"));
+
 	AttachTexture(std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", TextureTypes::Diffuse()));
 }
 
@@ -22,8 +23,7 @@ void Material::AttachTexture(std::shared_ptr<Texture>& texture)
 
 void Material::Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
 {
-	m_dummy_texture->Bind(USERMAP_DIFFUSE);
-	m_shader->Bind(camera, model_xform);
+	m_shader->Bind(*m_dummy_texture, camera, model_xform);
 }
 
 std::vector<Texture> Material::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)

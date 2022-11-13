@@ -7,11 +7,7 @@ public:
 	Texture(const char* path, TextureType texture_type = TextureTypes::Default(), bool flip = true);
 	unsigned int GetId();
 	TextureType GetTextureType();
-	void Bind(int usermap);
-	void Bind();
 private:
-	void CalcMipCount();
-
 	unsigned int  m_id;
 	int m_width;
 	int m_height;

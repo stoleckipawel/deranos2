@@ -57,17 +57,24 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glDeleteShader(fragment);
 }
 
-void Shader::Bind(std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
+void Shader::Bind(Texture& texture, std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform)
 {
     glUseProgram(ID);
     DepthFunc();
 
-    setInt("T_DIFFUSE", 0);
+    BindSampler(texture, "T_DIFFUSE", USERMAP_DIFFUSE);
+
     //for each texture bind
 
     setMat4("model", model_xform->GetMatrix());
     setMat4("view", camera->GetViewMatrix());
     setMat4("projection", camera->GetProjectionMatrix());
+}
+
+void Shader::BindSampler(Texture& texture, const char* texture_name, int texture_slot)
+{
+    Sampler(texture, texture_slot, WRAP, LINEAR_MIP_LINEAR);
+    setInt(texture_name, texture_slot);
 }
 
 void Shader::DepthFunc()

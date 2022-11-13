@@ -1,11 +1,9 @@
 #pragma once
 #include <Texture.h>
 
-#define WRAP_X GL_TEXTURE_WRAP_S
-#define WRAP_Y GL_TEXTURE_WRAP_T
-
-#define CLAMP_X GL_TEXTURE_CLAMP_S
-#define CLAMP_Y GL_TEXTURE_CLAMP_T
+#define WRAP GL_REPEAT 
+#define CLAMP GL_CLAMP_TO_EDGE
+#define MIRROR GL_MIRRORED_REPEAT
 
 #define LINEAR_MIP_LINEAR GL_LINEAR_MIPMAP_LINEAR
 #define POINT_MIP_LINEAR GL_NEAREST_MIPMAP_LINEAR
@@ -15,15 +13,13 @@
 class Sampler
 {
 public:
-	Sampler(Texture& texture,
-		int wrap_mode_x = WRAP_X, int wrap_mode_y = WRAP_Y,
-		int filtering = LINEAR_MIP_LINEAR);
+	Sampler(Texture& texture, int texture_slot, int wrap_mode = WRAP, int filtering = LINEAR_MIP_LINEAR);
 	void Bind();
 
 private:
 	Texture& m_texture;
-	int m_wrap_mode_x;
-	int m_wrap_mode_y;
+	int m_texture_slot;
+	int m_wrap_mode;
 	int m_filtering;
 };
 
