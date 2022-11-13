@@ -7,9 +7,6 @@
 class Shader
 {
 public:
-	unsigned int ID;
-
-	// constructor reads and builds the shader
 	Shader(const char* vertexPath, const char* fragmentPath);
 
 	void Bind(Texture& texture, std::shared_ptr<Camera>& camera, std::shared_ptr<Transform>& model_xform);
@@ -17,7 +14,6 @@ public:
 	void DepthFunc();
 	void CullFunc();
 	
-
 
 	// utility uniform functions
 	void setBool(const std::string& name, bool value) const;
@@ -31,5 +27,6 @@ public:
 	void Shader::setMat4(const std::string& name, const glm::mat4& mat) const;
 private:
 	void checkCompileErrors(unsigned int shader, std::string type);
+	unsigned int m_id;
 };
 

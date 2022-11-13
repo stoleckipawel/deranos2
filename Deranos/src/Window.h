@@ -5,16 +5,17 @@
 class Window
 {
 public:
-	Window::Window(int height, int width, std::string name);
-	inline int GetWidth() { return Window::m_width; };
-	inline void SetHeight(int height) { Window::m_height = height; };
+	Window(int height, int width, std::string name);
 
-	inline const std::string& GetName() { return Window::m_name; };
+	inline int GetWidth() const { return m_width; };
+	inline void SetHeight(int height) { m_height = height; };
 
-	inline int GetHeight() { return Window::m_height; };
-	inline void SetWidth(int width) { Window::m_width = width; };
+	inline const std::string& GetName() const { return m_name; };
 
-	inline GLFWwindow* GetWindow() { return Window::m_window; }
+	inline int GetHeight() const { return m_height; };
+	inline void SetWidth(int width) { m_width = width; };
+
+	inline GLFWwindow* GetWindow() const { return m_window; }
 private:
 	GLFWwindow* MakeWindow();
 	void BindWindow();

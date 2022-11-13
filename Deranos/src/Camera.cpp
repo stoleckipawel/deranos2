@@ -27,7 +27,7 @@ glm::mat4 Camera::GetProjectionMatrix()
 
 void Camera::Rotation()
 {
-	if (m_input->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE, m_window))
+	if (m_input->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE, *m_window))
 	{
 		if (m_in_rotation)
 		{
@@ -69,22 +69,22 @@ void Camera::Translation()
 		position_ws -= speed * m_up;
 
 	*/
-	if (m_input->IsKeyPressed(GLFW_KEY_SPACE, m_window))
+	if (m_input->IsKeyPressed(GLFW_KEY_SPACE, *m_window))
 		position_ws += speed * m_up;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_LEFT_CONTROL, m_window))
+	if (m_input->IsKeyPressed(GLFW_KEY_LEFT_CONTROL, *m_window))
 		position_ws -= speed * m_up;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_W, m_window))
+	if (m_input->IsKeyPressed(GLFW_KEY_W, *m_window))
 		position_ws += speed * orientation;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_S, m_window))
+	if (m_input->IsKeyPressed(GLFW_KEY_S, *m_window))
 		position_ws -= speed * orientation;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_A, m_window))
+	if (m_input->IsKeyPressed(GLFW_KEY_A, *m_window))
 		position_ws -= speed * glm::normalize(glm::cross(orientation, m_up));
 
-	if (m_input->IsKeyPressed(GLFW_KEY_D, m_window))
+	if (m_input->IsKeyPressed(GLFW_KEY_D, *m_window))
 		position_ws += speed * glm::normalize(glm::cross(orientation, m_up));
 }
 
