@@ -13,7 +13,7 @@
 class Renderer
 {
 public:
-	Renderer(std::shared_ptr<Window>& window);
+	Renderer(Window& window);
 	void PreRender();
 	void Renderloop();
 	void Present();
@@ -24,7 +24,7 @@ private:
 	void WireframeMode();
 	void DrawGui();
 
-	std::shared_ptr<Window>& m_window;
+	Window& m_window;
 	std::shared_ptr<Model> m_model;
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Gui> m_gui;

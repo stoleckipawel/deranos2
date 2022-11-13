@@ -4,12 +4,12 @@
 class Gui
 {
 public:
-	Gui(std::shared_ptr<Window>& window);
+	Gui(Window& window);
 	~Gui();
 	void Init();
 	void SetStyle();
 	void Render();
 private:
-	std::shared_ptr<Window>& m_window;
+	Window& m_window;
 };
 

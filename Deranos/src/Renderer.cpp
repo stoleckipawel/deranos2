@@ -4,7 +4,7 @@
 #include "Button.h"
 
 
-Renderer::Renderer(std::shared_ptr<Window>& window)
+Renderer::Renderer(Window& window)
 	: m_window(window)
 {
 }
@@ -61,7 +61,7 @@ void Renderer::Renderloop()
 
 void Renderer::Present()
 {	
-	glfwSwapBuffers(m_window->GetWindow());
+	glfwSwapBuffers(m_window.GetWindow());
 }
 
 void Renderer::OnInput()

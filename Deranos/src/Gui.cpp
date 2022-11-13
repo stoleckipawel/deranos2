@@ -6,14 +6,14 @@ void Gui::SetStyle()
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
 }
 
-Gui::Gui(std::shared_ptr<Window>& window)
+Gui::Gui(Window& window)
 	: m_window(window)
 {
 	//IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
-	ImGui_ImplGlfw_InitForOpenGL(m_window->GetWindow(), true);
+	ImGui_ImplGlfw_InitForOpenGL(m_window.GetWindow(), true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 	Gui::SetStyle();
 }
