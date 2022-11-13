@@ -51,10 +51,19 @@
     <ClInclude Include="src\Renderer.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Sampler.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\Shader.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Texture.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureType.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureTypes.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Transform.h">
@@ -99,9 +108,6 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
       <Filter>vendor\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\TextureTypes.h" />
-    <ClInclude Include="src\TextureType.h" />
-    <ClInclude Include="src\Sampler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -137,10 +143,19 @@
     <ClCompile Include="src\Renderer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Sampler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\Shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureType.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureTypes.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Transform.cpp">
@@ -176,8 +191,5 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <Filter>vendor\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\TextureType.cpp" />
-    <ClCompile Include="src\TextureTypes.cpp" />
-    <ClCompile Include="src\Sampler.cpp" />
   </ItemGroup>
 </Project>
