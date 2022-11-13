@@ -2,9 +2,8 @@
 #include "Window.h"
 
 Window::Window(int height = 1200, int width = 720, std::string name = "")
-    : m_width(width), m_height(height), m_name(name)
+    : m_window(MakeWindow()), m_width(width), m_height(height), m_name(name)
 {
-    m_window = MakeWindow();
     ValidateWindow();
     BindWindow();
     RegisterResizeCallback();
@@ -30,7 +29,7 @@ void Window::ValidateWindow()
 
 void Window::ResizeCallback(GLFWwindow* window, int width, int height)
 {
-    //glViewport(0, 0, width, height);
+    //glViewport(0, 0, width, height);// to be uncommented when proper resize callback is added
 
     DERANOS_CORE_INFO("Viewport has been resized to: {0}, {1}", width, height);
 }

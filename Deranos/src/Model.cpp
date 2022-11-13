@@ -54,15 +54,10 @@ void Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	this->mesh.push_back(submesh);
 }
 
-void Model::AttachMaterial(std::shared_ptr<Material>& material)
-{
-	this->material = material;
-}
-
-void Model::Draw(std::shared_ptr<Camera>& camera)
+void Model::Draw(Camera& camera)
 {
 	//Set proper camera consts in  the material, model, view, projection xform in the material
-	material->Bind(*camera, *model_xform);
+	material->Bind(camera, *model_xform);
 
 	//Draw each sub mesh of the mesh
 	for each (auto submesh in mesh)
@@ -70,5 +65,3 @@ void Model::Draw(std::shared_ptr<Camera>& camera)
 		submesh->Draw();
 	}
 }
-
-

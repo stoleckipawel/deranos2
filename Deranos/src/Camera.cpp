@@ -91,6 +91,6 @@ void Camera::Translation()
 void Camera::OnInput()
 {
 	//#ToDo: this should be event based not milions if every frame (callbacks)
-	Camera::Translation();
-	Camera::Rotation();
+	Translation();
+	Rotation();
 }

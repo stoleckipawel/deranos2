@@ -27,7 +27,7 @@ private:
 	Window& m_window;
 	std::shared_ptr<Model> m_model;
 	std::shared_ptr<Camera> m_camera;
-	std::shared_ptr<Gui> m_gui;
+	std::shared_ptr<Gui> m_gui;// to be stored elsewhere
 };
 
 

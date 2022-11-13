@@ -30,10 +30,16 @@ void Renderer::DrawGui()
 {
 	m_gui->Init();
 
-	ImGui::Begin("Camera");
+	ImGui::Begin("Editor");
+		ImGui::Text("Camera");
 		Button::Drag("Position", m_camera->position_ws);
 		Button::Drag("Rotation", m_camera->orientation);
 		Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
+		ImGui::Separator();
+
+		ImGui::Text("Model");
+		Button::Drag("Position ", m_model->model_xform->position);
+		Button::Drag("Scale", m_model->model_xform->scale);
 	ImGui::End();
 
 	m_gui->Render();
@@ -51,12 +57,12 @@ void Renderer::PreRender()
 
 void Renderer::Renderloop()
 {
-	Renderer::ClearBackBuffer(glm::vec3(1.0, 0.0, 1.0));
-	Renderer::ClearZbuffer();
+	ClearBackBuffer(glm::vec3(0.0, 0.0, 1.0));
+	ClearZbuffer();
 
-	m_model->Draw(m_camera);
+	m_model->Draw(*m_camera);
 
-	Renderer::DrawGui();
+	DrawGui();
 }
 
 void Renderer::Present()
@@ -67,5 +73,4 @@ void Renderer::Present()
 void Renderer::OnInput()
 {
 	m_camera->OnInput();
-	
 }

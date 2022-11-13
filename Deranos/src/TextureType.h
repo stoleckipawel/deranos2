@@ -8,6 +8,6 @@ public:
 	const int channel_num;
 	const int dimensions;
 	const bool generate_mips;
-	//mip filter
+	//mip filter option(kaiser, default etc)
 };
 
