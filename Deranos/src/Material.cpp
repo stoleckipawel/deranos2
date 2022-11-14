@@ -5,7 +5,7 @@
 
 Material::Material()
 	: m_shader(std::make_shared<Shader>("shaders/simple.vs", "shaders/simple.ps")),
-	m_texture(std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", TextureTypes::Diffuse()))
+	m_texture(std::make_shared<Texture>("resources/textures/default_texture.png", TextureTypes::Diffuse()))
 {
 }
 

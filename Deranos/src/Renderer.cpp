@@ -7,6 +7,11 @@
 Renderer::Renderer(Window& window)
 	: m_window(window)
 {
+	m_gui = std::make_shared<Gui>(m_window);
+
+	m_camera = std::make_shared<Camera>(m_window);
+
+	m_scene = std::make_shared<Scene>(*m_camera);
 }
 
 void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
@@ -37,25 +42,34 @@ void Renderer::DrawGui()
 		Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
 		ImGui::Separator();
 
-		ImGui::Text("Model");
-		Button::Drag("Position ", m_model->model_xform->position);
-		Button::Drag("Scale", m_model->model_xform->scale);
+		ImGui::Text("Backpack");
+		Button::Drag("Position ", m_backpack->model_xform->position);
+		Button::Drag("Scale", m_backpack->model_xform->scale);
+		ImGui::Separator();
+
+		ImGui::Text("Cube");
+		Button::Drag("Position  ", m_cube->model_xform->position);
+		Button::Drag("Scale ", m_cube->model_xform->scale);
 	ImGui::End();
 
 	m_gui->Render();
 }
 
+void Renderer::LoadModels()
+{
+	m_backpack = std::make_shared<Model>("resources/models/backpack/backpack.obj");//
+	m_backpack->model_xform->position += glm::vec3(-1.0, 0.0, -5.0f);
+	m_scene->models.push_back(m_backpack);
+
+	m_cube = std::make_shared<Model>("resources/models/cube/cube.obj");
+	m_cube->model_xform->position += glm::vec3(4.3, 4.0, -16.050f);
+	m_cube->model_xform->scale += glm::vec3(3.0, 3.0, 3.0f);
+	m_scene->models.push_back(m_cube);
+}
+
 void Renderer::PreRender()
 {
-	m_gui = std::make_shared<Gui>(m_window);
-
-	m_camera = std::make_shared<Camera>(m_window);
-
-	m_model = std::make_shared<Model>("resources/models/backpack/backpack.obj");
-	m_model->model_xform->position += glm::vec3(0.0, 0.0, -5.0f);
-
-	//m_scene = std::make_shared<Scene>(m_window, m_camera);
-	//m_scene->models.push_back(m_model);
+	LoadModels();
 }
 
 void Renderer::Renderloop()
@@ -63,9 +77,7 @@ void Renderer::Renderloop()
 	ClearBackBuffer(glm::vec3(0.0, 0.0, 1.0));
 	ClearZbuffer();
 
-	m_model->Draw(*m_camera);
-
-	//m_scene->Draw();
+	m_scene->Draw();
 
 	DrawGui();
 }

@@ -9,7 +9,7 @@
 #include <Window.h>
 #include <Gui.h>
 #include "Material.h"
-#include "../Scene.h"
+#include "Scene.h"
 
 class Renderer
 {
@@ -23,12 +23,17 @@ private:
 	void ClearBackBuffer(glm::vec3 clear_color);
 	void ClearZbuffer();
 	void WireframeMode();
+	void LoadModels();
 	void DrawGui();
 
 	Window& m_window;
-	std::shared_ptr<Model> m_model;
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Gui> m_gui;// to be stored elsewhere
+	std::shared_ptr<Scene> m_scene;
+	
+	//To be moved somewhere else
+	std::shared_ptr<Model> m_backpack;
+	std::shared_ptr<Model> m_cube;
 };
 
 
