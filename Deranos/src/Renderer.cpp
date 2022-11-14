@@ -40,6 +40,8 @@ void Renderer::DrawGui()
 		Button::Drag("Position", m_camera->position_ws);
 		Button::Drag("Rotation", m_camera->orientation);
 		Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
+		Button::Slider("Near Clipping Plane", m_camera->near_clipping_plane, 0.01f, 500.0f);
+		Button::Slider("Far Clipping Plane", m_camera->far_clipping_plane, 0.0f, 9999.9f);
 		ImGui::Separator();
 
 		ImGui::Text("Backpack");
@@ -55,21 +57,32 @@ void Renderer::DrawGui()
 	m_gui->Render();
 }
 
-void Renderer::LoadModels()
-{
-	m_backpack = std::make_shared<Model>("resources/models/backpack/backpack.obj");//
-	m_backpack->model_xform->position += glm::vec3(-1.0, 0.0, -5.0f);
-	m_scene->models.push_back(m_backpack);
-
-	m_cube = std::make_shared<Model>("resources/models/cube/cube.obj");
-	m_cube->model_xform->position += glm::vec3(4.3, 4.0, -16.050f);
-	m_cube->model_xform->scale += glm::vec3(3.0, 3.0, 3.0f);
-	m_scene->models.push_back(m_cube);
-}
-
 void Renderer::PreRender()
 {
-	LoadModels();
+	//#To do dont load the cube mesh over & over again
+	//#To do Entity class since model class is to explicit?(lights, etc)?
+
+	
+
+	//"Skybox"
+	std::shared_ptr<Model> skybox = std::make_shared<Model>("resources/models/cube/cube.obj");
+	std::shared_ptr<Shader> skybox_shader = std::make_shared<Shader>("shaders/skybox.vs", "shaders/skybox.ps");
+	skybox->material->shader = skybox_shader;
+	skybox->model_xform->scale = glm::vec3(9999.0, 9999.0, 9999.0f);
+	m_scene->models.push_back(skybox);
+
+	//Cube
+	m_cube = std::make_shared<Model>("resources/models/cube/cube.obj");
+	m_cube->model_xform->position += glm::vec3(4.3, 4.0, -16.050f);
+	m_cube->model_xform->scale = glm::vec3(3.0, 3.0, 3.0f);
+	m_scene->models.push_back(m_cube);
+
+	//Backpack
+	std::shared_ptr<Texture> backpack_diffuse = std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", TextureTypes::Diffuse());
+	m_backpack = std::make_shared<Model>("resources/models/backpack/backpack.obj");
+	m_backpack->material->texture = backpack_diffuse;
+	m_backpack->model_xform->position += glm::vec3(-1.0, 0.0, -5.0f);
+	m_scene->models.push_back(m_backpack);
 }
 
 void Renderer::Renderloop()

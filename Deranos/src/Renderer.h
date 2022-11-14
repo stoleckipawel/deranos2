@@ -23,7 +23,6 @@ private:
 	void ClearBackBuffer(glm::vec3 clear_color);
 	void ClearZbuffer();
 	void WireframeMode();
-	void LoadModels();
 	void DrawGui();
 
 	Window& m_window;

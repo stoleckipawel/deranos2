@@ -22,6 +22,13 @@ void Button::Drag(const char* name, float value[3], float speed)
 	ImGui::DragFloat3(name, value, speed);
 }
 
+void Button::Drag(const char* name, glm::vec2& value, float speed)
+{
+	float value2[2] = {value.x, value.y};
+	ImGui::DragFloat2(name, value2, speed);
+	value = glm::vec2(value2[0], value2[1]);
+}
+
 void Button::Drag(const char* name, glm::vec3& value, float speed)
 {
 	float value3[3] = { value.x, value.y, value.z };

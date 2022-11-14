@@ -8,9 +8,10 @@ class Material
 public:
 	Material();
 	void Bind(Camera& camera, Transform& model_xform);
+	std::shared_ptr<Shader> shader;
+	std::shared_ptr<Texture> texture;
 private:
-	std::shared_ptr<Shader> m_shader;
-	std::shared_ptr<Texture> m_texture;
+
 };
 
 
