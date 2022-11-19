@@ -4,19 +4,6 @@
 //#ToDo:
 //convert to a singleton
 
-void MessageCallback(GLenum source,
-    GLenum type,
-    GLuint id,
-    GLenum severity,
-    GLsizei length,
-    const GLchar* message,
-    const void* userParam)
-{
-    fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
-        type, severity, message);
-}
-
 void Application::InitializeGlfw()//#To do: hide under abstraction
 {
     glfwInit();
@@ -46,8 +33,6 @@ void Application::Input()
 
 Application::Application()
 {
-    Log::Init();
-
     InitializeGlfw();
 
     m_window = std::make_shared<Window>(1200, 1200, "PRAWIE SUPER ENGINE");
@@ -56,8 +41,7 @@ Application::Application()
 
     InitializeGlad();
 
-    glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-    glDebugMessageCallback(MessageCallback, 0);
+    Log::Init(GL_DEBUG_SEVERITY_HIGH);
 }
 
 Application::~Application()

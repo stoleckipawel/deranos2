@@ -18,10 +18,14 @@ Texture::Texture(const char* path, TextureType texture_type, bool flip)
 	{
 		LoadTexture();
 	}
+
+	if (m_texture_type.generate_mips)
+		glGenerateMipmap(m_texture_type.type);
 }
 
 void Texture::LoadTextureCubemap()
 {
+	stbi_set_flip_vertically_on_load(false);
 	//right, left, top, bottom, front, back
 	m_cubemap_faces.push_back("right");
 	m_cubemap_faces.push_back("left");
@@ -31,8 +35,9 @@ void Texture::LoadTextureCubemap()
 	m_cubemap_faces.push_back("back");
 
 	//Load all faces of the cubemap
-	for (int i = 0; i < m_cubemap_faces.size(); i++)
+	for (int i = 0; i < 6; i++)
 	{
+
 		std::string path = m_path;//path to skybox, char* to string
 		path.append(m_cubemap_faces[i]);//add face name
 		path.append(".png");
@@ -43,13 +48,12 @@ void Texture::LoadTextureCubemap()
 
 void Texture::LoadTexture()
 {
+	stbi_set_flip_vertically_on_load(m_flip);
 	LoadTexture(m_path, m_texture_type.type);
 }
 
 void Texture::LoadTexture(const char* path, int target)
 {
-	stbi_set_flip_vertically_on_load(m_flip);
-
 	int channel_num;
 	unsigned char* texture_data = stbi_load(path, &m_width, &m_height, &channel_num, 0);
 
@@ -87,9 +91,6 @@ void Texture::CreateTexture(unsigned char* texture_data, int target)
 	}
 		
 	glTexImage2D(target, 0, m_texture_type.format, m_width, m_height, 0, m_texture_type.format, GL_UNSIGNED_BYTE, texture_data);
-
-	if (m_texture_type.generate_mips)
-		glGenerateMipmap(m_texture_type.type);
 }
 
 unsigned int Texture::GetId()

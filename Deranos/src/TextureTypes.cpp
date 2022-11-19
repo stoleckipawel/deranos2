@@ -8,7 +8,7 @@ TextureType TextureTypes::Default()
 
 TextureType TextureTypes::Cubemap()
 {
-	return TextureType(GL_TEXTURE_CUBE_MAP, GL_RGB, 3, 2, false, 6);
+	return TextureType(GL_TEXTURE_CUBE_MAP, GL_RGB, 3, 2, true, 6);
 }
 
 TextureType TextureTypes::Diffuse()
