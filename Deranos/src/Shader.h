@@ -13,7 +13,7 @@ public:
 	void BindSampler(Texture& texture, const char* texture_name, int texture_slot);
 	void DepthFunc();
 	void CullFunc();
-	
+	inline std::shared_ptr<Sampler> GetSampler() const { return m_sampler; };
 
 	// utility uniform functions
 	void SetBool(const std::string& name, bool value) const;
@@ -28,5 +28,7 @@ public:
 private:
 	void CheckCompileErrors(unsigned int shader, std::string type);
 	unsigned int m_id;
+	std::shared_ptr<Sampler> m_sampler;
+
 };
 

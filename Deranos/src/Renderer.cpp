@@ -82,6 +82,12 @@ void Renderer::PreRender()
 	skybox->model_xform->scale = glm::vec3(9999.0, 9999.0, 9999.0f);
 	m_scene->models.push_back(skybox);
 
+	//Ground
+	std::shared_ptr<Model> m_ground = std::make_shared<Model>("resources/models/cube/cube.obj");
+	m_ground->model_xform->position = glm::vec3(0.0, -25.0, 0.0f);
+	m_ground->model_xform->scale = glm::vec3(1500.0, 4.0, 1500.0f);
+	m_scene->models.push_back(m_ground);
+
 	//Cube
 	m_cube = std::make_shared<Model>("resources/models/cube/cube.obj");
 	m_cube->model_xform->position += glm::vec3(4.3, 4.0, -16.050f);

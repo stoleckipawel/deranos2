@@ -1,25 +1,45 @@
 #pragma once
 #include <Texture.h>
 
-#define WRAP GL_REPEAT 
-#define CLAMP GL_CLAMP_TO_EDGE
-#define MIRROR GL_MIRRORED_REPEAT
+enum class EWrapMode {
+	Default = GL_CLAMP_TO_EDGE,
+	Wrap = GL_REPEAT,
+	Clamp = GL_CLAMP_TO_EDGE,
+	Mirror = GL_MIRRORED_REPEAT
+};
 
-#define LINEAR_MIP_LINEAR GL_LINEAR_MIPMAP_LINEAR
-#define POINT_MIP_LINEAR GL_NEAREST_MIPMAP_LINEAR
-#define LINEAR_MIP_POINT GL_LINEAR_MIPMAP_NEAREST
-#define POINT_MIP_POINT GL_NEAREST_MIPMAP_LINEAR
+
+enum class EFilteringMode { 
+	Default = GL_NEAREST,
+	Point = GL_NEAREST,
+	Linear = GL_LINEAR,
+	LinearMipLinear = GL_LINEAR_MIPMAP_LINEAR, 
+	PointMipLinear = GL_NEAREST_MIPMAP_LINEAR, 
+	LinearMipPoint = GL_LINEAR_MIPMAP_NEAREST,
+	PointMipPoint = GL_NEAREST_MIPMAP_LINEAR
+};
+
+enum class EMaxAnisotropyLevel {
+	Default = 1, 
+	None = 1, 
+	Low = 4, 
+	Medium = 8, 
+	High = 16
+};
 
 class Sampler
 {
 public:
-	Sampler(Texture& texture, int texture_slot, int wrap_mode = WRAP, int filtering = LINEAR_MIP_LINEAR);
-	void Bind();
-
+	Sampler(Texture& texture, int texture_slot, EWrapMode wrap_mode = EWrapMode::Default, EFilteringMode filtering = EFilteringMode::Default, EMaxAnisotropyLevel max_anisotropy_level = EMaxAnisotropyLevel::Default);
+	void Bind(EWrapMode wrap_mode, EFilteringMode filtering, EMaxAnisotropyLevel max_anisotropy_level);
+	void SetWrapMode(EWrapMode wrap_mode);
+	void SetFiltering(EFilteringMode filtering, EMaxAnisotropyLevel max_anisotropy_level);
+	void SetMaxAnisotropyLevel(EMaxAnisotropyLevel max_anisotropy_level);
 private:
 	Texture& m_texture;
 	int m_texture_slot;
-	int m_wrap_mode;
-	int m_filtering;
+	EWrapMode m_wrap_mode;
+	EFilteringMode m_filtering;
+	EMaxAnisotropyLevel m_max_anisotropy_level;
 };
 

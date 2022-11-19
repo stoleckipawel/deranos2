@@ -61,11 +61,9 @@ void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 {
     glUseProgram(m_id);
     DepthFunc();
-
     BindSampler(texture, "T_DIFFUSE", USERMAP_DIFFUSE);
 
     //for each texture bind
-
     SetMat4("model", model_xform.GetMatrix());
     SetMat4("view", camera.GetViewMatrix());
     SetMat4("projection", camera.GetProjectionMatrix());
@@ -73,7 +71,7 @@ void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 
 void Shader::BindSampler(Texture& texture, const char* texture_name, int texture_slot)
 {
-    Sampler(texture, texture_slot, WRAP, LINEAR_MIP_LINEAR);
+    m_sampler = std::make_shared<Sampler>(texture, texture_slot, EWrapMode::Wrap, EFilteringMode::LinearMipLinear, EMaxAnisotropyLevel::High);
     SetInt(texture_name, texture_slot);
 }
 
