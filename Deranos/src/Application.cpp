@@ -12,19 +12,18 @@ void MessageCallback(GLenum source,
     const GLchar* message,
     const void* userParam)
 {
-    /*
     fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
         (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
         type, severity, message);
-    */
 }
 
 void Application::InitializeGlfw()//#To do: hide under abstraction
 {
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 }
 
 void Application::InitializeGlad()//#To do: hide under abstraction
@@ -58,7 +57,7 @@ Application::Application()
     InitializeGlad();
 
     glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-    //glDebugMessageCallback(MessageCallback, 0);
+    glDebugMessageCallback(MessageCallback, 0);
 }
 
 Application::~Application()
@@ -69,8 +68,6 @@ Application::~Application()
 void Application::Run()
 {
     m_renderer->PreRender();//Builds assets
-
-
 
     while (!glfwWindowShouldClose(m_window->GetWindow()) && m_window->GetWindow() != nullptr)
     {

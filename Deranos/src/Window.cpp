@@ -2,8 +2,9 @@
 #include "Window.h"
 
 Window::Window(int height = 1200, int width = 720, std::string name = "")
-    : m_window(MakeWindow()), m_width(width), m_height(height), m_name(name)
+    : m_width(width), m_height(height), m_name(name)
 {
+    m_window = MakeWindow();
     ValidateWindow();
     BindWindow();
     RegisterResizeCallback();
@@ -21,7 +22,7 @@ void Window::BindWindow()
 
 void Window::ValidateWindow()
 {
-    if (GetWindow() == NULL)
+    if (GetWindow() == nullptr)
     {
         DERANOS_CORE_ERROR("GLFW Window Validation Failed!");
     }
