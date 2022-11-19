@@ -5,7 +5,7 @@
 
 
 Renderer::Renderer(Window& window)
-	: m_window(window)
+	: m_window(window), m_show_wireframe(false)
 {
 	m_gui = std::make_shared<Gui>(m_window);
 
@@ -26,9 +26,16 @@ void Renderer::ClearZbuffer()
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-void Renderer::WireframeMode()
+void Renderer::SetPolyFillMode()
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//wireframe mode
+	if (m_show_wireframe)
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);//wireframe
+	}
+	else
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//regular filled polygons
+	}
 }
 
 void Renderer::DrawGui()
@@ -52,6 +59,10 @@ void Renderer::DrawGui()
 		ImGui::Text("Cube");
 		Button::Drag("Position  ", m_cube->model_xform->position);
 		Button::Drag("Scale ", m_cube->model_xform->scale);
+		ImGui::Separator();
+
+		ImGui::Text("Settings");
+		Button::Checkbox("Show Wireframe", m_show_wireframe);
 	ImGui::End();
 
 	m_gui->Render();
@@ -62,12 +73,12 @@ void Renderer::PreRender()
 	//#To do dont load the cube mesh over & over again
 	//#To do Entity class since model class is to explicit?(lights, etc)?
 
-	
-
-	//"Skybox"
+	//Skybox
 	std::shared_ptr<Model> skybox = std::make_shared<Model>("resources/models/cube/cube.obj");
 	std::shared_ptr<Shader> skybox_shader = std::make_shared<Shader>("shaders/skybox.vs", "shaders/skybox.ps");
+	std::shared_ptr<Texture> sky_cubemap = std::make_shared<Texture>("resources/textures/skyboxes/day_", TextureTypes::Cubemap());
 	skybox->material->shader = skybox_shader;
+	skybox->material->texture = sky_cubemap;
 	skybox->model_xform->scale = glm::vec3(9999.0, 9999.0, 9999.0f);
 	m_scene->models.push_back(skybox);
 
@@ -87,6 +98,8 @@ void Renderer::PreRender()
 
 void Renderer::Renderloop()
 {
+	SetPolyFillMode();//should be event callback based to not check if over & over again
+
 	ClearBackBuffer(glm::vec3(0.0, 0.0, 1.0));
 	ClearZbuffer();
 

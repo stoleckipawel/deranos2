@@ -27,3 +27,5 @@ private:
 #define DERANOS_WARN(...)  ::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define DERANOS_ERROR(...) ::Log::GetClientLogger()->error(__VA_ARGS__)
 #define DERANOS_FATAL(...) ::Log::GetClientLogger()->fatal(__VA_ARGS__)
+
+

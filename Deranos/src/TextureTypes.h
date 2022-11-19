@@ -5,6 +5,7 @@ class TextureTypes
 {
 public:
 	static TextureType Default();
+	static TextureType Cubemap();
 	static TextureType Diffuse();
 	static TextureType Normal();
 	static TextureType Specular();

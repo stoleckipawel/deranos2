@@ -10,7 +10,7 @@ public:
 	void Draw();
 
 
-	std::vector<std::shared_ptr<Model>> models; //Is vector of shared pointer a bad idea?
+	std::vector<std::shared_ptr<Model>> models;
 private:
 	Camera& m_camera;
 };

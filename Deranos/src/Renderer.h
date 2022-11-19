@@ -22,10 +22,12 @@ public:
 private:
 	void ClearBackBuffer(glm::vec3 clear_color);
 	void ClearZbuffer();
-	void WireframeMode();
+	void SetPolyFillMode();
 	void DrawGui();
 
 	Window& m_window;
+	bool m_show_wireframe;
+
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Gui> m_gui;// to be stored elsewhere
 	std::shared_ptr<Scene> m_scene;

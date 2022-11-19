@@ -14,4 +14,3 @@ void Material::Bind(Camera& camera, Transform& model_xform)
 	shader->Bind(*texture, camera, model_xform);
 }
 
-

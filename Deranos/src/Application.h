@@ -8,8 +8,10 @@ public:
 	void Run();
 	Application();
 	~Application();
-	void OnInput();
+	void Input();
 private:
+	void InitializeGlad();
+	void InitializeGlfw();
 	std::shared_ptr<Window> m_window;
 	std::shared_ptr<Renderer> m_renderer;
 };
