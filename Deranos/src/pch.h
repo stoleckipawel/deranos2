@@ -37,6 +37,7 @@
 #include <assimp/scene.h>//data structure
 #include <assimp/postprocess.h>//postprocessing flags
 
+#include <Timer.h>
 #include <Log.h>
 #include "TextureTypes.h"
 

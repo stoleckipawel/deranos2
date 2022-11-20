@@ -111,6 +111,7 @@
     <ClInclude Include="src\Scene.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -197,5 +198,6 @@
     <ClCompile Include="src\Scene.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
 </Project>

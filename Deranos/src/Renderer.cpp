@@ -117,7 +117,7 @@ void Renderer::Renderloop()
 void Renderer::Present()
 {	
 	glfwSwapBuffers(m_window.GetWindow());
-}
+} 
 
 void Renderer::OnInput()
 {

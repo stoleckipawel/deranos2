@@ -35,6 +35,8 @@ Application::Application()
 {
     InitializeGlfw();
 
+    m_timer = std::make_shared<Timer>();
+
     m_window = std::make_shared<Window>(1200, 1200, "PRAWIE SUPER ENGINE");
 
     m_renderer = std::make_shared<Renderer>(*m_window);
@@ -60,6 +62,8 @@ void Application::Run()
         m_renderer->Renderloop();//rendering in general
 
         m_renderer->Present();//swap front & back bufer
+
+        m_timer->Update();
     }
 }
 
