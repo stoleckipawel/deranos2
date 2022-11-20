@@ -4,8 +4,8 @@
 #include "Button.h"
 
 
-Renderer::Renderer(Window& window)
-	: m_window(window), m_show_wireframe(false)
+Renderer::Renderer(Window& window, Timer& timer)
+	: m_window(window), m_timer(timer), m_show_wireframe(false), m_vsync_on(false)
 {
 	m_gui = std::make_shared<Gui>(m_window);
 
@@ -43,6 +43,10 @@ void Renderer::DrawGui()
 	m_gui->Init();
 
 	ImGui::Begin("Editor");
+		ImGui::SetWindowFontScale(1.5f);
+		ImGui::Text("FPS: ");
+		ImGui::Text(std::to_string(m_timer.GetFPS()).c_str());//awful conversion to be corrected
+		ImGui::Separator();
 		ImGui::Text("Camera");
 		Button::Drag("Position", m_camera->position_ws);
 		Button::Drag("Rotation", m_camera->orientation);
@@ -62,7 +66,9 @@ void Renderer::DrawGui()
 		ImGui::Separator();
 
 		ImGui::Text("Settings");
+		Button::Checkbox("V-Sync", m_vsync_on);
 		Button::Checkbox("Show Wireframe", m_show_wireframe);
+		
 	ImGui::End();
 
 	m_gui->Render();

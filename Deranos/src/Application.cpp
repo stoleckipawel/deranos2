@@ -39,7 +39,7 @@ Application::Application()
 
     m_window = std::make_shared<Window>(1200, 1200, "PRAWIE SUPER ENGINE");
 
-    m_renderer = std::make_shared<Renderer>(*m_window);
+    m_renderer = std::make_shared<Renderer>(*m_window, *m_timer);
 
     InitializeGlad();
 

@@ -11,10 +11,11 @@
 #include "Material.h"
 #include "Scene.h"
 
+
 class Renderer
 {
 public:
-	Renderer(Window& window);
+	Renderer(Window& window, Timer& timer);
 	void PreRender();
 	void Renderloop();
 	void Present();
@@ -26,7 +27,10 @@ private:
 	void DrawGui();
 
 	Window& m_window;
+	Timer& m_timer;
+
 	bool m_show_wireframe;
+	bool m_vsync_on;
 
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Gui> m_gui;// to be stored elsewhere
