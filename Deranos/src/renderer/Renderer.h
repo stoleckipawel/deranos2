@@ -23,6 +23,7 @@ public:
 private:
 	void ClearBackBuffer(glm::vec3 clear_color);
 	void ClearZbuffer();
+	void ClearStencil();
 	void SetPolyFillMode();
 	void DrawGui();
 

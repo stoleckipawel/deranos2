@@ -26,6 +26,12 @@ void Renderer::ClearZbuffer()
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
 
+void Renderer::ClearStencil()
+{
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_STENCIL_BUFFER_BIT);
+}
+
 void Renderer::SetPolyFillMode()
 {
 	if (m_show_wireframe)
@@ -112,6 +118,7 @@ void Renderer::Renderloop()
 
 	ClearBackBuffer(glm::vec3(0.0, 0.0, 1.0));
 	ClearZbuffer();
+	ClearStencil();
 
 	m_scene->Draw();
 

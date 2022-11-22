@@ -60,7 +60,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 {
     glUseProgram(m_id);
-    DepthFunc();
+    DepthFunc(ECompareFuncs::LESS, true);
     BindSampler(texture, "T_DIFFUSE", USERMAP_DIFFUSE);
 
     //for each texture bind
@@ -75,9 +75,25 @@ void Shader::BindSampler(Texture& texture, const char* texture_name, int texture
     SetInt(texture_name, texture_slot);
 }
 
-void Shader::DepthFunc()
+void Shader::DepthFunc(ECompareFuncs dpt_func, bool depth_write)
 {
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(int(dpt_func));
+
+    if(depth_write)
+        glDepthMask(GL_TRUE);
+    else
+        glDepthMask(GL_FALSE);
+}
+
+void Shader::StencilFunc(ECompareFuncs stencil_func, int ref, int read_mask, int write_mask, EStencilOps stencil_op)
+{
+    glEnable(GL_STENCIL_TEST);
+
+    glStencilFunc(int(stencil_func), ref, read_mask);
+    glStencilMask(write_mask);
+
+    glStencilOp(GL_KEEP, GL_KEEP, int(stencil_op));//might be worth to expose sfail, dpfail 
 }
 
 void Shader::CullFunc()
