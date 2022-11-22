@@ -60,7 +60,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DERANOS_PLATFORM_WINDOWS;DERANOS_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\assimp\lib;vendor\assimp\dll;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\gui;src\renderer;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\assimp\lib;vendor\assimp\dll;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -81,7 +81,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>DERANOS_PLATFORM_WINDOWS;DERANOS_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\assimp\lib;vendor\assimp\dll;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;src\gui;src\renderer;vendor\spdlog\include;vendor\glm;vendor\KHR;vendor\glad;vendor\GLFW\include;vendor\stb_image;vendor\assimp\include;vendor\assimp\lib;vendor\assimp\dll;vendor\imgui;vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -103,27 +103,27 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\Application.h" />
-    <ClInclude Include="src\Button.h" />
-    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\EngineDefines.h" />
-    <ClInclude Include="src\Gui.h" />
-    <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\Log.h" />
-    <ClInclude Include="src\Material.h" />
-    <ClInclude Include="src\Mesh.h" />
-    <ClInclude Include="src\Model.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\Sampler.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\Texture.h" />
-    <ClInclude Include="src\TextureType.h" />
-    <ClInclude Include="src\TextureTypes.h" />
-    <ClInclude Include="src\Transform.h" />
-    <ClInclude Include="src\Window.h" />
-    <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\gui\Button.h" />
+    <ClInclude Include="src\gui\Gui.h" />
+    <ClInclude Include="src\gui\Input.h" />
+    <ClInclude Include="src\gui\Window.h" />
+    <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\renderer\Camera.h" />
+    <ClInclude Include="src\renderer\Material.h" />
+    <ClInclude Include="src\renderer\Mesh.h" />
+    <ClInclude Include="src\renderer\Model.h" />
+    <ClInclude Include="src\renderer\Renderer.h" />
+    <ClInclude Include="src\renderer\Sampler.h" />
+    <ClInclude Include="src\renderer\Scene.h" />
+    <ClInclude Include="src\renderer\Shader.h" />
+    <ClInclude Include="src\renderer\Texture.h" />
+    <ClInclude Include="src\renderer\TextureType.h" />
+    <ClInclude Include="src\renderer\TextureTypes.h" />
+    <ClInclude Include="src\renderer\Transform.h" />
     <ClInclude Include="vendor\GLFW\glfw3.h" />
     <ClInclude Include="vendor\GLFW\glfw3native.h" />
     <ClInclude Include="vendor\imgui\imconfig.h" />
@@ -137,29 +137,29 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\Button.cpp" />
-    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
-    <ClCompile Include="src\Gui.cpp" />
-    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Log.cpp" />
-    <ClCompile Include="src\Material.cpp" />
-    <ClCompile Include="src\Mesh.cpp" />
-    <ClCompile Include="src\Model.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\Sampler.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\TextureType.cpp" />
-    <ClCompile Include="src\TextureTypes.cpp" />
-    <ClCompile Include="src\Transform.cpp" />
-    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\gui\Button.cpp" />
+    <ClCompile Include="src\gui\Gui.cpp" />
+    <ClCompile Include="src\gui\Input.cpp" />
+    <ClCompile Include="src\gui\Window.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\Timer.cpp" />
+    <ClCompile Include="src\renderer\Camera.cpp" />
+    <ClCompile Include="src\renderer\Material.cpp" />
+    <ClCompile Include="src\renderer\Mesh.cpp" />
+    <ClCompile Include="src\renderer\Model.cpp" />
+    <ClCompile Include="src\renderer\Renderer.cpp" />
+    <ClCompile Include="src\renderer\Sampler.cpp" />
+    <ClCompile Include="src\renderer\Scene.cpp" />
+    <ClCompile Include="src\renderer\Shader.cpp" />
+    <ClCompile Include="src\renderer\Texture.cpp" />
+    <ClCompile Include="src\renderer\TextureType.cpp" />
+    <ClCompile Include="src\renderer\TextureTypes.cpp" />
+    <ClCompile Include="src\renderer\Transform.cpp" />
     <ClCompile Include="vendor\glad\glad.c">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>

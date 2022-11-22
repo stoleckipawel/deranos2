@@ -5,7 +5,7 @@
 
 
 Renderer::Renderer(Window& window, Timer& timer)
-	: m_window(window), m_timer(timer), m_show_wireframe(false), m_vsync_on(false)
+	: m_window(window), m_timer(timer), m_show_wireframe(false)
 {
 	m_gui = std::make_shared<Gui>(m_window);
 
@@ -52,7 +52,7 @@ void Renderer::DrawGui()
 		Button::Drag("Rotation", m_camera->orientation);
 		Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
 		Button::Slider("Near Clipping Plane", m_camera->near_clipping_plane, 0.01f, 500.0f);
-		Button::Slider("Far Clipping Plane", m_camera->far_clipping_plane, 0.0f, 9999.9f);
+		Button::Slider("Far Clipping Plane", m_camera->far_clipping_plane, 0.0f, 99999.9f);
 		ImGui::Separator();
 
 		ImGui::Text("Backpack");
@@ -66,9 +66,7 @@ void Renderer::DrawGui()
 		ImGui::Separator();
 
 		ImGui::Text("Settings");
-		Button::Checkbox("V-Sync", m_vsync_on);
 		Button::Checkbox("Show Wireframe", m_show_wireframe);
-		
 	ImGui::End();
 
 	m_gui->Render();
@@ -85,7 +83,7 @@ void Renderer::PreRender()
 	std::shared_ptr<Texture> sky_cubemap = std::make_shared<Texture>("resources/textures/skyboxes/day_", TextureTypes::Cubemap());
 	skybox->material->shader = skybox_shader;
 	skybox->material->texture = sky_cubemap;
-	skybox->model_xform->scale = glm::vec3(9999.0, 9999.0, 9999.0f);
+	skybox->model_xform->scale = glm::vec3(9999.0, 9999.0, 9990.0f);
 	m_scene->models.push_back(skybox);
 
 	//Ground

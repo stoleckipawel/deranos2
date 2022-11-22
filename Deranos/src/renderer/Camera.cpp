@@ -5,7 +5,7 @@ Camera::Camera(Window& window)
 	: m_window(window),
 	fov(45.0f), 
 	near_clipping_plane(0.001f), 
-	far_clipping_plane(100000.0), 
+	far_clipping_plane(99999.9f),
 	speed(0.01f),
 	sensitivity(100.0f),
 	position_ws(glm::vec3(0.0f, 0.0f, 0.0f)),

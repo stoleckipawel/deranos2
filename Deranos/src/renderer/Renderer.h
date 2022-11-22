@@ -30,7 +30,6 @@ private:
 	Timer& m_timer;
 
 	bool m_show_wireframe;
-	bool m_vsync_on;
 
 	std::shared_ptr<Camera> m_camera;
 	std::shared_ptr<Gui> m_gui;// to be stored elsewhere

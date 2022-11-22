@@ -26,6 +26,14 @@ project "Deranos"
         "%{prj.name}/src/**.cpp",
         "%{prj.name}/src/**.c",
         "%{prj.name}/src/**.hpp",
+        "%{prj.name}/src/gui/**.h",
+        "%{prj.name}/src/gui/**.cpp",
+        "%{prj.name}/src/gui/**.c",
+        "%{prj.name}/src/gui/**.hpp",
+        "%{prj.name}/src/renderer/**.h",
+        "%{prj.name}/src/renderer/**.cpp",
+        "%{prj.name}/src/renderer/**.c",
+        "%{prj.name}/src/renderer/**.hpp",
         "%{prj.name}/vendor/glad/glad.c",
         "%{prj.name}/vendor/GLFW/glfw3.h",
         "%{prj.name}/vendor/GLFW/glfw3native.h",
@@ -36,6 +44,8 @@ project "Deranos"
     includedirs
     {
         "%{prj.name}/src",
+        "%{prj.name}/src/gui",
+        "%{prj.name}/src/renderer",
         "%{prj.name}/vendor/spdlog/include",
         "%{prj.name}/vendor/glm",
         "%{prj.name}/vendor/KHR",
