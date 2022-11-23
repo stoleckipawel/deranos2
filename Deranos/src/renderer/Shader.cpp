@@ -101,6 +101,13 @@ void Shader::CullFunc()
     glEnable(GL_CULL_FACE);
 }
 
+void Shader::BlendFunc(EBlendOps blend_func_src, EBlendOps blend_func_dst, EBlendOps blend_func_src_a, EBlendOps blend_fun_dst_a)
+{
+    glEnable(GL_BLEND);
+
+    glBlendFuncSeparate(int(blend_func_src), int(blend_func_dst), int(blend_func_src_a), int(blend_fun_dst_a));
+}
+
 void Shader::CheckCompileErrors(unsigned int shader, std::string type)
 {
     // utility function for checking shader compilation/linking errors.

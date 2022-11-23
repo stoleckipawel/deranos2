@@ -10,6 +10,10 @@ enum class ECompareFuncs { ALWAYS = GL_ALWAYS, NEVER = GL_NEVER, LESS = GL_LESS,
 enum class EStencilOps { KEEP = GL_KEEP, ZERO = GL_ZERO, REPLACE =  GL_REPLACE, INC = GL_INCR, INC_WRAP = GL_INCR_WRAP, 
 	DEC = GL_DECR, DEC_WRAP = GL_DECR_WRAP, INVERT = GL_INVERT};
 
+enum class EBlendOps { ZERO = GL_ZERO, ONE = GL_ONE, SRC_COLOR = GL_SRC_COLOR, ONE_MINUS_SRC_COLOR = GL_ONE_MINUS_SRC_COLOR, 
+	DST_COLOR = GL_DST_COLOR, ONE_MINUS_DST_COLOR = GL_ONE_MINUS_DST_COLOR, SRC_ALPHA = GL_SRC_ALPHA, ONE_MINUS_SRC_ALPHA = GL_ONE_MINUS_SRC_ALPHA,
+	DST_ALPHA = GL_DST_ALPHA, ONE_MINUS_DST_ALPHA = GL_ONE_MINUS_DST_ALPHA, };
+
 class Shader
 {
 public:
@@ -17,9 +21,13 @@ public:
 
 	void Bind(Texture& texture, Camera& camera, Transform& model_xform);
 	void BindSampler(Texture& texture, const char* texture_name, int texture_slot);
+
 	void DepthFunc(ECompareFuncs dpt_func, bool depth_write);
 	void StencilFunc(ECompareFuncs stencil_func, int ref, int read_mask, int write_mask, EStencilOps stencil_op);
 	void CullFunc();
+	void BlendFunc(EBlendOps blend_func_src = EBlendOps::SRC_ALPHA, EBlendOps blend_func_dst = EBlendOps::ONE_MINUS_SRC_ALPHA, 
+		EBlendOps blend_func_src_a = EBlendOps::ONE, EBlendOps blend_fun_dst_a = EBlendOps::ZERO);
+
 	inline std::shared_ptr<Sampler> GetSampler() const { return m_sampler; };
 
 	// utility uniform functions
