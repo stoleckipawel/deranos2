@@ -88,6 +88,7 @@ void Renderer::PreRender()
 	std::shared_ptr<Shader> skybox_shader = std::make_shared<Shader>("shaders/skybox.vs", "shaders/skybox.ps");
 	std::shared_ptr<Texture> sky_cubemap = std::make_shared<Texture>("resources/textures/skyboxes/day_", TextureTypes::Cubemap());
 	skybox->material->shader = skybox_shader;
+	skybox->material->shader->SetCullFunc(ECullFuncs::CW);
 	skybox->material->texture = sky_cubemap;
 	skybox->model_xform->scale = glm::vec3(9999.0, 9999.0, 9990.0f);
 	m_scene->models.push_back(skybox);

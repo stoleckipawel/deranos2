@@ -14,23 +14,19 @@ enum class EBlendOps { ZERO = GL_ZERO, ONE = GL_ONE, SRC_COLOR = GL_SRC_COLOR, O
 	DST_COLOR = GL_DST_COLOR, ONE_MINUS_DST_COLOR = GL_ONE_MINUS_DST_COLOR, SRC_ALPHA = GL_SRC_ALPHA, ONE_MINUS_SRC_ALPHA = GL_ONE_MINUS_SRC_ALPHA,
 	DST_ALPHA = GL_DST_ALPHA, ONE_MINUS_DST_ALPHA = GL_ONE_MINUS_DST_ALPHA, };
 
+enum class ECullFuncs { CW, CCW, NONE};
+
 class Shader
 {
 public:
 	Shader(const char* vertexPath, const char* fragmentPath);
-
+	
 	void Bind(Texture& texture, Camera& camera, Transform& model_xform);
 	void BindSampler(Texture& texture, const char* texture_name, int texture_slot);
 
-	void DepthFunc(ECompareFuncs dpt_func, bool depth_write);
-	void StencilFunc(ECompareFuncs stencil_func, int ref, int read_mask, int write_mask, EStencilOps stencil_op);
-	void CullFunc();
-	void BlendFunc(EBlendOps blend_func_src = EBlendOps::SRC_ALPHA, EBlendOps blend_func_dst = EBlendOps::ONE_MINUS_SRC_ALPHA, 
-		EBlendOps blend_func_src_a = EBlendOps::ONE, EBlendOps blend_fun_dst_a = EBlendOps::ZERO);
+	void SetCullFunc(ECullFuncs cull_func);
+	void SetDepthFunc(ECompareFuncs depth_func, bool write_depth);
 
-	inline std::shared_ptr<Sampler> GetSampler() const { return m_sampler; };
-
-	// utility uniform functions
 	void SetBool(const std::string& name, bool value) const;
 	void SetInt(const std::string& name, int value) const;
 	void SetFloat(const std::string& name, float value) const;
@@ -40,10 +36,22 @@ public:
 	void SetMat2(const std::string& name, const glm::mat2& mat) const;
 	void SetMat3(const std::string& name, const glm::mat3& mat) const;
 	void SetMat4(const std::string& name, const glm::mat4& mat) const;
+
+	inline std::shared_ptr<Sampler> GetSampler() const { return m_sampler; };
 private:
 	void CheckCompileErrors(unsigned int shader, std::string type);
+
+	void CullFunc();
+	void DepthFunc();
+	void StencilFunc(ECompareFuncs stencil_func, int ref, int read_mask, int write_mask, EStencilOps stencil_op);
+	void BlendFunc(EBlendOps blend_func_src = EBlendOps::SRC_ALPHA, EBlendOps blend_func_dst = EBlendOps::ONE_MINUS_SRC_ALPHA,
+		EBlendOps blend_func_src_a = EBlendOps::ONE, EBlendOps blend_fun_dst_a = EBlendOps::ZERO);
+
 	unsigned int m_id;
 	std::shared_ptr<Sampler> m_sampler;
 
+	ECompareFuncs m_depth_func;//Should be read from the shader in the future
+	bool m_write_depth;//Should be read from the shader in the future
+	ECullFuncs m_cull_func;//Should be read from the shader in the future
 };
 

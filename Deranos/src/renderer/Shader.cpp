@@ -3,6 +3,7 @@
 
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
+    :m_depth_func(ECompareFuncs::LESS), m_write_depth(true), m_cull_func(ECullFuncs::CCW)
 {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -60,7 +61,10 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 {
     glUseProgram(m_id);
-    DepthFunc(ECompareFuncs::LESS, true);
+
+    DepthFunc();
+    CullFunc();
+
     BindSampler(texture, "T_DIFFUSE", USERMAP_DIFFUSE);
 
     //for each texture bind
@@ -75,12 +79,23 @@ void Shader::BindSampler(Texture& texture, const char* texture_name, int texture
     SetInt(texture_name, texture_slot);
 }
 
-void Shader::DepthFunc(ECompareFuncs dpt_func, bool depth_write)
+void Shader::SetCullFunc(ECullFuncs cull_func)
+{
+    m_cull_func = cull_func;
+}
+
+void Shader::SetDepthFunc(ECompareFuncs depth_func, bool write_depth)
+{
+    m_depth_func = depth_func;
+    m_write_depth = write_depth;
+}
+
+void Shader::DepthFunc()
 {
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(int(dpt_func));
+    glDepthFunc(int(m_depth_func));
 
-    if(depth_write)
+    if(m_write_depth)
         glDepthMask(GL_TRUE);
     else
         glDepthMask(GL_FALSE);
@@ -98,7 +113,20 @@ void Shader::StencilFunc(ECompareFuncs stencil_func, int ref, int read_mask, int
 
 void Shader::CullFunc()
 {
-    glEnable(GL_CULL_FACE);
+    if (m_cull_func == ECullFuncs::CW)
+    {   
+        glEnable(GL_CULL_FACE);
+        glFrontFace(GL_CW);
+    }
+    else if (m_cull_func == ECullFuncs::CCW)
+    {
+        glEnable(GL_CULL_FACE);
+        glFrontFace(GL_CCW);
+    }
+    else//none
+    {
+        glDisable(GL_CULL_FACE);
+    }
 }
 
 void Shader::BlendFunc(EBlendOps blend_func_src, EBlendOps blend_func_dst, EBlendOps blend_func_src_a, EBlendOps blend_fun_dst_a)
