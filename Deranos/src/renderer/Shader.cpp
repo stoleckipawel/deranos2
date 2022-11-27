@@ -1,5 +1,60 @@
 #include "pch.h"
 #include "Shader.h"
+#include "TextureTypes.h"
+
+Sampler::Sampler(Texture& texture, int texture_slot, EWrapMode wrap_mode, EFilteringMode filtering, EMaxAnisotropyLevel max_anisotropy_level)
+    : m_texture(texture), m_texture_slot(texture_slot), m_wrap_mode(wrap_mode), m_filtering(filtering), m_max_anisotropy_level(max_anisotropy_level)
+{
+}
+
+void Sampler::Bind()
+{
+    Bind(m_texture, m_texture_slot, m_wrap_mode, m_filtering, m_max_anisotropy_level);
+}
+
+void Sampler::Bind(Texture& texture, int texture_slot, EWrapMode wrap_mode, EFilteringMode filtering, EMaxAnisotropyLevel max_anisotropy_level)
+{
+    glActiveTexture(GL_TEXTURE0 + texture_slot);
+    m_texture.Bind();
+    SetWrapMode(wrap_mode);
+    SetFiltering(filtering, max_anisotropy_level);
+}
+
+void Sampler::SetWrapMode(EWrapMode wrap_mode)
+{
+    //If texture is cube map force clamp wrap mode, temporary hack should be forced in other way
+    if (m_texture.GetTextureType().type == TextureTypes::Cubemap().type)
+    {
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, int(EWrapMode::Clamp));
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, int(EWrapMode::Clamp));
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, int(EWrapMode::Clamp));
+    }
+    else
+    {
+        m_wrap_mode = wrap_mode;
+        glTexParameteri(m_texture.GetTextureType().type, GL_TEXTURE_WRAP_S, int(m_wrap_mode));
+        glTexParameteri(m_texture.GetTextureType().type, GL_TEXTURE_WRAP_T, int(m_wrap_mode));
+    }
+}
+
+void Sampler::SetFiltering(EFilteringMode filtering, EMaxAnisotropyLevel max_anisotropy_level)
+{
+    m_filtering = filtering;
+    glBindTexture(m_texture.GetTextureType().type, m_texture.GetId());
+    //-Minification
+    glTexParameteri(m_texture.GetTextureType().type, GL_TEXTURE_MIN_FILTER, int(filtering));
+    //-Magnification
+    int mag_filter = ((filtering == EFilteringMode::LinearMipPoint) || (filtering == EFilteringMode::LinearMipLinear)) ? GL_LINEAR : GL_NEAREST;
+    glTexParameteri(m_texture.GetTextureType().type, GL_TEXTURE_MAG_FILTER, mag_filter);
+    //Anisotropy level
+    SetMaxAnisotropyLevel(max_anisotropy_level);
+}
+
+void Sampler::SetMaxAnisotropyLevel(EMaxAnisotropyLevel max_anisotropy_level)
+{
+    m_max_anisotropy_level = max_anisotropy_level;
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, int(m_max_anisotropy_level));
+}
 
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
@@ -13,12 +68,17 @@ void Shader::Bind(Texture& texture)
     glUseProgram(m_id);
     DepthFunc();
     CullFunc();
-    BindSampler(texture, "T_DIFFUSE", USERMAP_DIFFUSE);//for each texture bind
+    BindSampler(texture, "T_DIFFUSE", USERMAP_DIFFUSE);//for each texture bind sampler
 }
 
 void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 {
     Bind(texture);
+    SetMatrixes(camera, model_xform);
+}
+
+void Shader::SetMatrixes(Camera& camera, Transform& model_xform)
+{
     SetMat4("model", model_xform.GetMatrix());
     SetMat4("view", camera.GetViewMatrix());
     SetMat4("projection", camera.GetProjectionMatrix());
@@ -27,6 +87,7 @@ void Shader::Bind(Texture& texture, Camera& camera, Transform& model_xform)
 void Shader::BindSampler(Texture& texture, const char* texture_name, int texture_slot)
 {
     m_sampler = std::make_shared<Sampler>(texture, texture_slot, EWrapMode::Wrap, EFilteringMode::LinearMipLinear, EMaxAnisotropyLevel::High);
+    m_sampler->Bind();
     SetInt(texture_name, texture_slot);
 }
 
@@ -206,3 +267,7 @@ void Shader::SetMat4(const std::string& name, const glm::mat4& mat) const
 {
     glUniformMatrix4fv(glGetUniformLocation(m_id, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
+
+
+
+

@@ -72,9 +72,6 @@
     <ClInclude Include="src\renderer\Renderer.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\Sampler.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\renderer\Scene.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
@@ -166,9 +163,6 @@
       <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\Renderer.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\Sampler.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\Scene.cpp">

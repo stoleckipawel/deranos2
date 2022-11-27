@@ -118,7 +118,6 @@
     <ClInclude Include="src\renderer\Model.h" />
     <ClInclude Include="src\renderer\RenderTarget.h" />
     <ClInclude Include="src\renderer\Renderer.h" />
-    <ClInclude Include="src\renderer\Sampler.h" />
     <ClInclude Include="src\renderer\Scene.h" />
     <ClInclude Include="src\renderer\Shader.h" />
     <ClInclude Include="src\renderer\Transform.h" />
@@ -154,7 +153,6 @@
     <ClCompile Include="src\renderer\Model.cpp" />
     <ClCompile Include="src\renderer\RenderTarget.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
-    <ClCompile Include="src\renderer\Sampler.cpp" />
     <ClCompile Include="src\renderer\Scene.cpp" />
     <ClCompile Include="src\renderer\Shader.cpp" />
     <ClCompile Include="src\renderer\Transform.cpp" />

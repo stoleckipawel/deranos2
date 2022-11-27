@@ -28,5 +28,10 @@ TextureType TextureTypes::Specular()
 
 TextureType TextureTypes::Roughness()
 {
-	return TextureType(GL_TEXTURE_2D, GL_RG8, GL_RED, true);
+	return TextureType(GL_TEXTURE_2D, GL_R8, GL_RED, true);
+}
+
+TextureType TextureTypes::Metalic()
+{
+	return TextureType(GL_TEXTURE_2D, GL_R8, GL_RED, true);
 }
