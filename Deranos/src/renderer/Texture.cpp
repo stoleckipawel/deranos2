@@ -3,6 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include "Sampler.h"
+#include "Buffer.h"
 
 Texture::Texture(const char* path, TextureType texture_type, bool flip)
 	: m_path(path), m_texture_type(texture_type), m_flip(flip)
@@ -103,5 +104,8 @@ TextureType Texture::GetTextureType()
 	return m_texture_type;
 }
 
-
+Texture::~Texture()
+{
+	glDeleteTextures(1, &m_id);
+}
 

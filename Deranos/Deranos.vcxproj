@@ -103,6 +103,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\renderer\RenderTarget.h" />
+    <ClInclude Include="src\renderer\Buffer.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\EngineDefines.h" />
     <ClInclude Include="src\Log.h" />
@@ -137,6 +139,8 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\renderer\RenderTarget.cpp" />
+    <ClCompile Include="src\renderer\Buffer.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\Log.cpp" />

@@ -5,6 +5,7 @@ class Texture
 {
 public:
 	Texture(const char* path, TextureType texture_type = TextureTypes::Default(), bool flip = true);
+	~Texture();
 	unsigned int GetId();
 	TextureType GetTextureType();
 	

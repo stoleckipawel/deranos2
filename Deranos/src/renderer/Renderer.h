@@ -21,11 +21,13 @@ public:
 	void Present();
 	void OnInput();
 private:
-	void ClearBackBuffer(glm::vec3 clear_color);
+	void CopyToBackBuffer(std::shared_ptr<Texture>);
 	void ClearZbuffer();
 	void ClearStencil();
 	void SetPolyFillMode();
 	void DrawGui();
+
+	void SetRenderTargetView();
 
 	Window& m_window;
 	Timer& m_timer;
@@ -39,6 +41,9 @@ private:
 	//To be moved somewhere else
 	std::shared_ptr<Model> m_backpack;
 	std::shared_ptr<Model> m_cube;
+	
+	std::shared_ptr<Mesh> m_quad;
+	std::shared_ptr<Material> m_copy_material;
 };
 
 

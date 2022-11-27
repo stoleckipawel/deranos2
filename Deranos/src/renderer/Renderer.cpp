@@ -2,6 +2,8 @@
 #include "Renderer.h"
 #include "Gui.h"
 #include "Button.h"
+#include "RenderTarget.h"
+#include "Buffer.h"
 
 
 Renderer::Renderer(Window& window, Timer& timer)
@@ -12,12 +14,6 @@ Renderer::Renderer(Window& window, Timer& timer)
 	m_camera = std::make_shared<Camera>(m_window);
 
 	m_scene = std::make_shared<Scene>(*m_camera);
-}
-
-void Renderer::ClearBackBuffer(glm::vec3 clear_color = glm::vec3(0.0, 0.0, 0.0))
-{
-	glClearColor(clear_color.x, clear_color.y, clear_color.z, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Renderer::ClearZbuffer()
@@ -42,40 +38,6 @@ void Renderer::SetPolyFillMode()
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);//regular filled polygons
 	}
-}
-
-void Renderer::DrawGui()
-{
-	m_gui->Init();
-
-	ImGui::Begin("Editor");
-		ImGui::SetWindowFontScale(1.5f);
-		ImGui::Text("FPS: ");
-		ImGui::Text(std::to_string(m_timer.GetFPS()).c_str());//awful conversion to be corrected
-		ImGui::Separator();
-		ImGui::Text("Camera");
-		Button::Drag("Position", m_camera->position_ws);
-		Button::Drag("Rotation", m_camera->orientation);
-		Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
-		Button::Slider("Near Clipping Plane", m_camera->near_clipping_plane, 0.01f, 500.0f);
-		Button::Slider("Far Clipping Plane", m_camera->far_clipping_plane, 0.0f, 99999.9f);
-		ImGui::Separator();
-
-		ImGui::Text("Backpack");
-		Button::Drag("Position ", m_backpack->model_xform->position);
-		Button::Drag("Scale", m_backpack->model_xform->scale);
-		ImGui::Separator();
-
-		ImGui::Text("Cube");
-		Button::Drag("Position  ", m_cube->model_xform->position);
-		Button::Drag("Scale ", m_cube->model_xform->scale);
-		ImGui::Separator();
-
-		ImGui::Text("Settings");
-		Button::Checkbox("Show Wireframe", m_show_wireframe);
-	ImGui::End();
-
-	m_gui->Render();
 }
 
 void Renderer::PreRender()
@@ -111,17 +73,83 @@ void Renderer::PreRender()
 	m_backpack->material->texture = backpack_diffuse;
 	m_backpack->model_xform->position += glm::vec3(-1.0, 0.0, -5.0f);
 	m_scene->models.push_back(m_backpack);
+
+	//Copy Material
+	std::shared_ptr<Shader> copy_shader = std::make_shared<Shader>("shaders/copy.vs", "shaders/copy.ps");
+	copy_shader->SetCullFunc(ECullFuncs::NONE);
+	m_copy_material = std::make_shared<Material>();
+	m_copy_material->shader = copy_shader;
+
+	//Quad
+	m_quad = std::make_shared<Mesh>();	
+}
+
+void Renderer::DrawGui()
+{
+	m_gui->Init();
+
+	ImGui::Begin("Editor");
+	ImGui::SetWindowFontScale(1.5f);
+	ImGui::Text("FPS: ");
+	ImGui::Text(std::to_string(m_timer.GetFPS()).c_str());//awful conversion to be corrected
+	ImGui::Separator();
+	ImGui::Text("Camera");
+	Button::Drag("Position", m_camera->position_ws);
+	Button::Drag("Rotation", m_camera->orientation);
+	Button::Slider("Field of View", m_camera->fov, 1.0f, 180.0f);
+	Button::Slider("Near Clipping Plane", m_camera->near_clipping_plane, 0.01f, 500.0f);
+	Button::Slider("Far Clipping Plane", m_camera->far_clipping_plane, 0.0f, 99999.9f);
+	ImGui::Separator();
+
+	ImGui::Text("Backpack");
+	Button::Drag("Position ", m_backpack->model_xform->position);
+	Button::Drag("Scale", m_backpack->model_xform->scale);
+	ImGui::Separator();
+
+	ImGui::Text("Cube");
+	Button::Drag("Position  ", m_cube->model_xform->position);
+	Button::Drag("Scale ", m_cube->model_xform->scale);
+	ImGui::Separator();
+
+	ImGui::Text("Post Processing");
+	float sharpen = 0.0f;
+	Button::Slider("Sharpen", sharpen, 0.0f, 1.0f);
+	ImGui::Separator();
+
+	ImGui::Text("Settings");
+	Button::Checkbox("Show Wireframe", m_show_wireframe);
+	ImGui::End();
+
+	m_gui->Render();
+}
+
+void Renderer::CopyToBackBuffer(std::shared_ptr<Texture> texture)
+{
+	m_copy_material->texture = texture;
+	m_copy_material->Bind();
+
+	BackBuffer::SetRenderTargetView();
+	m_quad->Draw();
 }
 
 void Renderer::Renderloop()
 {
 	SetPolyFillMode();//should be event callback based to not check if over & over again
 
-	ClearBackBuffer(glm::vec3(0.0, 0.0, 1.0));
+	BackBuffer::Clear(glm::vec4(0.0, 0.0, 1.0, 1.0));
 	ClearZbuffer();
 	ClearStencil();
 
+	//Buffer* gbuffer_diffuse = new Buffer(GL_RGB, m_window.GetWidth(), m_window.GetHeight());
+	
+	BackBuffer::SetRenderTargetView();
+	
 	m_scene->Draw();
+	
+	//std::shared_ptr<Texture> xd = std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", TextureTypes::Diffuse());
+	//CopyToBackBuffer(xd);
+
+	//delete gbuffer_diffuse;
 
 	DrawGui();
 }

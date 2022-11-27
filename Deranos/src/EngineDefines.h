@@ -18,8 +18,7 @@
 
 
 
-
-
+typedef unsigned int uint;
 
 
 /*

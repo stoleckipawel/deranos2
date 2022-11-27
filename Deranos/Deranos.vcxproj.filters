@@ -120,6 +120,8 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
       <Filter>vendor\imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\Buffer.h" />
+    <ClInclude Include="src\renderer\RenderTarget.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -209,5 +211,7 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <Filter>vendor\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\Buffer.cpp" />
+    <ClCompile Include="src\renderer\RenderTarget.cpp" />
   </ItemGroup>
 </Project>
