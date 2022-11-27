@@ -1,13 +1,32 @@
 #include "pch.h"
 #include "Window.h"
 
-Window::Window(int height = 1200, int width = 720, std::string name = "")
+Window::Window(int height = 1200, int width = 1200, std::string name = "")
     : m_width(width), m_height(height), m_name(name)
 {
+    InitializeGlfw();
     m_window = MakeWindow();
     ValidateWindow();
     BindWindow();
     RegisterResizeCallback();
+
+    DERANOS_CORE_INFO("Window::INITIALIZED");
+}
+
+Window::~Window()
+{
+    DERANOS_CORE_INFO("Window::Destroyed");
+    glfwTerminate();
+}
+
+void Window::InitializeGlfw()//#To do: hide under abstraction
+{
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+    DERANOS_CORE_INFO("Glfw::INITIALIZED");
 }
 
 GLFWwindow* Window::MakeWindow()

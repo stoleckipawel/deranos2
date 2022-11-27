@@ -16,6 +16,8 @@ Gui::Gui(Window& window)
 	ImGui_ImplGlfw_InitForOpenGL(m_window.GetWindow(), true);
 	ImGui_ImplOpenGL3_Init("#version 330");
 	Gui::SetStyle();
+
+	DERANOS_CORE_INFO("GUI::INITIALIZED");
 }
 
 Gui::~Gui()

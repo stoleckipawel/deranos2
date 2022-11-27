@@ -26,6 +26,7 @@ private:
 	void ClearStencil();
 	void SetPolyFillMode();
 	void DrawGui();
+	void InitializeGlad();
 
 	void SetRenderTargetView();
 

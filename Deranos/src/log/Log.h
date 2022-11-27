@@ -5,13 +5,11 @@
 class Log
 {
 public:
-	static void Init(int severity);
+	static void Init();
 
 	inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
 	inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 private:
-	static void GlDebugLayer(int severity);
-
 	static std::shared_ptr<spdlog::logger> s_CoreLogger;
 	static std::shared_ptr<spdlog::logger> s_ClientLogger;
 };

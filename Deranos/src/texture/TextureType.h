@@ -1,15 +1,16 @@
 #pragma once
+
 class TextureType
 {
 public:
-	TextureType(int type, GLenum format, int channel_num, int dimensions, bool generate_mips, int faces);
+	TextureType(int type, GLenum internal_format, GLenum format, bool generate_mips);
 
 	const int type;//2d/3d/cubemap etc
+	const GLenum internal_format;
 	const GLenum format;
-	const int channel_num;
-	const int dimensions;
+	int channel_num;
 	const bool generate_mips;
-	const int faces;
+	int faces;
 	//mip filter option(kaiser, default etc)
 };
 

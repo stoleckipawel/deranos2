@@ -7,8 +7,14 @@
     <Filter Include="src\gui">
       <UniqueIdentifier>{210530A9-8DE4-AE44-96FC-391B025B15A6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\log">
+      <UniqueIdentifier>{9E1930A9-0AF9-AE44-1311-3A1B7F6F15A6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\renderer">
       <UniqueIdentifier>{936D1A48-7FD0-A9EC-2856-E2A21498756F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\texture">
+      <UniqueIdentifier>{AD45B3E2-19FB-2BD8-A2EF-25AF0EA422DC}</UniqueIdentifier>
     </Filter>
     <Filter Include="vendor">
       <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
@@ -30,9 +36,6 @@
     <ClInclude Include="src\EngineDefines.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Log.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Timer.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -47,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="src\gui\Window.h">
       <Filter>src\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\log\Log.h">
+      <Filter>src\log</Filter>
     </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>src</Filter>
@@ -63,6 +69,9 @@
     <ClInclude Include="src\renderer\Model.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\RenderTarget.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\renderer\Renderer.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
@@ -75,17 +84,17 @@
     <ClInclude Include="src\renderer\Shader.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\Texture.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\TextureType.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\renderer\TextureTypes.h">
-      <Filter>src\renderer</Filter>
-    </ClInclude>
     <ClInclude Include="src\renderer\Transform.h">
       <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\texture\Texture.h">
+      <Filter>src\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\texture\TextureType.h">
+      <Filter>src\texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\texture\TextureTypes.h">
+      <Filter>src\texture</Filter>
     </ClInclude>
     <ClInclude Include="vendor\GLFW\glfw3.h">
       <Filter>vendor\GLFW</Filter>
@@ -120,17 +129,13 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
       <Filter>vendor\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\Buffer.h" />
-    <ClInclude Include="src\renderer\RenderTarget.h" />
+    <ClInclude Include="src\renderer\RendererDebuger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\EntryPoint.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Log.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Timer.cpp">
@@ -148,6 +153,9 @@
     <ClCompile Include="src\gui\Window.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\log\Log.cpp">
+      <Filter>src\log</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -163,6 +171,9 @@
     <ClCompile Include="src\renderer\Model.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\renderer\RenderTarget.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\renderer\Renderer.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
@@ -175,17 +186,17 @@
     <ClCompile Include="src\renderer\Shader.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\Texture.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\TextureType.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\renderer\TextureTypes.cpp">
-      <Filter>src\renderer</Filter>
-    </ClCompile>
     <ClCompile Include="src\renderer\Transform.cpp">
       <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture\Texture.cpp">
+      <Filter>src\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture\TextureType.cpp">
+      <Filter>src\texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\texture\TextureTypes.cpp">
+      <Filter>src\texture</Filter>
     </ClCompile>
     <ClCompile Include="vendor\glad\glad.c">
       <Filter>vendor\glad</Filter>
@@ -211,7 +222,6 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <Filter>vendor\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\Buffer.cpp" />
-    <ClCompile Include="src\renderer\RenderTarget.cpp" />
+    <ClCompile Include="src\renderer\RendererDebuger.cpp" />
   </ItemGroup>
 </Project>

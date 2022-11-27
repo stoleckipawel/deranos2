@@ -3,8 +3,7 @@
 #include "Gui.h"
 #include "Button.h"
 #include "RenderTarget.h"
-#include "Buffer.h"
-
+#include "RendererDebuger.h"
 
 Renderer::Renderer(Window& window, Timer& timer)
 	: m_window(window), m_timer(timer), m_show_wireframe(false)
@@ -14,6 +13,20 @@ Renderer::Renderer(Window& window, Timer& timer)
 	m_camera = std::make_shared<Camera>(m_window);
 
 	m_scene = std::make_shared<Scene>(*m_camera);
+
+	InitializeGlad();
+
+	RendererDebuger::Init();
+
+	DERANOS_CORE_INFO("Renderer::INITIALIZED");
+}
+
+void Renderer::InitializeGlad()//#To do: hide under abstraction
+{
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		DERANOS_CORE_ERROR("Failed to Initialize GLAD!");
+	}
 }
 
 void Renderer::ClearZbuffer()
@@ -140,15 +153,13 @@ void Renderer::Renderloop()
 	ClearZbuffer();
 	ClearStencil();
 
-	//Buffer* gbuffer_diffuse = new Buffer(GL_RGB, m_window.GetWidth(), m_window.GetHeight());
-	
 	BackBuffer::SetRenderTargetView();
 	
 	m_scene->Draw();
 	
-	//std::shared_ptr<Texture> xd = std::make_shared<Texture>("resources/models/backpack/diffuse.jpg", TextureTypes::Diffuse());
-	//CopyToBackBuffer(xd);
 
+	//CopyToBackBuffer(xd);
+	//Texture* gbuffer_diffuse = new Texture(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window.GetWidth(), m_window.GetHeight());
 	//delete gbuffer_diffuse;
 
 	DrawGui();

@@ -3,7 +3,14 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include "Sampler.h"
-#include "Buffer.h"
+
+Texture::Texture(int type, GLenum internal_format, GLenum format, uint width, uint height)
+	: m_path(nullptr), m_width(width), m_height(height), m_texture_type(TextureType(type, internal_format, format, false)), m_flip(false)
+{
+	glBindTexture(m_texture_type.type, m_id);
+
+	CreateTexture(nullptr, m_texture_type.type);
+}
 
 Texture::Texture(const char* path, TextureType texture_type, bool flip)
 	: m_path(path), m_texture_type(texture_type), m_flip(flip)
@@ -85,13 +92,7 @@ void Texture::LoadTexture(const char* path, int target)
 
 void Texture::CreateTexture(unsigned char* texture_data, int target)
 {
-	if (!texture_data)
-	{
-		DERANOS_CORE_WARN("Failed to load a texture");
-		return;
-	}
-		
-	glTexImage2D(target, 0, m_texture_type.format, m_width, m_height, 0, m_texture_type.format, GL_UNSIGNED_BYTE, texture_data);
+	glTexImage2D(target, 0, m_texture_type.internal_format, m_width, m_height, 0, m_texture_type.format, GL_UNSIGNED_BYTE, texture_data);
 }
 
 unsigned int Texture::GetId()

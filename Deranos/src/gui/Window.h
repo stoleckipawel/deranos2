@@ -6,6 +6,7 @@ class Window
 {
 public:
 	Window(int height, int width, std::string name);
+	~Window();
 
 	inline int GetWidth() const { return m_width; };
 	inline void SetHeight(int height) { m_height = height; };
@@ -22,6 +23,7 @@ private:
 	void ValidateWindow();
 	void RegisterResizeCallback();
 	static void ResizeCallback(GLFWwindow* window, int width, int height);
+	void InitializeGlfw();
 
 	int m_width;
 	int m_height;

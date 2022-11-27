@@ -4,23 +4,6 @@
 //#ToDo:
 //convert to a singleton
 
-void Application::InitializeGlfw()//#To do: hide under abstraction
-{
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-}
-
-void Application::InitializeGlad()//#To do: hide under abstraction
-{
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        DERANOS_CORE_ERROR("Failed to Initialize GLAD!");
-    }
-}
-
 void Application::Input()
 {
     if (glfwGetKey(m_window->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -33,7 +16,7 @@ void Application::Input()
 
 Application::Application()
 {
-    InitializeGlfw();
+    Log::Init();
 
     m_timer = std::make_shared<Timer>();
 
@@ -41,14 +24,7 @@ Application::Application()
 
     m_renderer = std::make_shared<Renderer>(*m_window, *m_timer);
 
-    InitializeGlad();
-
-    Log::Init(GL_DEBUG_SEVERITY_HIGH);
-}
-
-Application::~Application()
-{
-    glfwTerminate();
+    DERANOS_CORE_INFO("App::INITIALIZED");
 }
 
 void Application::Run()
