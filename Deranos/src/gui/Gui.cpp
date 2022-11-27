@@ -6,18 +6,18 @@ void Gui::SetStyle()
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 4.0f);
 }
 
-Gui::Gui(Window& window)
+Gui::Gui(Window* window)
 	: m_window(window)
 {
 	//IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	ImGui::StyleColorsDark();
-	ImGui_ImplGlfw_InitForOpenGL(m_window.GetWindow(), true);
-	ImGui_ImplOpenGL3_Init("#version 330");
+	ImGui_ImplGlfw_InitForOpenGL(m_window->GetWindow(), true);
+	ImGui_ImplOpenGL3_Init("#version 460 core");
 	Gui::SetStyle();
 
-	DERANOS_CORE_INFO("GUI::INITIALIZED");
+	DERANOS_CORE_INFO("Gui::Initialized");
 }
 
 Gui::~Gui()
@@ -25,6 +25,7 @@ Gui::~Gui()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
+	DERANOS_CORE_INFO("Gui::Destroyed");
 }
 
 void Gui::Init()

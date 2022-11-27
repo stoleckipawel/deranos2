@@ -109,7 +109,6 @@
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\gui\Button.h" />
     <ClInclude Include="src\gui\Gui.h" />
-    <ClInclude Include="src\gui\Input.h" />
     <ClInclude Include="src\gui\Window.h" />
     <ClInclude Include="src\log\Log.h" />
     <ClInclude Include="src\pch.h" />
@@ -141,11 +140,9 @@
   <ItemGroup>
     <ClCompile Include="src\renderer\RendererDebuger.cpp" />
     <ClCompile Include="src\Application.cpp" />
-    <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\gui\Button.cpp" />
     <ClCompile Include="src\gui\Gui.cpp" />
-    <ClCompile Include="src\gui\Input.cpp" />
     <ClCompile Include="src\gui\Window.cpp" />
     <ClCompile Include="src\log\Log.cpp" />
     <ClCompile Include="src\pch.cpp">

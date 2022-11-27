@@ -15,7 +15,8 @@
 class Renderer
 {
 public:
-	Renderer(Window& window, Timer& timer);
+	Renderer(Window* window, Timer* timer);
+	~Renderer();
 	void PreRender();
 	void Renderloop();
 	void Present();
@@ -30,14 +31,14 @@ private:
 
 	void SetRenderTargetView();
 
-	Window& m_window;
-	Timer& m_timer;
+	Window* m_window;
+	Timer* m_timer;
 
 	bool m_show_wireframe;
 
-	std::shared_ptr<Camera> m_camera;
-	std::shared_ptr<Gui> m_gui;// to be stored elsewhere
-	std::shared_ptr<Scene> m_scene;
+	Camera* m_camera;
+	Gui* m_gui;
+	Scene* m_scene;
 	
 	//To be moved somewhere else
 	std::shared_ptr<Model> m_backpack;

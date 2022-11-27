@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Camera.h"
 
-Camera::Camera(Window& window)
+Camera::Camera(Window* window)
 	: m_window(window),
 	fov(45.0f), 
 	near_clipping_plane(0.001f), 
@@ -12,7 +12,6 @@ Camera::Camera(Window& window)
 	m_up(glm::vec3(0.0f, 1.0f, 0.0f)),
 	orientation(glm::vec3(0.0f, 0.0f, -1.0f))
 {
-	m_input = std::make_shared<Input>();//to be converted into singleton
 }
 
 glm::mat4 Camera::GetViewMatrix()
@@ -22,25 +21,25 @@ glm::mat4 Camera::GetViewMatrix()
 
 glm::mat4 Camera::GetProjectionMatrix()
 {
-	return glm::perspective(glm::radians(fov), static_cast<float>(m_window.GetWidth()) / m_window.GetHeight(), near_clipping_plane, far_clipping_plane);
+	return glm::perspective(glm::radians(fov), static_cast<float>(m_window->GetWidth()) / m_window->GetHeight(), near_clipping_plane, far_clipping_plane);
 }
 
 void Camera::Rotation()
 {
-	if (m_input->IsMouseButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE, m_window))
+	if (Input::IsMouseButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE, m_window))
 	{
 		if (m_in_rotation)
 		{
-			glfwSetCursorPos(m_window.GetWindow(), m_window.GetWidth() / 2.0, m_window.GetHeight() / 2.0);
+			glfwSetCursorPos(m_window->GetWindow(), m_window->GetWidth() / 2.0, m_window->GetHeight() / 2.0);
 			m_in_rotation = false;
 		}
 
 		double mouseX;
 		double mouseY;
-		glfwGetCursorPos(m_window.GetWindow(), &mouseX, &mouseY);
+		glfwGetCursorPos(m_window->GetWindow(), &mouseX, &mouseY);
 
-		float rotX = sensitivity * (float)(mouseY - (m_window.GetHeight() / 2.0)) / m_window.GetHeight();
-		float rotY = sensitivity * (float)(mouseX - (m_window.GetHeight() / 2.0)) / m_window.GetHeight();
+		float rotX = sensitivity * (float)(mouseY - (m_window->GetHeight() / 2.0)) / m_window->GetHeight();
+		float rotY = sensitivity * (float)(mouseX - (m_window->GetHeight() / 2.0)) / m_window->GetHeight();
 
 		glm::vec3 newOrientation = glm::rotate(orientation, glm::radians(-rotX), glm::normalize(glm::cross(orientation, m_up)));
 
@@ -54,7 +53,7 @@ void Camera::Rotation()
 		orientation = glm::rotate(orientation, glm::radians(-rotY), m_up);
 
 		// Sets mouse cursor to the middle of the screen so that it doesn't end up roaming around
-		glfwSetCursorPos(m_window.GetWindow(), m_window.GetWidth() / 2.0, m_window.GetHeight() / 2.0);
+		glfwSetCursorPos(m_window->GetWindow(), m_window->GetWidth() / 2.0, m_window->GetHeight() / 2.0);
 	}
 	else
 	{
@@ -64,27 +63,22 @@ void Camera::Rotation()
 
 void Camera::Translation()
 {
-	/*
-	if (m_input->IsKeyPressed(GLFW_KEY_LEFT_SHIFT, m_window))
-		position_ws -= speed * m_up;
-
-	*/
-	if (m_input->IsKeyPressed(GLFW_KEY_SPACE, m_window))
+	if (Input::IsKeyPressed(GLFW_KEY_SPACE, m_window))
 		position_ws += speed * m_up;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_LEFT_CONTROL, m_window))
+	if (Input::IsKeyPressed(GLFW_KEY_LEFT_CONTROL, m_window))
 		position_ws -= speed * m_up;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_W, m_window))
+	if (Input::IsKeyPressed(GLFW_KEY_W, m_window))
 		position_ws += speed * orientation;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_S, m_window))
+	if (Input::IsKeyPressed(GLFW_KEY_S, m_window))
 		position_ws -= speed * orientation;
 
-	if (m_input->IsKeyPressed(GLFW_KEY_A, m_window))
+	if (Input::IsKeyPressed(GLFW_KEY_A, m_window))
 		position_ws -= speed * glm::normalize(glm::cross(orientation, m_up));
 
-	if (m_input->IsKeyPressed(GLFW_KEY_D, m_window))
+	if (Input::IsKeyPressed(GLFW_KEY_D, m_window))
 		position_ws += speed * glm::normalize(glm::cross(orientation, m_up));
 }
 

@@ -5,20 +5,26 @@
 #include "RenderTarget.h"
 #include "RendererDebuger.h"
 
-Renderer::Renderer(Window& window, Timer& timer)
+Renderer::Renderer(Window* window, Timer* timer)
 	: m_window(window), m_timer(timer), m_show_wireframe(false)
 {
-	m_gui = std::make_shared<Gui>(m_window);
-
-	m_camera = std::make_shared<Camera>(m_window);
-
-	m_scene = std::make_shared<Scene>(*m_camera);
+	m_gui = new Gui(m_window);
+	m_camera = new Camera(m_window);
+	m_scene = new Scene(m_camera);
 
 	InitializeGlad();
 
 	RendererDebuger::Init();
 
 	DERANOS_CORE_INFO("Renderer::INITIALIZED");
+}
+
+Renderer::~Renderer()
+{
+	delete m_scene;
+	delete m_camera;
+	delete m_gui;
+	DERANOS_CORE_INFO("Renderer::Destroyed");
 }
 
 void Renderer::InitializeGlad()//#To do: hide under abstraction
@@ -99,9 +105,9 @@ void Renderer::PreRender()
 
 
 	//gbuffer
-	m_gbuffer_diffuse = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window.GetWidth(), m_window.GetHeight());
-	m_gbuffer_normal = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RG8_SNORM, GL_RG, m_window.GetWidth(), m_window.GetHeight());
-	m_gbuffer_packed = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window.GetWidth(), m_window.GetHeight());
+	m_gbuffer_diffuse = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window->GetWidth(), m_window->GetHeight());
+	m_gbuffer_normal = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RG8_SNORM, GL_RG, m_window->GetWidth(), m_window->GetHeight());
+	m_gbuffer_packed = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window->GetWidth(), m_window->GetHeight());
 }
 
 void Renderer::DrawGui()
@@ -111,7 +117,7 @@ void Renderer::DrawGui()
 	ImGui::Begin("Editor");
 	ImGui::SetWindowFontScale(1.5f);
 	ImGui::Text("FPS: ");
-	ImGui::Text(std::to_string(m_timer.GetFPS()).c_str());//awful conversion to be corrected
+	ImGui::Text(std::to_string(m_timer->GetFPS()).c_str());//awful conversion to be corrected
 	ImGui::Separator();
 	ImGui::Text("Camera");
 	Button::Drag("Position", m_camera->position_ws);
@@ -177,7 +183,7 @@ void Renderer::Renderloop()
 
 void Renderer::Present()
 {	
-	glfwSwapBuffers(m_window.GetWindow());
+	glfwSwapBuffers(m_window->GetWindow());
 } 
 
 void Renderer::OnInput()

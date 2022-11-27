@@ -45,9 +45,6 @@
     <ClInclude Include="src\gui\Gui.h">
       <Filter>src\gui</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui\Input.h">
-      <Filter>src\gui</Filter>
-    </ClInclude>
     <ClInclude Include="src\gui\Window.h">
       <Filter>src\gui</Filter>
     </ClInclude>
@@ -135,9 +132,6 @@
     <ClCompile Include="src\Application.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\EntryPoint.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Timer.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -145,9 +139,6 @@
       <Filter>src\gui</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\Gui.cpp">
-      <Filter>src\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\Input.cpp">
       <Filter>src\gui</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\Window.cpp">

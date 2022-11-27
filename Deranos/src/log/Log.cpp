@@ -16,7 +16,7 @@ void Log::Init()
 	s_ClientLogger = spdlog::stdout_color_mt("APP");
 	s_ClientLogger->set_level(spdlog::level::trace);
 
-    DERANOS_CORE_INFO("Log::INITIALIZED");
+    DERANOS_CORE_INFO("Log::Initialized");
 }
  
 

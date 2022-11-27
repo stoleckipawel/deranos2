@@ -1,11 +1,10 @@
 #pragma once
-#include <Input.h>
 #include <Window.h>
 
 class Camera
 {
 public:
-	Camera(Window& window);
+	Camera(Window* window);
 	void OnInput();
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix();
@@ -20,9 +19,7 @@ public:
 private:
 	void Rotation();
 	void Translation();
-	Window& m_window;
-	std::shared_ptr<Input> m_input;
-
+	Window* m_window;
 	glm::vec3 m_up;
 	bool m_in_rotation = true;
 };

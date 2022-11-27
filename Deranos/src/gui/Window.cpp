@@ -10,13 +10,14 @@ Window::Window(int height = 1200, int width = 1200, std::string name = "")
     BindWindow();
     RegisterResizeCallback();
 
-    DERANOS_CORE_INFO("Window::INITIALIZED");
+    DERANOS_CORE_INFO("Window::Initialized");
 }
 
 Window::~Window()
 {
-    DERANOS_CORE_INFO("Window::Destroyed");
     glfwTerminate();
+
+    DERANOS_CORE_INFO("Window::Destroyed");
 }
 
 void Window::InitializeGlfw()//#To do: hide under abstraction
@@ -26,7 +27,7 @@ void Window::InitializeGlfw()//#To do: hide under abstraction
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-    DERANOS_CORE_INFO("Glfw::INITIALIZED");
+    DERANOS_CORE_INFO("Glfw::Initialized");
 }
 
 GLFWwindow* Window::MakeWindow()
@@ -60,3 +61,34 @@ void Window::RegisterResizeCallback()
     glfwSetFramebufferSizeCallback(GetWindow(), ResizeCallback);
 }
 
+
+bool Input::IsKeyPressed(int keyCode, Window* window)
+{
+    auto state = glfwGetKey(window->GetWindow(), keyCode);
+    return state & (GLFW_PRESS || GLFW_REPEAT);
+}
+
+bool Input::IsMouseButtonPressed(int button, Window* window)
+{
+    auto state = glfwGetMouseButton(window->GetWindow(), button);
+    return state & GLFW_PRESS;
+}
+
+std::pair<float, float> Input::GetMousePosition(Window* window)
+{
+    double posX, posY;
+    glfwGetCursorPos(window->GetWindow(), &posX, &posY);
+    return { (float)posX, (float)posY };
+}
+
+float Input::GetMouseX(Window* window)
+{
+    auto [x, y] = GetMousePosition(window);
+    return x;
+}
+
+float Input::GetMouseY(Window* window)
+{
+    auto [x, y] = GetMousePosition(window);
+    return y;
+}

@@ -1,16 +1,13 @@
 #include "pch.h"
 #include "Application.h"
 
-//#ToDo:
-//convert to a singleton
-
 void Application::Input()
 {
+    //#To do convert to event dispatcher
     if (glfwGetKey(m_window->GetWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(m_window->GetWindow(), true);
 
     m_renderer->OnInput();
-
     glfwPollEvents();
 }
 
@@ -18,13 +15,18 @@ Application::Application()
 {
     Log::Init();
 
-    m_timer = std::make_shared<Timer>();
+    m_timer = new Timer();
+    m_window = new Window(1200, 1200, "PRAWIE SUPER ENGINE");
+    m_renderer = new Renderer(m_window, m_timer);
+    DERANOS_CORE_INFO("App::Initialized");
+}
 
-    m_window = std::make_shared<Window>(1200, 1200, "PRAWIE SUPER ENGINE");
-
-    m_renderer = std::make_shared<Renderer>(*m_window, *m_timer);
-
-    DERANOS_CORE_INFO("App::INITIALIZED");
+Application::~Application()
+{
+    delete m_renderer;
+    delete m_window;
+    delete m_timer;
+    DERANOS_CORE_INFO("App::Destroyed");
 }
 
 void Application::Run()
@@ -33,14 +35,20 @@ void Application::Run()
 
     while (!glfwWindowShouldClose(m_window->GetWindow()) && m_window->GetWindow() != nullptr)
     {
-        Input();////#To do convert to event dispatcher
+        Input();//#To do convert to event dispatcher
 
-        m_renderer->Renderloop();//rendering in general
+        m_renderer->Renderloop();
 
-        m_renderer->Present();//swap front & back bufer
+        m_renderer->Present();
 
         m_timer->Update();
     }
+}
+
+int main()
+{
+    Application app;
+    app.Run();
 }
 
 

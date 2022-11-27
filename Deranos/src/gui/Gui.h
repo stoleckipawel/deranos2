@@ -4,12 +4,12 @@
 class Gui
 {
 public:
-	Gui(Window& window);
+	Gui(Window* window);
 	~Gui();
 	void Init();
 	void SetStyle();
 	void Render();
 private:
-	Window& m_window;
+	Window* m_window;
 };
 
