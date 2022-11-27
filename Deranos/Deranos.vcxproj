@@ -103,7 +103,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\renderer\RendererDebuger.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\EngineDefines.h" />
     <ClInclude Include="src\Timer.h" />
@@ -118,6 +117,8 @@
     <ClInclude Include="src\renderer\Model.h" />
     <ClInclude Include="src\renderer\RenderTarget.h" />
     <ClInclude Include="src\renderer\Renderer.h" />
+    <ClInclude Include="src\renderer\RendererDebuger.h" />
+    <ClInclude Include="src\renderer\Sampler.h" />
     <ClInclude Include="src\renderer\Scene.h" />
     <ClInclude Include="src\renderer\Shader.h" />
     <ClInclude Include="src\renderer\Transform.h" />
@@ -137,7 +138,6 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\renderer\RendererDebuger.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\gui\Button.cpp" />
@@ -153,6 +153,8 @@
     <ClCompile Include="src\renderer\Model.cpp" />
     <ClCompile Include="src\renderer\RenderTarget.cpp" />
     <ClCompile Include="src\renderer\Renderer.cpp" />
+    <ClCompile Include="src\renderer\RendererDebuger.cpp" />
+    <ClCompile Include="src\renderer\Sampler.cpp" />
     <ClCompile Include="src\renderer\Scene.cpp" />
     <ClCompile Include="src\renderer\Shader.cpp" />
     <ClCompile Include="src\renderer\Transform.cpp" />

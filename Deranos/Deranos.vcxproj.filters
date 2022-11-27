@@ -72,6 +72,12 @@
     <ClInclude Include="src\renderer\Renderer.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\renderer\RendererDebuger.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Sampler.h">
+      <Filter>src\renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\renderer\Scene.h">
       <Filter>src\renderer</Filter>
     </ClInclude>
@@ -123,7 +129,6 @@
     <ClInclude Include="vendor\imgui\imstb_truetype.h">
       <Filter>vendor\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\renderer\RendererDebuger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -163,6 +168,12 @@
       <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\Renderer.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\RendererDebuger.cpp">
+      <Filter>src\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Sampler.cpp">
       <Filter>src\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\renderer\Scene.cpp">
@@ -207,6 +218,5 @@
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp">
       <Filter>vendor\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\renderer\RendererDebuger.cpp" />
   </ItemGroup>
 </Project>

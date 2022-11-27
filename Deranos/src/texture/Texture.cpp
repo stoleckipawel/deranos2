@@ -2,7 +2,7 @@
 #include "Texture.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
-
+#include "Sampler.h"
 
 Texture::Texture(int type, GLenum internal_format, GLenum format, uint width, uint height)
 	: m_path(nullptr), m_width(width), m_height(height), m_texture_type(TextureType(type, internal_format, format, false)), m_flip(false)
@@ -20,9 +20,13 @@ Texture::Texture(const char* path, TextureType texture_type, bool flip)
 	glBindTexture(m_texture_type.type, m_id);
 
 	if (texture_type.type == TextureTypes::Cubemap().type)
+	{
 		LoadTextureCubemap();
+	}
 	else
+	{
 		LoadTexture();
+	}
 
 	if (m_texture_type.generate_mips)
 		glGenerateMipmap(m_texture_type.type);
@@ -30,7 +34,8 @@ Texture::Texture(const char* path, TextureType texture_type, bool flip)
 
 void Texture::LoadTextureCubemap()
 {
-	std::vector<const char*> m_cubemap_faces;
+	stbi_set_flip_vertically_on_load(false);
+	//right, left, top, bottom, front, back
 	m_cubemap_faces.push_back("right");
 	m_cubemap_faces.push_back("left");
 	m_cubemap_faces.push_back("top");
@@ -38,25 +43,26 @@ void Texture::LoadTextureCubemap()
 	m_cubemap_faces.push_back("front");
 	m_cubemap_faces.push_back("back");
 
-	m_flip = false;
-	for (int i = 0; i < m_cubemap_faces.size(); i++)
+	//Load all faces of the cubemap
+	for (int i = 0; i < 6; i++)
 	{
+
 		std::string path = m_path;//path to skybox, char* to string
 		path.append(m_cubemap_faces[i]);//add face name
 		path.append(".png");
+
 		LoadTexture(path.c_str(), GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
 	}
 }
 
 void Texture::LoadTexture()
 {
+	stbi_set_flip_vertically_on_load(m_flip);
 	LoadTexture(m_path, m_texture_type.type);
 }
 
 void Texture::LoadTexture(const char* path, int target)
 {
-	stbi_set_flip_vertically_on_load(m_flip);
-
 	int channel_num;
 	unsigned char* texture_data = stbi_load(path, &m_width, &m_height, &channel_num, 0);
 
@@ -90,12 +96,7 @@ void Texture::CreateTexture(unsigned char* texture_data, int target)
 	glTexImage2D(target, 0, m_texture_type.internal_format, m_width, m_height, 0, m_texture_type.format, GL_UNSIGNED_BYTE, texture_data);
 }
 
-void Texture::Bind()
-{
-	glBindTexture(m_texture_type.type, m_id);
-}
-
-uint Texture::GetId()
+unsigned int Texture::GetId()
 {
 	return m_id;
 }
@@ -103,5 +104,10 @@ uint Texture::GetId()
 TextureType Texture::GetTextureType()
 {
 	return m_texture_type;
+}
+
+Texture::~Texture()
+{
+	//glDeleteTextures(1, &m_id);
 }
 

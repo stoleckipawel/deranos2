@@ -10,7 +10,6 @@ public:
 	static TextureType Normal();
 	static TextureType Specular();
 	static TextureType Roughness();
-	static TextureType Metalic();
 };
 
 
