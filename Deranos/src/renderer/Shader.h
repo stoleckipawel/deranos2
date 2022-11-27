@@ -40,6 +40,7 @@ public:
 
 	inline std::shared_ptr<Sampler> GetSampler() const { return m_sampler; };
 private:
+	void Compile(const char* vertexPath, const char* fragmentPath);
 	void CheckCompileErrors(unsigned int shader, std::string type);
 
 	void CullFunc();

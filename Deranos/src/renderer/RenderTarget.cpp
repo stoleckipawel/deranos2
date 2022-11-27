@@ -1,22 +1,26 @@
 #include "pch.h"
 #include "RenderTarget.h"
 
-RenderTarget::RenderTarget()
+void RenderTarget::SetRenderTargetView(std::vector<Texture> renderTargets)
 {
-	glGenFramebuffers(1, &m_id);
-	glBindFramebuffer(GL_FRAMEBUFFER, m_id);
-	/*
-	Attach(texture_id);
-	SetRenderTargetView();
-	*/
+	uint id;
+	glGenFramebuffers(1, &id);
+	glBindFramebuffer(GL_FRAMEBUFFER, id);
+
+	uint mip = 0;//To do expose mips
+
+	for (int i = 0; i < renderTargets.size(); i++)
+	{
+		Attach(renderTargets[i].GetId(), mip, i);
+	}
+
+	Validate();
+	glBindFramebuffer(GL_FRAMEBUFFER, id);
 }
 
-void RenderTarget::Attach(uint texture_id, uint mip_level)
+void RenderTarget::Attach(uint texture_id, uint mip_level, int rt_index)
 {
-	//MRT -> for each texture attachement 0,1,2,3
-
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture_id, mip_level);
-	//GL_DEPTH_ATTACHMENT, GL_DEPTH_STENCIL_ATTACHMENT
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + rt_index, GL_TEXTURE_2D, texture_id, mip_level);
 }
 
 void RenderTarget::Validate()
@@ -25,25 +29,16 @@ void RenderTarget::Validate()
 		DERANOS_CORE_ERROR("FRAMEBUFFER:: Framebuffer is not complete!");
 }
 
-void RenderTarget::SetRenderTargetView()
-{
-	Validate();
-	glBindFramebuffer(GL_FRAMEBUFFER, m_id);
-}
-
 void RenderTarget::Clear(glm::vec4 clear_color, ECLearFlags flags)
 {
-	SetRenderTargetView();
 	glClearColor(clear_color.x, clear_color.y, clear_color.z, 1.0f);
 	glClear((uint)flags);
 }
 
-RenderTarget::~RenderTarget()
+void RenderTarget::Clear(glm::vec4 clear_color)
 {
-	glDeleteFramebuffers(1, &m_id);
+	Clear(clear_color, ECLearFlags::Color);
 }
-
-
 
 void BackBuffer::SetRenderTargetView()
 {

@@ -7,6 +7,7 @@
 Texture::Texture(int type, GLenum internal_format, GLenum format, uint width, uint height)
 	: m_path(nullptr), m_width(width), m_height(height), m_texture_type(TextureType(type, internal_format, format, false)), m_flip(false)
 {
+	glGenTextures(1, &m_id);
 	glBindTexture(m_texture_type.type, m_id);
 
 	CreateTexture(nullptr, m_texture_type.type);
@@ -107,6 +108,6 @@ TextureType Texture::GetTextureType()
 
 Texture::~Texture()
 {
-	glDeleteTextures(1, &m_id);
+	//glDeleteTextures(1, &m_id);
 }
 

@@ -45,6 +45,10 @@ private:
 	
 	std::shared_ptr<Mesh> m_quad;
 	std::shared_ptr<Material> m_copy_material;
+
+	std::shared_ptr<Texture> m_gbuffer_diffuse;
+	std::shared_ptr<Texture> m_gbuffer_normal;
+	std::shared_ptr<Texture> m_gbuffer_packed;//metalic, rgh, specular, ao
 };
 
 

@@ -55,6 +55,7 @@ void Renderer::SetPolyFillMode()
 
 void Renderer::PreRender()
 {
+	//#To do: Convert smart pointers to raw pointers
 	//#To do dont load the cube mesh over & over again
 	//#To do Entity class since model class is to explicit?(lights, etc)?
 
@@ -94,7 +95,13 @@ void Renderer::PreRender()
 	m_copy_material->shader = copy_shader;
 
 	//Quad
-	m_quad = std::make_shared<Mesh>();	
+	m_quad = std::make_shared<Mesh>();
+
+
+	//gbuffer
+	m_gbuffer_diffuse = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window.GetWidth(), m_window.GetHeight());
+	m_gbuffer_normal = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RG8_SNORM, GL_RG, m_window.GetWidth(), m_window.GetHeight());
+	m_gbuffer_packed = std::make_shared<Texture>(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window.GetWidth(), m_window.GetHeight());
 }
 
 void Renderer::DrawGui()
@@ -140,7 +147,8 @@ void Renderer::CopyToBackBuffer(std::shared_ptr<Texture> texture)
 {
 	m_copy_material->texture = texture;
 	m_copy_material->Bind();
-
+	m_copy_material->shader->GetSampler()->SetFiltering(EFilteringMode::Point, EMaxAnisotropyLevel::None);
+	
 	BackBuffer::SetRenderTargetView();
 	m_quad->Draw();
 }
@@ -153,16 +161,18 @@ void Renderer::Renderloop()
 	ClearZbuffer();
 	ClearStencil();
 
-	BackBuffer::SetRenderTargetView();
-	
 	m_scene->Draw();
-	
 
-	//CopyToBackBuffer(xd);
-	//Texture* gbuffer_diffuse = new Texture(GL_TEXTURE_2D, GL_RGB8, GL_RGB, m_window.GetWidth(), m_window.GetHeight());
-	//delete gbuffer_diffuse;
+	/*
+	std::vector<Texture> renderTarget;
+	renderTarget.push_back(*m_gbuffer_diffuse);
+	RenderTarget::SetRenderTargetView(renderTarget);
+	RenderTarget::Clear(glm::uvec4(0.0f, 1.0f, 0.0f, 1.0f));
+	CopyToBackBuffer(m_gbuffer_diffuse);
+	*/
 
 	DrawGui();
+
 }
 
 void Renderer::Present()
